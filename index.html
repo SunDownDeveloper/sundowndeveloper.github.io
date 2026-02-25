@@ -3,124 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPU A - Device Info App</title>
-    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
+    <title>SunDownDeveloper | Android Studio</title>
     <style>
+        /* =========================================
+           1. LIGHT MODE (Default Variables)
+           ========================================= */
+        :root {
+            --bg-color: #f4f7f6;
+            --surface-color: #ffffff;
+            --text-main: #222222;
+            --text-muted: #555555;
+            --accent: #007bff;
+            --bio-bg: linear-gradient(145deg, #ffffff, #e6ecef);
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --border-line: #e0e0e0;
+            --upcoming-bg: #ff3b30;
+            --upcoming-text: #ffffff;
+        }
+
+        /* =========================================
+           2. DARK MODE (Automatic trigger)
+           ========================================= */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --surface-color: #1e1e1e;
+                --text-main: #ffffff;
+                --text-muted: #a0a0a0;
+                --accent: #00a8ff;
+                --bio-bg: linear-gradient(145deg, #1a1a1a, #222222);
+                --card-shadow: 0 4px 12px rgba(0,0,0,0.5);
+                --border-line: #333333;
+            }
+        }
+
+        /* =========================================
+           3. MAIN STYLES (Uses variables above)
+           ========================================= */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Google Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
+            padding-bottom: 40px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
         }
+
         .container {
             max-width: 800px;
             margin: auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 16px;
         }
-        /* Header Section */
-        .header {
-            text-align: center;
-            padding: 40px 0;
+
+        h2 {
+            font-size: 1.25rem;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            font-weight: 600;
         }
-        .app-icon {
-            width: 120px;
-            border-radius: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+        /* YouTube Style Banner */
+        .yt-banner-container {
+            width: 100%;
+            margin-top: 10px;
         }
-        .app-title {
-            font-size: 2.5em;
-            margin: 10px 0;
-            color: #222;
+        .yt-banner {
+            width: 100%;
+            aspect-ratio: 16 / 3;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
         }
-        /* Horizontal Screenshot Slider */
-        .screenshot-slider {
+
+        /* Play Store Style Horizontal Sliders */
+        .slider-wrapper {
             display: flex;
             overflow-x: auto;
-            gap: 15px;
-            padding: 20px 0;
-            scrollbar-width: thin;
+            gap: 16px;
+            padding-bottom: 12px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
         }
-        .screenshot-slider img {
-            height: 400px;
+        .slider-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        /* App Cards (Recommended Section) */
+        .app-card {
+            min-width: 280px;
+            background-color: var(--surface-color);
             border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        /* Description Section */
-        .description {
-            line-height: 1.6;
-            font-size: 1.1em;
-            padding: 20px 0;
-            border-bottom: 2px solid #eee;
-        }
-        /* Developer Footer */
-        .developer-footer {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 30px 0;
-            margin-top: 20px;
-        }
-        .dev-photo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #007bff;
-        }
-        .dev-info h3 {
-            margin: 0 0 5px 0;
-            color: #007bff;
-        }
-        .dev-info p {
-            margin: 0;
-            font-size: 0.95em;
-            color: #555;
-        }
-        .dev-info a {
-            color: #ff0000;
+            scroll-snap-align: start;
             text-decoration: none;
+            color: var(--text-main);
+            overflow: hidden;
+            display: block;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-line);
+        }
+        .app-hero {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+        .app-info-row {
+            display: flex;
+            padding: 12px;
+            gap: 12px;
+            align-items: center;
+        }
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .app-text h3 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+        }
+        .app-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Developer Bio Section */
+        .dev-bio {
+            background: var(--bio-bg);
+            padding: 24px;
+            border-radius: 16px;
+            margin: 32px 0;
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--card-shadow);
+        }
+        .dev-bio h2 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+        .dev-bio p {
+            line-height: 1.6;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        /* Ad / Offers Slider */
+        .ad-card {
+            min-width: 320px;
+            height: 160px;
+            border-radius: 12px;
+            scroll-snap-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        .ad-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Promo Text */
+        .promo-text {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--accent);
+            margin: 24px 0;
+        }
+
+        /* Events Section */
+        .event-card {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--surface-color);
+            margin-bottom: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-line);
+        }
+        .event-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .event-info {
+            padding: 16px;
+        }
+        .event-info h3 { margin: 0; font-size: 1.1rem; }
+
+        /* Upcoming Section */
+        .upcoming-indicator {
+            display: inline-block;
+            background-color: var(--upcoming-bg);
+            color: var(--upcoming-text);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .upcoming-icons {
+            display: flex;
+            gap: 16px;
+        }
+        .upcoming-icons img {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            opacity: 0.7;
+            filter: grayscale(50%);
+            box-shadow: var(--card-shadow);
+        }
+        .upcoming-text {
+            margin-top: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* YouTube Button */
+        .yt-btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .yt-btn {
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 24px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+        .yt-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Outro */
+        .outro {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-line);
+            padding-top: 24px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-icon">
-        <h1 class="app-title">CPU A</h1>
-        <p>Your Ultimate Device Information Companion</p>
+
+    <div class="yt-banner-container">
+        <img src="images/channel-banner.jpg" alt="SunDownDeveloper Banner" class="yt-banner">
     </div>
 
-    <div class="screenshot-slider">
-        <img src="CPU A web ss/Screenshot_20260208-012607.jpg" alt="Screenshot 1">
-        <img src="CPU A web ss/Screenshot_20260208-012609.jpg" alt="Screenshot 2">
-        <img src="CPU A web ss/Screenshot_20260208-012612.jpg" alt="Screenshot 3">
-        <img src="CPU A web ss/Screenshot_20260208-012615.jpg" alt="Screenshot 4">
-        <img src="CPU A web ss/Screenshot_20260208-012625.jpg" alt="Screenshot 5">
-        <img src="CPU A web ss/Screenshot_20260208-012633.jpg" alt="Screenshot 6">
-        <img src="CPU A web ss/Screenshot_20260208-012636.jpg" alt="Screenshot 7">
-        <img src="CPU A web ss/Screenshot_20260221-120152.jpg" alt="Screenshot 8">
-        <img src="CPU A web ss/Screenshot_20260221-120156.jpg" alt="Screenshot 9">
+    <h2>Recommended for you</h2>
+    <div class="slider-wrapper">
+        <a href="cpu-a.html" class="app-card">
+            <img src="images/cpu-a-hero.jpg" alt="CPU A Highlights" class="app-hero">
+            <div class="app-info-row">
+                <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-icon">
+                <div class="app-text">
+                    <h3>CPU A</h3>
+                    <p>Tools • Device Info</p>
+                </div>
+            </div>
+        </a>
     </div>
 
-    <div class="description">
-        <h2>About the App</h2>
-        <p>CPU A provides deep, real-time insights into your Android device. Check your hardware version, RAM usage, model numbers, and internal storage at a glance. Built with performance in mind, it's the perfect tool for monitoring your system's health and specifications.</p>
+    <div class="dev-bio">
+        <h2>About SunDownDeveloper</h2>
+        <p>Creating advanced, high-performance mobile experiences for Android users worldwide. I specialize in turning complex logic into seamless, intuitive applications. </p>
+        <p>Fluent in <strong>Java, Kotlin, and JavaScript</strong>, my development environments of choice are <strong>Android Studio</strong> and <strong>Sketchware Pro</strong>. Whether it's deep system analytics or rich visual studios, my passion is building modern apps that solve real problems and push the boundaries of mobile tech.</p>
     </div>
 
-    <div class="developer-footer">
-        <img src="CPU A web ss/javascript-jpg.webp" alt="SunDownDeveloper" class="dev-photo">
-        <div class="dev-info">
-            <h3>SunDownDeveloper</h3>
-            <p>Passionate Android programmer building tools that matter.</p>
-            <p>Check out my tutorials and projects on <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank">YouTube</a>.</p>
+    <h2>Offers you might like</h2>
+    <div class="slider-wrapper" id="ad-slider">
+        <div class="ad-card">
+            <img src="images/ad1.jpg" alt="Advertisement 1">
+        </div>
+        <div class="ad-card">
+            <img src="images/ad2.jpg" alt="Advertisement 2">
+        </div>
+        <div class="ad-card">
+            <img src="images/advertise-here.jpg" alt="Contact to Advertise">
         </div>
     </div>
+
+    <div class="promo-text">
+        "Designing the future of Android, one line of code at a time."
+    </div>
+
+    <h2>Events happening now</h2>
+    <div class="event-card">
+        <img src="images/event-banner.jpg" alt="Current Event">
+        <div class="event-info">
+            <h3>CPU A Launch Celebration Giveaways!</h3>
+        </div>
+    </div>
+
+    <h2>Coming soon to Play</h2>
+    <div class="upcoming-indicator">Upcoming</div>
+    <div class="upcoming-icons">
+        <img src="images/mlbb-icon.png" alt="Upcoming App 1">
+        <img src="images/invest-icon.png" alt="Upcoming App 2">
+    </div>
+    <div class="upcoming-text">The fun's on its way...</div>
+
+    <div class="yt-btn-container">
+        <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" class="yt-btn">
+            ▶ Subscribe on YouTube
+        </a>
+    </div>
+
+    <div class="outro">
+        <h2>SunDownDeveloper</h2>
+        <p>Innovating Mobile. Built with precision.</p>
+        <p>&copy; 2026 SunDownDeveloper. All rights reserved.</p>
+    </div>
+
 </div>
+
+<script>
+    const adSlider = document.getElementById('ad-slider');
+
+    setInterval(() => {
+        // Get the width of one ad card plus the gap (16px)
+        const firstCard = adSlider.querySelector('.ad-card');
+        if (!firstCard) return; // Safety check
+        const cardWidth = firstCard.offsetWidth + 16; 
+        
+        // If we reach the end, scroll back to the beginning
+        // We subtract a small buffer (10px) to account for precise pixel math
+        if (adSlider.scrollLeft + adSlider.clientWidth >= adSlider.scrollWidth - 10) {
+            adSlider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            // Otherwise, scroll one card over
+            adSlider.scrollTo({ left: adSlider.scrollLeft + cardWidth, behavior: 'smooth' });
+        }
+    }, 4000); // 4000 milliseconds = 4 seconds
+</script>
 
 </body>
 </html>
