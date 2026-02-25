@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SunDownDeveloper | Android Studio</title>
+    
     <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
+
     <style>
         /* =========================================
            1. LIGHT MODE (Default Variables)
@@ -39,7 +41,7 @@
         }
 
         /* =========================================
-           3. MAIN STYLES (Uses variables above)
+           3. MAIN STYLES
            ========================================= */
         body {
             font-family: 'Google Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -48,7 +50,7 @@
             margin: 0;
             padding: 0;
             padding-bottom: 40px;
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -71,8 +73,9 @@
         }
         .yt-banner {
             width: 100%;
-            aspect-ratio: 16 / 3;
+            aspect-ratio: 16 / 4; /* Keeps it wide like a YouTube banner */
             object-fit: cover;
+            object-position: center;
             border-radius: 16px;
             box-shadow: var(--card-shadow);
         }
@@ -84,10 +87,10 @@
             gap: 16px;
             padding-bottom: 12px;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
         .slider-wrapper::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
+            display: none;
         }
 
         /* App Cards (Recommended Section) */
@@ -119,6 +122,7 @@
             height: 48px;
             border-radius: 10px;
             object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .app-text h3 {
             margin: 0 0 4px 0;
@@ -158,6 +162,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-line);
         }
         .ad-card img {
             width: 100%;
@@ -205,23 +210,38 @@
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             text-transform: uppercase;
         }
         .upcoming-icons {
             display: flex;
-            gap: 16px;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 10px;
         }
-        .upcoming-icons img {
+        .upcoming-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 72px; /* Keeps text wrapped nicely under the icon */
+        }
+        .upcoming-item img {
             width: 64px;
             height: 64px;
             border-radius: 14px;
-            opacity: 0.7;
-            filter: grayscale(50%);
+            opacity: 0.85;
             box-shadow: var(--card-shadow);
+            margin-bottom: 8px;
+        }
+        .upcoming-item span {
+            font-size: 0.8rem;
+            color: var(--text-main);
+            font-weight: 500;
+            line-height: 1.2;
         }
         .upcoming-text {
-            margin-top: 12px;
+            margin-top: 16px;
             font-weight: 500;
             color: var(--text-muted);
         }
@@ -265,13 +285,13 @@
 <div class="container">
 
     <div class="yt-banner-container">
-        <img src="images/channel-banner.jpg" alt="SunDownDeveloper Banner" class="yt-banner">
+        <img src="CPU A web ss/1771855980858.png" alt="SunDownDeveloper Banner" class="yt-banner">
     </div>
 
     <h2>Recommended for you</h2>
     <div class="slider-wrapper">
         <a href="cpu-a.html" class="app-card">
-            <img src="images/cpu-a-hero.jpg" alt="CPU A Highlights" class="app-hero">
+            <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A Highlights" class="app-hero">
             <div class="app-info-row">
                 <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-icon">
                 <div class="app-text">
@@ -291,13 +311,10 @@
     <h2>Offers you might like</h2>
     <div class="slider-wrapper" id="ad-slider">
         <div class="ad-card">
-            <img src="images/ad1.jpg" alt="Advertisement 1">
+            <img src="CPU A web ss/file_00000000183c7246a6c515a2253b8fbf.png" alt="Advertisement 1">
         </div>
         <div class="ad-card">
-            <img src="images/ad2.jpg" alt="Advertisement 2">
-        </div>
-        <div class="ad-card">
-            <img src="images/advertise-here.jpg" alt="Contact to Advertise">
+            <img src="CPU A web ss/file_00000000f3a0720aa5d3149248fdf8a5.png" alt="Contact to Advertise">
         </div>
     </div>
 
@@ -307,17 +324,24 @@
 
     <h2>Events happening now</h2>
     <div class="event-card">
-        <img src="images/event-banner.jpg" alt="Current Event">
+        <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A Launch Event">
         <div class="event-info">
-            <h3>CPU A Launch Celebration Giveaways!</h3>
+            <h3>CPU A Launch!</h3>
         </div>
     </div>
 
     <h2>Coming soon to Play</h2>
     <div class="upcoming-indicator">Upcoming</div>
+    
     <div class="upcoming-icons">
-        <img src="images/mlbb-icon.png" alt="Upcoming App 1">
-        <img src="images/invest-icon.png" alt="Upcoming App 2">
+        <div class="upcoming-item">
+            <img src="CPU A web ss/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon">
+            <span>MLBB Visual Studio</span>
+        </div>
+        <div class="upcoming-item">
+            <img src="CPU A web ss/Picsart_25-05-fundsup.png" alt="FundsUp Icon">
+            <span>FundsUp</span>
+        </div>
     </div>
     <div class="upcoming-text">The fun's on its way...</div>
 
@@ -339,20 +363,16 @@
     const adSlider = document.getElementById('ad-slider');
 
     setInterval(() => {
-        // Get the width of one ad card plus the gap (16px)
         const firstCard = adSlider.querySelector('.ad-card');
-        if (!firstCard) return; // Safety check
+        if (!firstCard) return; 
         const cardWidth = firstCard.offsetWidth + 16; 
         
-        // If we reach the end, scroll back to the beginning
-        // We subtract a small buffer (10px) to account for precise pixel math
         if (adSlider.scrollLeft + adSlider.clientWidth >= adSlider.scrollWidth - 10) {
             adSlider.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
-            // Otherwise, scroll one card over
             adSlider.scrollTo({ left: adSlider.scrollLeft + cardWidth, behavior: 'smooth' });
         }
-    }, 4000); // 4000 milliseconds = 4 seconds
+    }, 4000); 
 </script>
 
 </body>
