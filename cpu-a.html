@@ -143,6 +143,66 @@
         .play-badge:hover {
             transform: scale(1.05);
         }
+        /* --- Expandable About Card --- */
+        .about-card {
+            background: var(--surface-color);
+            padding: 24px;
+            border-radius: 16px;
+            margin: 15px 0 25px 0;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--accent);
+            cursor: pointer;
+            position: relative;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .about-card:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        .about-content {
+            font-size: 0.89em; /* Your requested text size */
+            line-height: 1.6;
+            color: var(--text-main);
+            max-height: 120px; /* How much text shows initially */
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.4s ease-in-out;
+        }
+        .about-content.expanded {
+            max-height: 2500px; /* Expands to fit all text */
+        }
+        
+        /* Cleans up the paragraph spacing inside the card */
+        .about-content p {
+            margin-top: 0;
+            margin-bottom: 14px;
+        }
+        
+        /* The fade effect at the bottom when collapsed */
+        .fade-out {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(transparent, var(--surface-color));
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .about-content.expanded .fade-out {
+            opacity: 0; /* Hides the fade when opened */
+        }
+        
+        /* The Show More / Show Less text */
+        .expand-label {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 15px;
+            display: block;
+            transition: color 0.2s;
+        }
     </style>
 </head>
 <body>
@@ -171,65 +231,60 @@
         <img src="CPU A web ss/Screenshot_20260221-120156.jpg" alt="Screenshot 9">
     </div>
 
-    <div class="description">
+    <div class="description" style="border-bottom: none;">
         <h2>About the App</h2>
-        <p>CPU A provides deep, real-time insights into your Android device. Check your hardware version, RAM usage, model numbers, and internal storage at a glance. Built with performance in mind, it's the perfect tool for monitoring your system's health and specifications.<p> 
-        <p>
-            🔍 Core Features.</p>
-        <p>
-🧠 CPU & GPU Information</p>
-        <p>
-Access in-depth processor and graphics details, including:
-- CPU architecture and core layout
-- Supported clock frequencies
-- GPU model and rendering information
-</p>
-        <p>📱 Device Overview</p>
-        <p>
-View essential hardware and system data at a glance:
-- Device model and manufacturer
-- RAM and internal storage details
-- Display resolution and screen density
-- Supported hardware features.
-</p>
-        <p>
-⚙ System & Build Information
-</p>
-        <p>
-Get a complete view of your system configuration:
-- Android version and SDK level
-- Security patch status
-- Build number and device fingerprint
-</p>
-        <p>
-♻ Optimized Performance</p>
-        <p>
-CPU A is designed to be lightweight, responsive, and efficient—delivering accurate information without unnecessary overhead.
-</p>
-        <p>
-🚀 Continuous Improvements & Enhancements</p>
-        <p>
-CPU A is actively evolving, with ongoing updates focused on performance optimization, expanded hardware analysis, and improved usability.</p>
-        <p>
-Planned enhancements include:</p>
-        <p>
-- Real-time CPU frequency monitoring
-- Advanced battery health and charging insights
-- Temperature and sensor data tracking
-- Deeper hardware diagnostics and system details
-- UI refinements and performance optimizations
-- Our goal is to deliver one of the most dependable and feature----- rich device information tools available on Android.
-</p>
-        <p>
-🙌 Feedback & Support</p>
-        <p>
-Your feedback plays an important role in shaping CPU A’s future.
-If you encounter any issues, have suggestions, or would like to request features, please leave a review or contact us directly.</p>
-        <p>
-⭐ Thank You for Using CPU A.</p>
-        <p>
-We appreciate your trust in CPU A.
-Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
+        
+        <div class="about-card" onclick="toggleCard()">
+            <div class="about-content" id="aboutContent">
+                <p>CPU A provides deep, real-time insights into your Android device. Check your hardware version, RAM usage, model numbers, and internal storage at a glance. Built with performance in mind, it's the perfect tool for monitoring your system's health and specifications.</p>
+                
+                <p><strong>🔍 Core Features</strong></p>
+                
+                <p><strong>🧠 CPU & GPU Information</strong><br>
+                Access in-depth processor and graphics details, including:<br>
+                - CPU architecture and core layout<br>
+                - Supported clock frequencies<br>
+                - GPU model and rendering information</p>
+                
+                <p><strong>📱 Device Overview</strong><br>
+                View essential hardware and system data at a glance:<br>
+                - Device model and manufacturer<br>
+                - RAM and internal storage details<br>
+                - Display resolution and screen density<br>
+                - Supported hardware features</p>
+                
+                <p><strong>⚙️ System & Build Information</strong><br>
+                Get a complete view of your system configuration:<br>
+                - Android version and SDK level<br>
+                - Security patch status<br>
+                - Build number and device fingerprint</p>
+                
+                <p><strong>♻️ Optimized Performance</strong><br>
+                CPU A is designed to be lightweight, responsive, and efficient—delivering accurate information without unnecessary overhead.</p>
+                
+                <p><strong>🚀 Continuous Improvements & Enhancements</strong><br>
+                CPU A is actively evolving, with ongoing updates focused on performance optimization, expanded hardware analysis, and improved usability.</p>
+                
+                <p>Planned enhancements include:<br>
+                - Real-time CPU frequency monitoring<br>
+                - Advanced battery health and charging insights<br>
+                - Temperature and sensor data tracking<br>
+                - Deeper hardware diagnostics and system details<br>
+                - UI refinements and performance optimizations<br>
+                Our goal is to deliver one of the most dependable and feature-rich device information tools available on Android.</p>
+                
+                <p><strong>🙌 Feedback & Support</strong><br>
+                Your feedback plays an important role in shaping CPU A’s future. If you encounter any issues, have suggestions, or would like to request features, please leave a review or contact us directly.</p>
+                
+                <p><strong>⭐ Thank You for Using CPU A</strong><br>
+                We appreciate your trust in CPU A. Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
+                
+                <div class="fade-out"></div>
+            </div>
+            
+            <span class="expand-label" id="expandLabel">Show More ▼</span>
+        </div>
+
         <div class="download-btn-container">
             <a href="https://play.google.com/store/apps/details?id=com.cpu.a" target="_blank">
                 <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" class="play-badge">
@@ -246,6 +301,22 @@ Expect consistent updates, enhanced performance, and powerful new features in up
         </div>
     </div>
 </div>
-
+<script>
+    function toggleCard() {
+        const content = document.getElementById('aboutContent');
+        const label = document.getElementById('expandLabel');
+        
+        // Toggles the 'expanded' class on and off
+        content.classList.toggle('expanded');
+        
+        // Changes the text of the button depending on the state
+        if (content.classList.contains('expanded')) {
+            label.innerHTML = 'Show Less ▲';
+        } else {
+            label.innerHTML = 'Show More ▼';
+        }
+    }
+</script>
+    
 </body>
 </html>
