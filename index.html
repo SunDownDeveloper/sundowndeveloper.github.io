@@ -263,6 +263,28 @@
             cursor: not-allowed;
             flex-shrink: 0;
         }
+
+        /* Events Section */
+        .event-card {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--surface-color);
+            margin-bottom: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-line);
+        }
+        .event-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .event-info {
+            padding: 16px;
+        }
+        .event-info h3 { 
+            margin: 0; font-size: 1.1rem; 
+        }
         
         /* Developer Bio Section */
         .dev-bio {
@@ -293,26 +315,6 @@
             margin: 24px 0;
         }
 
-        /* Events Section */
-        .event-card {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: var(--surface-color);
-            margin-bottom: 16px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-line);
-        }
-        .event-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .event-info {
-            padding: 16px;
-        }
-        .event-info h3 { margin: 0; font-size: 1.1rem; }
-
         /* Upcoming Section */
         .upcoming-indicator {
             display: inline-block;
@@ -339,8 +341,8 @@
             width: 72px; /* Keeps text wrapped nicely under the icon */
         }
         .upcoming-item img {
-            width: 84px;
-            height: 84px;
+            width: 56px;
+            height: 56px;
             border-radius: 14px;
             opacity: 0.85;
             background: #ffffff;
