@@ -92,6 +92,66 @@
         .slider-wrapper::-webkit-scrollbar {
             display: none;
         }
+        
+        /* --- Google Play Style Promo Card --- */
+        .play-promo {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Perfect spacing between banner and text */
+            width: 100%;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 25px;
+            transition: opacity 0.2s ease;
+        }
+        
+        .play-promo:hover {
+            opacity: 0.85; /* Smooth hover effect instead of jumping */
+        }
+
+        .play-banner {
+            width: 100%;
+            border-radius: 12px; /* Rounds ALL 4 corners */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Standalone shadow */
+            object-fit: cover;
+            aspect-ratio: 16 / 9; /* Keeps the banner perfectly proportioned */
+        }
+
+        .play-details {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 0 4px; /* Aligns text perfectly with the banner's visual edge */
+        }
+
+        .play-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px; /* The classic Play Store squircle */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+            background: #ffffff; /* Ensures the icon background is clean */
+            object-fit: cover;
+        }
+
+        .play-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .play-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-main); /* Adapts to your dark mode! */
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .play-category {
+            font-size: 0.9em;
+            color: #5f6368; /* The exact Google Play grey */
+            margin: 0;
+        }
 
         /* App Cards (Recommended Section) */
         .app-card {
@@ -298,18 +358,18 @@
     </div>
 
     <h2>Recommended for you</h2>
-    <div class="slider-wrapper">
-        <a href="cpu-a.html" class="app-card">
-            <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A Highlights" class="app-hero">
-            <div class="app-info-row">
-                <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-icon">
-                <div class="app-text">
-                    <h3>CPU A</h3>
-                    <p>Tools • Device Info</p>
-                </div>
+    
+    <a href="cpu-a.html" class="play-promo">
+        <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A Promo Banner" class="play-banner">
+        
+        <div class="play-details">
+            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="play-icon">
+            <div class="play-text">
+                <h3 class="play-title">CPU A</h3>
+                <p class="play-category">Tools • Device Info</p>
             </div>
-        </a>
-    </div>
+        </div>
+    </a>
 
     <div class="dev-bio">
         <h2>About SunDownDeveloper</h2>
