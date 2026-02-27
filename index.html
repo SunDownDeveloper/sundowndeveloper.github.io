@@ -363,12 +363,14 @@
             width: 48px; /* Keeps text wrapped nicely under the icon */
         }
         .upcoming-item img {
-            width: 56px;
-            height: 56px;
+            width: 54px;
+            height: 54px;
             border-radius: 12px;
             opacity: 0.85;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
             background: #ffffff;
-            box-shadow: var(--card-shadow);
+            object-fit: cover;
+            flex-shrink: 0; /* Prevents the icon from squishing on small screens */
             margin-bottom: 8px;
         }
         .upcoming-item span {
