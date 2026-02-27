@@ -167,47 +167,103 @@
             margin: 0;
         }
 
-        /* App Cards (Recommended Section) */
-        .app-card {
-            min-width: 280px;
-            background-color: var(--surface-color);
+         /* Ad / Offers Slider */
+        .ad-card {
+            min-width: 320px;
+            height: 160px;
             border-radius: 12px;
-            scroll-snap-align: start;
-            text-decoration: none;
-            color: var(--text-main);
+            scroll-snap-align: center;
+            position: relative;
             overflow: hidden;
-            display: block;
             box-shadow: var(--card-shadow);
             border: 1px solid var(--border-line);
         }
-        .app-hero {
+        .ad-card img {
             width: 100%;
-            height: 140px;
+            height: 100%;
             object-fit: cover;
-        }
-        .app-info-row {
-            display: flex;
-            padding: 12px;
-            gap: 12px;
-            align-items: center;
-        }
-        .app-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .app-text h3 {
-            margin: 0 0 4px 0;
-            font-size: 1rem;
-        }
-        .app-text p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            border-radius: 12px;
         }
 
+        /* --- Google Play Vertical List View --- */
+        .app-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between each app in the list */
+            margin-bottom: 30px;
+        }
+
+        .app-list-item {
+            display: flex;
+            align-items: center; /* Vertically centers the icon, text, and button */
+            gap: 16px; /* Space between icon and text */
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .app-list-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px; /* Slightly more rounded than the promo cards */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+            background: #ffffff;
+            object-fit: cover;
+            flex-shrink: 0; /* Prevents the icon from squishing on small screens */
+        }
+
+        .app-list-text {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* This pushes the button to the far right edge! */
+            gap: 4px;
+        }
+
+        .app-list-title {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .app-list-desc {
+            font-size: 0.85em;
+            color: #9aa0a6; /* The classic Play Store grey text */
+            margin: 0;
+        }
+
+        /* --- Custom Buttons --- */
+        .btn-install {
+            background-color: #0a56d1; /* Google Material Blue */
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.85em;
+            padding: 8px 20px;
+            border-radius: 20px; /* Pill shape */
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.2s ease;
+            border: none;
+            flex-shrink: 0;
+        }
+
+        .btn-install:hover {
+            background-color: #0842a0;
+        }
+
+        .btn-disabled {
+            background-color: transparent;
+            color: #5f6368;
+            border: 1px solid #5f6368;
+            font-weight: 600;
+            font-size: 0.85em;
+            padding: 7px 19px; /* Slightly less padding to account for the 1px border */
+            border-radius: 20px;
+            text-align: center;
+            cursor: not-allowed;
+            flex-shrink: 0;
+        }
+        
         /* Developer Bio Section */
         .dev-bio {
             background: var(--bio-bg);
@@ -225,24 +281,6 @@
             line-height: 1.6;
             color: var(--text-main);
             font-size: 0.95rem;
-        }
-
-        /* Ad / Offers Slider */
-        .ad-card {
-            min-width: 320px;
-            height: 160px;
-            border-radius: 12px;
-            scroll-snap-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-line);
-        }
-        .ad-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
         }
 
         /* Promo Text */
@@ -396,6 +434,30 @@
         <a href="mailto:sundowndeveloper0@gmail.com" class="ad-card" style="display: block;">
             <img src="CPU A web ss/file_000000006e64720a98ac1145c1ffa41a.png" alt="Contact to Advertise">
         </a>
+    </div>
+
+    <h2>Popular apps</h2>
+    
+    <div class="app-list">
+        
+        <div class="app-list-item">
+            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-list-icon">
+            <div class="app-list-text">
+                <h3 class="app-list-title">CPU A</h3>
+                <p class="app-list-desc">Tools • Device Info</p>
+            </div>
+            <a href="https://play.google.com/store/apps/details?id=com.cpu.a" class="btn-install" target="_blank">Install</a>
+        </div>
+
+        <div class="app-list-item">
+            <img src="CPU A web ss/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon" class="app-list-icon">
+            <div class="app-list-text">
+                <h3 class="app-list-title">MLBB Visual Studio</h3>
+                <p class="app-list-desc">Tools • Gaming • Visuals</p>
+            </div>
+            <div class="btn-disabled">Coming Soon</div>
+        </div>
+
     </div>
 
     <div class="dev-bio">
