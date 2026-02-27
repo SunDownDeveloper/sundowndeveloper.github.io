@@ -337,51 +337,65 @@
             margin: 24px 0;
         }
 
-        /* Upcoming Section */
+        /* --- Google Play Upcoming Section --- */
         .upcoming-indicator {
             display: inline-block;
-            background-color: var(--upcoming-bg);
-            color: var(--upcoming-text);
+            background-color: #d93025; /* The exact Google Play Red */
+            color: #ffffff;
             padding: 4px 8px;
             border-radius: 6px;
             font-size: 0.75rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 16px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+        
         .upcoming-icons {
             display: flex;
-            gap: 24px;
+            gap: 16px; /* Brought closer together (was 24px) */
             overflow-x: auto;
-            padding-bottom: 10px;
+            padding-bottom: 15px; /* Room for the drop shadow */
+            scrollbar-width: none; /* Hides the scrollbar for a native app feel */
         }
+        
+        .upcoming-icons::-webkit-scrollbar {
+            display: none;
+        }
+        
         .upcoming-item {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 72px; /* Keeps text wrapped nicely under the icon */
+            align-items: flex-start; /* Aligns the text flush left like the Play Store */
+            text-align: left;
+            width: 88px; /* Widened to give text room to breathe without folding */
+            flex-shrink: 0; /* Prevents the icons from getting squished on narrow screens */
+            text-decoration: none; /* Keeps it clean if you wrap them in <a> tags later */
         }
+        
         .upcoming-item img {
-            width: 54px;
-            height: 54px;
-            border-radius: 12px;
-            opacity: 0.85;
+            width: 84px; /* Much larger, showcase-sized icons */
+            height: 84px;
+            border-radius: 18px; /* Slightly larger curve for bigger icons */
             box-shadow: 0 1px 4px rgba(0,0,0,0.15);
             background: #ffffff;
             object-fit: cover;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
+        
         .upcoming-item span {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-main);
             font-weight: 500;
             line-height: 1.2;
+            word-break: break-word; /* Allows long words to break naturally if absolutely necessary */
         }
+        
         .upcoming-text {
             margin-top: 16px;
+            font-size: 0.95em;
             font-weight: 500;
-            color: var(--text-muted);
+            color: #9aa0a6; /* Standard Play Store secondary text color */
         }
 
         /* YouTube Button */
