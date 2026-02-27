@@ -264,26 +264,47 @@
             flex-shrink: 0;
         }
 
-        /* --- Google Play Event Cards --- */
+        /* --- Google Play Event Cards (Snapping Slider) --- */
         .event-grid {
             display: flex;
-            flex-wrap: wrap; /* If you add more events later, they will sit side-by-side on PC! */
-            gap: 20px;
+            flex-wrap: nowrap; /* Forces them into a single horizontal row */
+            gap: 16px;
             margin-bottom: 30px;
+            overflow-x: auto; /* Enables horizontal swiping */
+            padding-bottom: 20px; /* Room for the drop shadow */
+            
+            /* The Recoil Spring Magic */
+            scroll-snap-type: x mandatory;
+            
+            /* Hides the ugly browser scrollbar */
+            scrollbar-width: none; 
+        }
+
+        .event-grid::-webkit-scrollbar {
+            display: none;
         }
 
         .event-card {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            max-width: 450px; /* The Magic Fix: Stops it from stretching across your whole monitor */
+            
+            /* The 85% trick lets the edge of the next card peek out on mobile! */
+            width: 85%; 
+            max-width: 400px; /* Keeps it perfectly sized on your wide PC screen */
+            flex-shrink: 0; /* Stops the browser from squishing the cards together */
+            
+            /* Snaps this card perfectly into the view when you stop swiping */
+            scroll-snap-align: center; 
+            
             border-radius: 12px;
             box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            overflow: hidden; /* Keeps the image locked inside the rounded corners */
+            overflow: hidden; 
             text-decoration: none;
-            background-color: #ffffff; /* Card background color */
+            background-color: #ffffff; 
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        /* Keep your existing .event-banner and .event-text-container CSS exactly as they are below this! */
 
         .event-card:hover {
             transform: translateY(-2px); /* Gives it a slight lift when you hover on PC */
