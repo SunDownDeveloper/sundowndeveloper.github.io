@@ -93,43 +93,55 @@
             display: none;
         }
         
+        /* --- Play Store Swipeable Row --- */
+        .play-card-row {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto; /* Lets you swipe horizontally on mobile */
+            padding-bottom: 15px; /* Room for the shadow */
+            scrollbar-width: none; /* Hides the ugly scrollbar */
+        }
+        .play-card-row::-webkit-scrollbar {
+            display: none;
+        }
+
         /* --- Google Play Style Promo Card --- */
         .play-promo {
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Perfect spacing between banner and text */
-            width: 100%;
+            gap: 12px;
+            min-width: 280px; /* Exact Play Store width */
+            max-width: 280px; /* Stops it from stretching */
             text-decoration: none;
             cursor: pointer;
-            margin-bottom: 25px;
             transition: opacity 0.2s ease;
         }
         
         .play-promo:hover {
-            opacity: 0.85; /* Smooth hover effect instead of jumping */
+            opacity: 0.85; 
         }
 
         .play-banner {
             width: 100%;
-            border-radius: 12px; /* Rounds ALL 4 corners */
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Standalone shadow */
+            border-radius: 12px; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15); 
             object-fit: cover;
-            aspect-ratio: 16 / 9; /* Keeps the banner perfectly proportioned */
+            aspect-ratio: 16 / 9; 
         }
 
         .play-details {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 0 4px; /* Aligns text perfectly with the banner's visual edge */
+            padding: 0 4px; 
         }
 
         .play-icon {
             width: 56px;
             height: 56px;
-            border-radius: 12px; /* The classic Play Store squircle */
+            border-radius: 12px; 
             box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            background: #ffffff; /* Ensures the icon background is clean */
+            background: #ffffff; 
             object-fit: cover;
         }
 
@@ -142,14 +154,14 @@
         .play-title {
             font-size: 1.1em;
             font-weight: 600;
-            color: var(--text-main); /* Adapts to your dark mode! */
+            color: var(--text-main); 
             margin: 0;
             line-height: 1.2;
         }
 
         .play-category {
             font-size: 0.9em;
-            color: #5f6368; /* The exact Google Play grey */
+            color: #5f6368; 
             margin: 0;
         }
 
@@ -359,17 +371,20 @@
 
     <h2>Recommended for you</h2>
     
-    <a href="cpu-a.html" class="play-promo">
-        <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A Promo Banner" class="play-banner">
+    <div class="play-card-row">
         
-        <div class="play-details">
-            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="play-icon">
-            <div class="play-text">
-                <h3 class="play-title">CPU A</h3>
-                <p class="play-category">Tools • Device Info</p>
+        <a href="cpu-a.html" class="play-promo">
+            <img src="CPU A web ss/your-banner-image.jpg" alt="CPU A Promo Banner" class="play-banner">
+            
+            <div class="play-details">
+                <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="play-icon">
+                <div class="play-text">
+                    <h3 class="play-title">CPU A</h3>
+                    <p class="play-category">Tools • Device Info</p>
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
 
     <div class="dev-bio">
         <h2>About SunDownDeveloper</h2>
