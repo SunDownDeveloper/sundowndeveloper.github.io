@@ -278,13 +278,15 @@
         }
 
         .screenshot-item {
-            height: 380px; /* The classic iOS App Store screenshot height */
-            border-radius: 12px; /* Smooth inner curves */
+            width: 220px; /* The Fix: Locks the width so they don't explode! */
+            height: auto; /* Keeps your screenshot proportions absolutely perfect */
+            max-height: 450px; /* Failsafe limit */
+            border-radius: 12px; 
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            border: 1px solid rgba(0,0,0,0.05); /* Gives a premium edge to the glass */
+            border: 1px solid rgba(0,0,0,0.05); 
             flex-shrink: 0;
             scroll-snap-align: start;
-            object-fit: cover;
+            object-fit: contain; /* Ensures the whole screenshot is always visible */
         }
 
         /* Horizontal Screenshot Slider */
@@ -437,7 +439,16 @@
             display: flex;
             gap: 16px;
             overflow-x: auto;
+            
+            /* The Fix: Breaks the slider out to the edge of the phone screen */
+            margin-left: -10px;
+            margin-right: -10px;
+            
+            /* The Fix: Pushes the first card back into perfect alignment with the title */
+            padding-left: 10px;
+            padding-right: 10px;
             padding-bottom: 20px; 
+            
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
         }
@@ -628,15 +639,15 @@
         </div>
 
     <div class="screenshot-gallery">
-        <img src="CPU A web ss/Screenshot_20260208-012607.jpg" alt="Screenshot 1">
-        <img src="CPU A web ss/Screenshot_20260208-012609.jpg" alt="Screenshot 2">
-        <img src="CPU A web ss/Screenshot_20260208-012612.jpg" alt="Screenshot 3">
-        <img src="CPU A web ss/Screenshot_20260208-012615.jpg" alt="Screenshot 4">
-        <img src="CPU A web ss/Screenshot_20260208-012625.jpg" alt="Screenshot 5">
-        <img src="CPU A web ss/Screenshot_20260208-012633.jpg" alt="Screenshot 6">
-        <img src="CPU A web ss/Screenshot_20260208-012636.jpg" alt="Screenshot 7">
-        <img src="CPU A web ss/Screenshot_20260221-120152.jpg" alt="Screenshot 8">
-        <img src="CPU A web ss/Screenshot_20260221-120156.jpg" alt="Screenshot 9">
+        <img src="CPU A web ss/Screenshot_20260208-012607.jpg" alt="Screenshot 1" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260208-012609.jpg" alt="Screenshot 2" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260208-012612.jpg" alt="Screenshot 3" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260208-012615.jpg" alt="Screenshot 4" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260208-012625.jpg" alt="Screenshot 5" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260208-012633.jpg" alt="Screenshot 6" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260208-012636.jpg" alt="Screenshot 7" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260221-120152.jpg" alt="Screenshot 8" class="screenshot-item">
+        <img src="CPU A web ss/Screenshot_20260221-120156.jpg" alt="Screenshot 9" class="screenshot-item">
     </div>
 
     <div class="description" style="border-bottom: none;">
