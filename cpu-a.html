@@ -270,56 +270,128 @@
             box-shadow: var(--card-shadow);
         }
 
-        /* Description Section */
-        .description {
-            line-height: 1.6;
-            font-size: 0.89em;
-            padding: 20px 0;
-            border-bottom: 2px solid var(--border-line);
+        /* --- App Store Ratings & Reviews --- */
+        .app-reviews-section {
+            margin-top: 32px;
+            margin-bottom: 24px;
         }
-        
-        /* Developer Footer */
-        .developer-footer {
+
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .reviews-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0;
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 30px 0;
-            margin-top: 20px;
+            gap: 8px;
         }
-        .dev-photo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent);
-        }
-        .dev-info h3 {
-            margin: 0 0 5px 0;
-            color: var(--accent);
-        }
-        .dev-info p {
-            margin: 0;
-            font-size: 0.95em;
-            color: var(--text-muted);
-        }
-        .dev-info a {
-            color: #ff0000;
-            text-decoration: none;
+
+        .reviews-arrow {
+            color: #c7c7cc;
+            font-size: 1.2rem;
             font-weight: bold;
         }
-        
-        /* Google Play Badge */
-        .download-btn-container {
-            margin-top: 25px;
-            text-align: left;
+
+        .reviews-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
         }
-        .play-badge {
-            height: 60px; /* Standard official height */
-            transition: transform 0.2s ease;
+
+        .reviews-score {
+            font-size: 4.5rem; /* Massive, Apple-style font size */
+            font-weight: 800; /* Extra bold */
+            color: var(--text-main);
+            line-height: 1;
+            letter-spacing: -2px; /* Pulls the numbers tighter together */
         }
-        .play-badge:hover {
-            transform: scale(1.05);
+
+        .reviews-stars-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Pushes the stars perfectly to the right edge */
         }
+
+        .reviews-stars-overall {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .reviews-count {
+            font-size: 0.85rem;
+            color: #8e8e93; /* iOS standard grey */
+            font-weight: 500;
+        }
+
+        .reviews-subtitle {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+
+        /* Review Cards Slider */
+        .reviews-slider {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 20px; 
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .reviews-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .review-card {
+            background-color: rgba(142, 142, 147, 0.12); /* Native iOS adaptive card background */
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 85%; /* Enables the 'peek' effect for swiping */
+            max-width: 350px; 
+            flex-shrink: 0;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .review-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-card-stars {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .review-card-author {
+            font-size: 0.85rem;
+            color: #8e8e93;
+            font-weight: 400;
+        }
+
+        .review-card-text {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.4;
+            margin: 0;
+        }
+
         /* --- Expandable About Card --- */
         .about-card {
             background: var(--surface-color);
@@ -379,6 +451,57 @@
             margin-top: 15px;
             display: block;
             transition: color 0.2s;
+        }
+
+        /* Google Play Badge */
+        .download-btn-container {
+            margin-top: 25px;
+            text-align: left;
+        }
+        .play-badge {
+            height: 60px; /* Standard official height */
+            transition: transform 0.2s ease;
+        }
+        .play-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Description Section */
+        .description {
+            line-height: 1.6;
+            font-size: 0.89em;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--border-line);
+        }
+        
+        /* Developer Footer */
+        .developer-footer {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px 0;
+            margin-top: 20px;
+        }
+        .dev-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+        .dev-info h3 {
+            margin: 0 0 5px 0;
+            color: var(--accent);
+        }
+        .dev-info p {
+            margin: 0;
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+        .dev-info a {
+            color: #ff0000;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
     <!-- Google tag (gtag.js) -->
@@ -530,6 +653,35 @@
             </div>
             
             <span class="expand-label" id="expandLabel">Show More ▼</span>
+        </div>
+
+        <div class="app-reviews-section">
+            <div class="reviews-header">
+                <h2>Ratings & Reviews <span class="reviews-arrow">&gt;</span></h2>
+            </div>
+            
+            <div class="reviews-summary">
+                <div class="reviews-score">4.9</div>
+                <div class="reviews-stars-container">
+                    <div class="reviews-stars-overall">★★★★★</div>
+                    <div class="reviews-count">7 Ratings</div>
+                </div>
+            </div>
+
+            <h3 class="reviews-subtitle">Most Helpful Reviews</h3>
+
+            <div class="reviews-slider">
+                <div class="review-card">
+                    <div class="review-card-meta">
+                        <span class="review-card-stars">★★★★★</span>
+                        <span class="review-card-author">Today • Samuelson OC</span>
+                    </div>
+                    <p class="review-card-text">
+                        Honestly, I like the aesthetics of the app, it feels premium and easy to navigate through smooth transitioning between activities within the app, kudos for that overall 5 stars from me, I expect improvements in coming updates though (maybe add something more pleasing to draw users)
+                    </p>
+                </div>
+                
+                </div>
         </div>
 
         <div class="download-btn-container">
