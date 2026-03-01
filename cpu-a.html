@@ -256,6 +256,37 @@
             cursor: pointer;
         }
 
+        /* --- App Store Screenshot Gallery --- */
+        .screenshot-gallery {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            
+            /* The Magic Trick: This pulls the slider OUT of the container's padding to touch the phone edges */
+            margin-left: -10px; 
+            margin-right: -10px;
+            
+            /* This pushes the first image back into perfect alignment with your text! */
+            padding: 10px 10px 24px 10px; 
+            
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        
+        .screenshot-gallery::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .screenshot-item {
+            height: 380px; /* The classic iOS App Store screenshot height */
+            border-radius: 12px; /* Smooth inner curves */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.05); /* Gives a premium edge to the glass */
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            object-fit: cover;
+        }
+
         /* Horizontal Screenshot Slider */
         .screenshot-slider {
             display: flex;
@@ -418,7 +449,7 @@
         .review-card {
             background-color: rgba(142, 142, 147, 0.12); 
             border-radius: 16px;
-            padding: 08px;
+            padding: 20px;
             
             /* The Sizing Fix */
             width: 85%; 
@@ -596,7 +627,7 @@
             </p>
         </div>
 
-    <div class="screenshot-slider">
+    <div class="screenshot-gallery">
         <img src="CPU A web ss/Screenshot_20260208-012607.jpg" alt="Screenshot 1">
         <img src="CPU A web ss/Screenshot_20260208-012609.jpg" alt="Screenshot 2">
         <img src="CPU A web ss/Screenshot_20260208-012612.jpg" alt="Screenshot 3">
