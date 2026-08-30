@@ -3,599 +3,761 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB Visual Studio - Closed Beta</title>
+    <title>MLBB Visual Studio — Closed Beta | SunDownTech</title>
+    
+    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
+    <meta name="description" content="MLBB Visual Studio — Ultimate Premium Customization Engine. Local dual-injection visual engine for Mobile Legends. Join the Closed Beta via SunDownTech.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* ==========================================
-           AUTO LIGHT/DARK THEME VARIABLES
-           ========================================== */
+        /* =========================================
+           1. CORE SYSTEM & NEON TECH VARIABLES
+           ========================================= */
         :root {
-            --bg-color: #FFFFFF; /* Changed to pure white to match container */
-            --container-bg: #FFFFFF;
-            --text-primary: #202124;
-            --text-secondary: #5F6368;
-            --border-color: #DADCE0;
-            --divider-color: #E8EAED;
-            --btn-bg: #007BFF;
-            --btn-hover: #0056b3;
-            --btn-text: #FFFFFF;
-            --tutorial-bg: #F8F9FA;
-            --tutorial-border: #F59E0B;
-            --card-border-left: #007BFF;
-            --fade-gradient: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
-            --stars-empty: #DADCE0;
-            --icon-color: #007BFF;
+            --bg-dark: #070a12;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(23, 33, 58, 0.9);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-emerald: #10b981;
+            --accent-cyan: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.25);
+            --border-line: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(6, 182, 212, 0.3);
+            --glass-blur: blur(16px);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212; /* Matches container for a seamless dark void */
-                --container-bg: #121212; 
-                --text-primary: #E3E3E3;
-                --text-secondary: #A0A0A0;
-                --border-color: #2A324A;
-                --divider-color: #2A2A2A;
-                --btn-bg: #007BFF;
-                --btn-hover: #3395ff;
-                --btn-text: #FFFFFF;
-                --tutorial-bg: #1B1B1B;
-                --card-border-left: #007BFF;
-                --fade-gradient: linear-gradient(to bottom, rgba(18,18,18,0), rgba(18,18,18,1));
-                --stars-empty: #5F6368;
-                --icon-color: #7DD3FC;
-            }
-        }
-        
-        /* ==========================================
-           BASE LAYOUT (1200px Max Width)
-           ========================================== */
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding-bottom: 60px;
+        }
+
+        /* Ambient Noise Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        a { text-decoration: none; color: inherit; }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 08px;
-            background-color: var(--container-bg);
-            min-height: 100vh;
-            /* box-shadow: 0 0 20px rgba(0,0,0,0.05); <-- DELETED */
+            padding: 0 20px;
         }
 
-        /* ==========================================
-           FLOATING BACK BUTTON
-           ========================================== */
-        .feature-graphic-wrapper {
-            position: relative;
+        /* =========================================
+           2. HEADER & NAVIGATION
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            z-index: 1000;
+            background: rgba(7, 10, 18, 0.85);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-line);
         }
 
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 35px;
-            height: 35px;
-            background-color: #FFFFFF;
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-back-btn:hover {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: var(--border-glow);
+            color: var(--accent-cyan);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 0.95rem;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .tech-accent { color: var(--accent-cyan); }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 58px;
+            height: 58px;
+            background: #25d366;
+            color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-            z-index: 10;
-            text-decoration: none;
-            transition: background-color 0.2s;
+            font-size: 1.7rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: var(--transition);
         }
 
-        .back-btn:hover {
-            background-color: #F8F9FA;
+        .floating-whatsapp:hover {
+            transform: scale(1.1) rotate(8deg);
         }
 
-        .back-icon {
-            width: 24px;
-            height: 24px;
-            fill: #202124; /* Keeps the arrow dark grey/black even in dark mode */
+        /* =========================================
+           3. APP HERO BANNER & MAIN HEADLINE
+           ========================================= */
+        .app-hero-wrapper {
+            padding-top: 100px;
+            margin-bottom: 24px;
         }
 
-        /* Feature Graphic */
-        .feature-graphic {
+        .app-store-banner {
             width: 100%;
-            height: 180px;
-            background-color: #1B2236;
-            background-image: url('MLBB%20VS/feature-graphic.png'); 
+            height: 240px;
+            border-radius: var(--radius-lg);
+            background-image: url('MLBB%20VS/feature-graphic.png');
             background-size: cover;
             background-position: center;
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (max-width: 768px) {
-            .feature-graphic { height: 200px; }
+        .app-store-banner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(7, 10, 18, 0.95), transparent 60%);
         }
 
-        /* App Header */
-        .app-header {
-            display: flex;
-            padding: 20px 0px 10px 0px;
-            align-items: center;
-        }
-
-        .app-icon {
-            width: 118px;
-            height: 118px;
-            border-radius: 20px;
-            background-color: var(--border-color);
-            margin-right: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .app-title-area {
-            flex-grow: 1;
-        }
-
-        .app-title-area h1 {
-            font-size: 24px;
-            color: var(--text-primary);
-            margin: 0 0 6px 0;
-            letter-spacing: -0.5px;
-        }
-
-        .app-title-area p {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        /* The Share Button */
-        .share-btn-container {
-            margin-left: 15px;
-            cursor: pointer;
-            color: var(--icon-color);
-            align-self: flex-end;
-            padding-top: 8px;
-        }
-
-        .share-icon {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* ==========================================
-           THE 6-ITEM STATS ROW
-           ========================================== */
-        .stats-row {
-            display: flex;
-            align-items: center;
-            overflow-x: auto;
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--divider-color);
-            scrollbar-width: none;
-        }
-        
-        .stats-row::-webkit-scrollbar { display: none; }
-
-        .stat-item {
+        /* Main Info Card Overlay/Container */
+        .app-header-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
+            gap: 24px;
+        }
+
+        .app-main-info {
+            display: flex;
+            gap: 20px;
             align-items: center;
-            justify-content: center;
-            padding: 0 28px; 
-            text-align: center;
+        }
+
+        .app-store-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            border: 1px solid var(--border-line);
+            background: #ffffff;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             flex-shrink: 0;
         }
 
-        .stat-header {
-            font-size: 11px;
+        .app-title-group h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .app-title-group .subtitle {
+            font-size: 1.05rem;
+            color: var(--accent-cyan);
             font-weight: 600;
-            color: var(--text-secondary);
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
+        }
+
+        .app-cta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-line);
+            padding-top: 20px;
+        }
+
+        .btn-beta-main {
+            background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+            color: #031826;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 12px 32px;
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .btn-beta-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.45);
+        }
+
+        .btn-share {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            color: var(--text-main);
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .btn-share:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-emerald);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        /* =========================================
+           4. STATS GRID & SPECS ROW
+           ========================================= */
+        .app-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+        }
+
+        .stat-box:hover {
+            border-color: var(--border-glow);
+            background: var(--bg-card-hover);
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
             text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
         }
 
         .stat-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--text-primary);
-            margin-bottom: 4px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           5. BETA TUTORIAL & INSTRUCTIONS BOX
+           ========================================= */
+        .card-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 28px;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+        }
+
+        .card-box:hover {
+            border-color: var(--border-glow);
+        }
+
+        .card-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            height: 24px;
-        }
-
-        .stat-subtext {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .stars {
-            color: var(--stars-empty);
-            font-size: 16px;
-            letter-spacing: 2px;
-            line-height: 24px;
-        }
-
-        .stat-divider {
-            min-width: 1px;
-            width: 1px;
-            height: 45px;
-            background-color: var(--divider-color);
-            flex-shrink: 0;
-        }
-
-        .dev-icon {
-            width: 24px;
-            height: 24px;
-            fill: var(--text-primary);
-        }
-
-        @media (max-width: 768px) {
-            .stat-item { padding: 0 20px; }
-        }
-
-        /* ==========================================
-           ACTION AREA & TUTORIAL BOX (PERFECT PADDING)
-           ========================================== */
-        .action-area {
-            padding: 15px 0px;
-            text-align: left;
-        }
-
-        .btn-install {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            text-align: center;
-            padding: 14px 0;
-            background-color: var(--btn-bg);
-            color: var(--btn-text);
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 20px; /* Space between button and tutorial */
-            transition: background 0.2s;
-        }
-
-        .btn-install:hover {
-            background-color: var(--btn-hover);
-        }
-
-        .tutorial-box {
-            background-color: var(--tutorial-bg);
-            border-left: 5px solid var(--tutorial-border);
-            padding: 24px 32px; /* Flawless CPU A spacing */
-            margin-left: 5px; 
-            margin-right: 5px;
-            border-radius: 12px;
-            font-size: 14px;
-            line-height: 1.8; /* Breathable line height */
-            color: var(--text-secondary);
-            max-width: 800px;
-        }
-
-        .tutorial-box strong {
-            color: var(--text-primary);
-            font-size: 16px;
-            display: block;
             margin-bottom: 16px;
         }
 
-        .tutorial-box ol { 
-            margin: 0; 
-            padding-left: 20px; 
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
-        .tutorial-box li { 
-            margin-bottom: 16px; /* Stops text clumping */
+
+        .card-title i {
+            color: var(--accent-emerald);
         }
-        
+
+        .tutorial-box {
+            background: rgba(6, 182, 212, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .tutorial-box strong {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-box ol {
+            padding-left: 20px;
+        }
+
+        .tutorial-box li {
+            margin-bottom: 12px;
+        }
+
         .tutorial-box li:last-child {
             margin-bottom: 0;
         }
 
-        /* ==========================================
-           SECTIONS & SCREENSHOTS
-           ========================================== */
-        .section {
-            padding: 0px;
-            /* Removed max-width restriction completely */
-        }
-
-        .section-title {
-            font-size: 22px;
-            color: var(--text-primary);
-            font-weight: bold;
-            margin: 0 0 20px 0;
+        /* =========================================
+           6. SCREENSHOT GALLERY
+           ========================================= */
+        .screenshot-slider {
             display: flex;
-            align-items: center;
-        }
-
-        .screenshots-container {
-            display: flex;
+            gap: 16px;
             overflow-x: auto;
-            gap: 12px;
-            padding-bottom: 15px;
+            padding-bottom: 16px;
+            scroll-snap-type: x mandatory;
             scrollbar-width: none;
         }
-        .screenshots-container::-webkit-scrollbar { display: none; }
 
-        .screenshot {
-            width: auto;
-            max-width: 220px; /* The Fix: Locks the width so they don't explode! */
-            height: auto; /* Keeps your screenshot proportions absolutely perfect */
-            max-height: 450px; /* Failsafe limit */
-            background-color: var(--border-color);
-            border-radius: 12px;
+        .screenshot-slider::-webkit-scrollbar { display: none; }
+
+        .screenshot-item {
+            max-width: 220px;
+            height: auto;
+            max-height: 440px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-line);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             flex-shrink: 0;
             scroll-snap-align: start;
             object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: var(--transition);
         }
 
-        /* ==========================================
-           EXPANDABLE ABOUT CARD (CPU A STYLE)
-           ========================================== */
+        .screenshot-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.25);
+        }
+
+        /* =========================================
+           7. EXPANDABLE ABOUT APP CARD
+           ========================================= */
         .about-card {
-            border: 1px solid var(--border-color);
-            border-left: 6px solid var(--card-border-left);
-            border-radius: 16px;
-            padding: 24px; /* Match CPU A generous padding */
-            margin-left: 5px; 
-            margin-right: 5px;
+            cursor: pointer;
             position: relative;
-            background-color: var(--container-bg);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            margin-bottom: 20px;
         }
 
         .about-content {
-            max-height: 220px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-height: 140px;
             overflow: hidden;
-            font-size: 14px; /* Clean, perfectly sized font */
-            line-height: 1.6; /* Breathable spacing */
-            color: var(--text-secondary);
-            transition: max-height 0.4s ease;
+            position: relative;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .about-content.expanded { max-height: 3000px; }
+        .about-content.expanded {
+            max-height: 3500px;
+        }
 
         .about-content p {
-            margin-top: 0;
-            margin-bottom: 16px; /* Perfect paragraph spacing */
+            margin-bottom: 16px;
         }
 
         .about-content h3 {
-            color: var(--text-primary);
-            font-size: 15px;
-            margin-top: 32px; /* Pushes headers down away from text above */
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-top: 24px;
             margin-bottom: 12px;
         }
 
-        .about-content strong { color: var(--text-primary); }
+        .about-content strong {
+            color: var(--text-main);
+        }
 
-        .about-fade {
+        .fade-overlay {
             position: absolute;
-            bottom: 60px;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px;
-            background: var(--fade-gradient);
+            height: 60px;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.95));
             pointer-events: none;
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
+            transition: opacity 0.3s;
         }
 
-        .show-more-btn {
-            display: block;
-            width: 100%;
+        .about-content.expanded .fade-overlay {
+            opacity: 0;
+        }
+
+        .expand-btn-text {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 0.95rem;
             text-align: center;
-            background: none;
-            border: none;
-            color: var(--btn-bg);
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            padding-top: 10px;
-            margin-top: 10px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        /* ==========================================
-           EMPTY REVIEWS SECTION
-           ========================================== */
-        .empty-reviews {
+        /* =========================================
+           8. REVIEWS & RATINGS SECTION (BETA STATE)
+           ========================================= */
+        .empty-reviews-box {
+            text-align: center;
+            padding: 36px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-line);
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           9. DOWNLOAD CTA & FOOTER
+           ========================================= */
+        .download-cta-banner {
             text-align: center;
             padding: 40px 20px;
-            color: var(--text-secondary);
-            font-size: 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-top: 20px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+        }
+
+        .download-cta-banner h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-line);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .app-title-group h1 { font-size: 1.8rem; }
         }
     </style>
+
+    <!-- Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0K5Y7KPZWS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0K5Y7KPZWS');
+    </script>
 </head>
 <body>
 
-    <div class="container">
-        <div class="feature-graphic-wrapper">
-            <a href="javascript:history.back()" class="back-btn" title="Go Back">
-                <svg class="back-icon" viewBox="0 0 24 24">
-                    <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-                </svg>
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/2347015327995?text=Hello%20SunDownTech,%20I'm%20interested%20in%20MLBB%20Visual%20Studio!" class="floating-whatsapp" target="_blank" aria-label="Contact on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Top Navigation Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="nav-back-btn">
+                <i class="fas fa-arrow-left"></i> Home
             </a>
-            
-            <div class="feature-graphic"></div>
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-paintbrush"></i></div>
+                <span>SunDown<span class="tech-accent">Tech</span></span>
+            </a>
         </div>
-        <div class="app-header">
-            <img src="MLBB%20VS/Picsart_26-02-visual-studio.png" alt="App Icon" class="app-icon">
-            <div class="app-title-area">
-                <h1>MLBB Visual Studio</h1>
-                <p>Ultimate Premium Customization Engine.</p>
-            </div>
-            <div class="share-btn-container" title="Share">
-                <svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                    <polyline points="16 6 12 2 8 6"></polyline>
-                    <line x1="12" y1="2" x2="12" y2="15"></line>
-                </svg>
-            </div>
-        </div>
+    </header>
 
-        <div class="stats-row">
-            <div class="stat-item">
-                <div class="stat-header">0 RATINGS</div>
-                <div class="stat-value">-</div>
-                <div class="stat-subtext stars">&#9734;&#9734;&#9734;&#9734;&#9734;</div>
-            </div>
-            <div class="stat-divider"></div>
-            
-            <div class="stat-item">
-                <div class="stat-header">AGE</div>
-                <div class="stat-value">3+</div>
-                <div class="stat-subtext">Years Old</div>
-            </div>
-            <div class="stat-divider"></div>
+    <div class="container app-hero-wrapper">
+        <!-- Banner Image -->
+        <div class="app-store-banner"></div>
 
-            <div class="stat-item">
-                <div class="stat-header">CHART</div>
-                <div class="stat-value">No. -</div>
-                <div class="stat-subtext">Visual Tools</div>
-            </div>
-            <div class="stat-divider"></div>
-
-            <div class="stat-item">
-                <div class="stat-header">DEVELOPER</div>
-                <div class="stat-value">
-                    <svg class="dev-icon" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
+        <!-- Main App Header Card -->
+        <div class="app-header-card">
+            <div class="app-main-info">
+                <img src="MLBB%20VS/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon" class="app-store-icon">
+                <div class="app-title-group">
+                    <h1>MLBB Visual Studio</h1>
+                    <div class="subtitle">Ultimate Premium Customization Engine</div>
                 </div>
-                <div class="stat-subtext">SunDownDeveloper</div>
             </div>
-            <div class="stat-divider"></div>
 
-            <div class="stat-item">
-                <div class="stat-header">LANGUAGE</div>
-                <div class="stat-value">EN</div>
-                <div class="stat-subtext">+ More</div>
-            </div>
-            <div class="stat-divider"></div>
-
-            <div class="stat-item">
-                <div class="stat-header">SIZE</div>
-                <div class="stat-value">16.2</div>
-                <div class="stat-subtext">MB</div>
+            <div class="app-cta-row">
+                <a href="https://chat.whatsapp.com/LI7dESj6BQf1v4u617iYAV?mode=hqctcla" class="btn-beta-main" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Join Closed Testing Beta
+                </a>
+                <button class="btn-share" id="shareBtn" title="Share MLBB Visual Studio">
+                    <i class="fas fa-share-nodes"></i>
+                </button>
             </div>
         </div>
 
-        <div class="action-area">
-            <a href="https://chat.whatsapp.com/LI7dESj6BQf1v4u617iYAV?mode=hqctcla" class="btn-install" target="_blank">Join Closed Testing</a>
-            
+        <!-- Specs & Quick Stats Grid -->
+        <div class="app-stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">STATUS</div>
+                <div class="stat-value">BETA</div>
+                <div class="stat-sub">Closed Testing</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">AGE</div>
+                <div class="stat-value">3+</div>
+                <div class="stat-sub">Years Old</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">CATEGORY</div>
+                <div class="stat-value">Tools</div>
+                <div class="stat-sub">Visual Engine</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">DEVELOPER</div>
+                <div class="stat-value"><i class="fas fa-code"></i></div>
+                <div class="stat-sub">SunDownTech</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">SIZE</div>
+                <div class="stat-value">16.2 MB</div>
+                <div class="stat-sub">Lightweight</div>
+            </div>
+        </div>
+
+        <!-- Beta Participation Box -->
+        <div class="card-box">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-flask"></i> Beta Instructions</div>
+            </div>
             <div class="tutorial-box">
-                <strong>How to participate in the Beta:</strong>
+                <strong>How to participate in the Closed Beta:</strong>
                 <ol>
-                    <li>Tap the button above to join the official WhatsApp Beta group.</li>
+                    <li>Tap the <strong>Join Closed Testing Beta</strong> button above to join our official WhatsApp Beta group.</li>
                     <li>Drop your Google account email in the group chat.</li>
                     <li>Within 5 minutes, you will be added to the official testing list.</li>
-                    <li><strong>Important:</strong> Ensure the email you provide is currently signed into your browser (to accept the invite) AND signed into your Google Play Store app to successfully download the beta!</li>
+                    <li><strong>Important:</strong> Ensure the email you provide is signed into your browser (to accept the invite) AND signed into your Google Play Store app to successfully download the beta build!</li>
                 </ol>
             </div>
         </div>
 
-        <div class="section">
-            <div class="screenshots-container">
-                <img src="MLBB%20VS/Screenshot_1.jpg" class="screenshot" alt="Screenshot 1">
-                <img src="MLBB%20VS/Screenshot_2.jpg" class="screenshot" alt="Screenshot 2">
-                <img src="MLBB%20VS/Screenshot_3.jpg" class="screenshot" alt="Screenshot 3">
-                <img src="MLBB%20VS/Screenshot_4.jpg" class="screenshot" alt="Screenshot 4">
-                <img src="MLBB%20VS/Screenshot_5.jpg" class="screenshot" alt="Screenshot 5">
-                <img src="MLBB%20VS/Screenshot_6.jpg" class="screenshot" alt="Screenshot 6">
-                <img src="MLBB%20VS/Screenshot_7.jpg" class="screenshot" alt="Screenshot 7">
+        <!-- Screenshot Gallery -->
+        <div class="card-box">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-mobile-screen"></i> App Screenshots</div>
+            </div>
+            <div class="screenshot-slider">
+                <img src="MLBB%20VS/Screenshot_1.jpg" alt="MLBB Visual Studio Screenshot 1" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_2.jpg" alt="MLBB Visual Studio Screenshot 2" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_3.jpg" alt="MLBB Visual Studio Screenshot 3" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_4.jpg" alt="MLBB Visual Studio Screenshot 4" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_5.jpg" alt="MLBB Visual Studio Screenshot 5" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_6.jpg" alt="MLBB Visual Studio Screenshot 6" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_7.jpg" alt="MLBB Visual Studio Screenshot 7" class="screenshot-item">
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-title">About the App</div>
-            
-            <div class="about-card">
-                <div class="about-content" id="aboutContent">
-                    <p>🎨 <strong>Enter the Studio. Remaster Your Experience.</strong></p>
-                    <p>Welcome to MLBB Visual Studio, the ultimate premium customization engine built specifically for players who want to elevate their in-game aesthetics. Unlock breathtaking visual effects, custom hero skins, and epic recall animations—all rendered 100% locally on your device with zero risk to your account.</p>
-                    <p>Designed by SunDownDeveloper with the same precision and AAA-polish as CPU A, this tool is built for speed, safety, and a flawless user experience.</p>
-                    
-                    <h3>🔥 KEY FEATURES</h3>
-                    <p><strong>🚀 Advanced Dual-Injection Engine</strong><br>
-                    Whether you are on an older device or running the latest Android OS, our app adapts. Featuring a revolutionary dual-engine architecture, MLBB Visual Studio utilizes both SAF (Storage Access Framework) and Shizuku (Wireless Debugging) for lightning-fast, flawless visual deployment. No PC and no traditional root required!</p>
-
-                    <p><strong>✨ High-Fidelity Customization</strong><br>
-                    Completely transform your gameplay. Inject highly detailed hero skins, vibrant custom maps, flashy recall animations, emotes, and elimination effects directly into your local game directory.</p>
-
-                    <p><strong>🛡️ 100% Safe & Local (Zero Ban Risk)</strong><br>
-                    Play with absolute peace of mind. MLBB Visual Studio modifies only the visual assets displayed on your personal screen. It does not alter core gameplay mechanics, inject cheats, or modify server data. You get to enjoy the premium visuals, but the competitive balance remains completely untouched.</p>
-
-                    <p><strong>🛠️ The Ultimate Control Center</strong><br>
-                    Manage your mods like a pro developer. Our deeply integrated, cyberpunk-themed Control Center features a highly intelligent "Remove Injected Skin" utility to safely wipe mods, built-in video tutorials, and dedicated tools to fix stuck loading screens or full storage issues with a single tap.</p>
-
-                    <p><strong>📱 Tablet-Proof Dynamic UI</strong><br>
-                    Experience a breathtaking, dark-neon aesthetic that dynamically scales to look absolutely gorgeous on any screen size, from compact phones to massive gaming tablets.</p>
-
-                    <h3>⚠️ IMPORTANT DISCLAIMER:</h3>
-                    <p>MLBB Visual Studio is a third-party local visual modification tool. It is not affiliated with, endorsed by, or officially connected to Moonton or Mobile Legends: Bang Bang. All injected files are local aesthetic modifications only, visible strictly to the user, and provide absolutely no in-game competitive advantage (no damage hacks, no map hacks).</p>
-                    
-                    <p>Ready to upgrade your visuals? Download MLBB Visual Studio today and completely redefine your game!</p>
-
-                    <h3>🙌 Feedback & Support</h3>
-                    <p>Your feedback plays an important role in shaping MLBB Visual Studio’s future. If you encounter any issues, have suggestions, or would like to request features, please leave a review or contact us directly.</p>
-
-                    <h3>⭐ Thank You for Using MLBB Visual Studio.</h3>
-                    <p>We appreciate your trust in MLBB Visual Studio. Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
-                </div>
+        <!-- Expandable About Card -->
+        <div class="card-box about-card" onclick="toggleCard()">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-circle-info"></i> About the App</div>
+            </div>
+            <div class="about-content" id="aboutContent">
+                <p>🎨 <strong>Enter the Studio. Remaster Your Experience.</strong></p>
+                <p>Welcome to MLBB Visual Studio, the ultimate premium customization engine built specifically for players who want to elevate their in-game aesthetics. Unlock breathtaking visual effects, custom hero skins, and epic recall animations—all rendered 100% locally on your device with zero risk to your account.</p>
+                <p>Engineered with the same precision and AAA-polish as CPU A, this tool is built for speed, safety, and a flawless user experience.</p>
                 
-                <div class="about-fade" id="aboutFade"></div>
-                <button class="show-more-btn" id="showMoreBtn" onclick="toggleAbout()">Show More ▼</button>
+                <h3>🔥 KEY FEATURES</h3>
+                <p><strong>🚀 Advanced Dual-Injection Engine</strong><br>
+                Whether you are on an older device or running the latest Android OS, our app adapts. Featuring a revolutionary dual-engine architecture, MLBB Visual Studio utilizes both SAF (Storage Access Framework) and Shizuku (Wireless Debugging) for lightning-fast, flawless visual deployment. No PC and no traditional root required!</p>
+
+                <p><strong>✨ High-Fidelity Customization</strong><br>
+                Completely transform your gameplay. Inject highly detailed hero skins, vibrant custom maps, flashy recall animations, emotes, and elimination effects directly into your local game directory.</p>
+
+                <p><strong>🛡️ 100% Safe &amp; Local (Zero Ban Risk)</strong><br>
+                Play with absolute peace of mind. MLBB Visual Studio modifies only the visual assets displayed on your personal screen. It does not alter core gameplay mechanics, inject cheats, or modify server data. You get to enjoy the premium visuals, but the competitive balance remains completely untouched.</p>
+
+                <p><strong>🛠️ The Ultimate Control Center</strong><br>
+                Manage your mods like a pro developer. Our deeply integrated, cyberpunk-themed Control Center features a highly intelligent "Remove Injected Skin" utility to safely wipe mods, built-in video tutorials, and dedicated tools to fix stuck loading screens or full storage issues with a single tap.</p>
+
+                <p><strong>📱 Tablet-Proof Dynamic UI</strong><br>
+                Experience a breathtaking, dark-neon aesthetic that dynamically scales to look absolutely gorgeous on any screen size, from compact phones to massive gaming tablets.</p>
+
+                <h3>⚠️ IMPORTANT DISCLAIMER:</h3>
+                <p>MLBB Visual Studio is a third-party local visual modification tool. It is not affiliated with, endorsed by, or officially connected to Moonton or Mobile Legends: Bang Bang. All injected files are local aesthetic modifications only, visible strictly to the user, and provide absolutely no in-game competitive advantage (no damage hacks, no map hacks).</p>
+                
+                <p>Ready to upgrade your visuals? Join our closed beta today and redefine your game!</p>
+
+                <h3>🙌 Feedback &amp; Support</h3>
+                <p>Your feedback plays an important role in shaping MLBB Visual Studio’s future. If you encounter any issues, have suggestions, or would like to request features, please leave feedback in our beta group or contact us directly.</p>
+
+                <h3>⭐ Thank You for Using MLBB Visual Studio</h3>
+                <p>We appreciate your trust in MLBB Visual Studio. Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
+
+                <div class="fade-overlay"></div>
+            </div>
+            <div class="expand-btn-text" id="expandLabel">
+                Show More <i class="fas fa-chevron-down"></i>
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-title">Ratings & Reviews ></div>
-            
-            <div class="stats-row" style="border: none; padding: 10px 0; justify-content: flex-start; gap: 30px;">
-                <div style="font-size: 64px; font-weight: bold; color: var(--text-primary); line-height: 1;">-</div>
-                <div style="text-align: right; color: var(--text-secondary);">
-                    <div class="stars" style="font-size: 20px; margin-bottom: 4px;">&#9734;&#9734;&#9734;&#9734;&#9734;</div>
-                    <div style="font-size: 14px;">0 Ratings</div>
-                </div>
+        <!-- Ratings & Reviews (Beta State) -->
+        <div class="card-box">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-star"></i> Ratings &amp; Reviews</div>
             </div>
-            
-            <div class="section-title" style="font-size: 18px; margin-top: 20px;">Most Helpful Reviews</div>
-            <div class="empty-reviews">
-                No reviews yet. Join the closed beta and be the first to leave feedback!
+            <div class="empty-reviews-box">
+                <i class="fas fa-comments" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--accent-cyan); display: block;"></i>
+                No public reviews yet. Join the closed beta group to test builds and leave feedback directly to the development team!
             </div>
         </div>
 
+        <!-- Download Banner CTA -->
+        <div class="download-cta-banner">
+            <h2>Get Early Access to MLBB Visual Studio</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Join the testing program and start customizing your game environment today.</p>
+            <a href="https://chat.whatsapp.com/LI7dESj6BQf1v4u617iYAV?mode=hqctcla" target="_blank" class="btn-beta-main">
+                <i class="fab fa-whatsapp"></i> Join WhatsApp Beta Group
+            </a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 SunDownTech. All rights reserved.</p>
+        </footer>
     </div>
 
+    <!-- Interactivity Scripts -->
     <script>
-        function toggleAbout() {
+        // Expand/Collapse Card Logic
+        function toggleCard() {
             const content = document.getElementById('aboutContent');
-            const fade = document.getElementById('aboutFade');
-            const btn = document.getElementById('showMoreBtn');
-
+            const label = document.getElementById('expandLabel');
+            
+            content.classList.toggle('expanded');
+            
             if (content.classList.contains('expanded')) {
-                content.classList.remove('expanded');
-                fade.style.display = 'block';
-                btn.innerHTML = 'Show More ▼';
+                label.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
             } else {
-                content.classList.add('expanded');
-                fade.style.display = 'none';
-                btn.innerHTML = 'Show Less ▲';
+                label.innerHTML = 'Show More <i class="fas fa-chevron-down"></i>';
             }
         }
+
+        // Web Share API Button
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'MLBB Visual Studio - Beta',
+                        text: 'Check out MLBB Visual Studio, a premium custom visual engine for Mobile Legends by SunDownTech!',
+                        url: window.location.href,
+                    });
+                } catch (err) {}
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        });
     </script>
 </body>
 </html>
