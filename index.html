@@ -3,622 +3,1095 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SunDownDeveloper | Android Studio</title>
+    <title>SunDownTech | Next-Gen Android Engineering & Development</title>
     
     <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
+    <meta name="description" content="SunDownTech — Premium native Android application development, system diagnostics tools, and custom digital solutions. Built by SunDownDeveloper.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* =========================================
-           1. LIGHT MODE (Default Variables)
+           1. CORE SYSTEM & NEON TECH VARIABLES
            ========================================= */
         :root {
-            --bg-color: #f4f7f6;
-            --surface-color: #ffffff;
-            --text-main: #222222;
-            --text-muted: #555555;
-            --accent: #007bff;
-            --bio-bg: linear-gradient(145deg, #ffffff, #e6ecef);
-            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            --border-line: #e0e0e0;
-            --upcoming-bg: #ff3b30;
-            --upcoming-text: #ffffff;
+            --bg-dark: #070a12;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(23, 33, 58, 0.9);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-emerald: #10b981;
+            --accent-cyan: #06b6d4;
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --border-line: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(16, 185, 129, 0.3);
+            --glass-blur: blur(16px);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* =========================================
-           2. DARK MODE (Automatic trigger)
-           ========================================= */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --surface-color: #1e1e1e;
-                --text-main: #ffffff;
-                --text-muted: #a0a0a0;
-                --accent: #00a8ff;
-                --bio-bg: linear-gradient(145deg, #1a1a1a, #222222);
-                --card-shadow: 0 4px 12px rgba(0,0,0,0.5);
-                --border-line: #333333;
-            }
-        }
-
-        /* =========================================
-           3. MAIN STYLES
-           ========================================= */
-        body {
-            font-family: 'Google Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            padding-bottom: 40px;
-            transition: background-color 0.3s, color 0.3s;
+            scroll-behavior: smooth;
         }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Ambient Noise Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
         .container {
-            max-width: 1200px; 
-            width: 100%; 
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 08px; /* 0 space on top/bottom, 20px of space on left/right */
-            box-sizing: border-box; /* This ensures the padding doesn't accidentally widen the screen */
+            padding: 0 24px;
         }
 
-        h2 {
-            font-size: 1.25rem;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        /* YouTube Style Banner */
-        .yt-banner-container {
+        /* =========================================
+           2. GLASS HEADER & NAVIGATION
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin-top: 0px;
-        }
-        .yt-banner {
-            width: 100%;
-            aspect-ratio: 16 / 3; /* Keeps it wide like a YouTube banner */
-            object-fit: cover;
-            object-position: center;
-            border-radius: 0px;
-            box-shadow: var(--card-shadow);
+            z-index: 1000;
+            background: rgba(7, 10, 18, 0.8);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-line);
+            transition: var(--transition);
         }
 
-        /* Play Store Style Horizontal Sliders */
-        .slider-wrapper {
+        .nav-container {
             display: flex;
-            overflow-x: auto;
-            gap: 16px;
-            padding-bottom: 12px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-        }
-        .slider-wrapper::-webkit-scrollbar {
-            display: none;
-        }
-        
-        /* --- Play Store Swipeable Row --- */
-        .play-card-row {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto; /* Lets you swipe horizontally on mobile */
-            padding-bottom: 15px; /* Room for the shadow */
-            scrollbar-width: none; /* Hides the ugly scrollbar */
-        }
-        .play-card-row::-webkit-scrollbar {
-            display: none;
+            justify-content: space-between;
+            align-items: center;
+            height: 76px;
         }
 
-        /* --- Google Play Style Promo Card --- */
-        .play-promo {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            min-width: 280px; /* Exact Play Store width */
-            max-width: 280px; /* Stops it from stretching */
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-        }
-        
-        .play-promo:hover {
-            opacity: 0.85; 
-        }
-
-        .play-banner {
-            width: 100%;
-            border-radius: 12px; 
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15); 
-            object-fit: cover;
-            aspect-ratio: 16 / 9; 
-        }
-
-        .play-details {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 0 4px; 
+            gap: 12px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
-        .play-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px; 
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            background: #ffffff; 
-            object-fit: cover;
-        }
-
-        .play-text {
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+            border-radius: 10px;
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.1rem;
+            box-shadow: 0 0 16px var(--accent-glow);
         }
 
-        .play-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: var(--text-main); 
-            margin: 0;
-            line-height: 1.2;
+        .logo span {
+            background: linear-gradient(to right, #ffffff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .play-category {
-            font-size: 0.9em;
-            color: #5f6368; 
-            margin: 0;
+        .logo .tech-accent {
+            color: var(--accent-emerald);
+            -webkit-text-fill-color: var(--accent-emerald);
         }
 
-         /* Ad / Offers Slider */
-        .ad-card {
-            min-width: 320px;
-            height: 160px;
-            border-radius: 12px;
-            scroll-snap-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-line);
-        }
-        .ad-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-
-        /* --- Google Play Vertical List View --- */
-        .app-list {
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            gap: 20px; /* Space between each app in the list */
-            margin-bottom: 30px;
+            align-items: center;
+            gap: 32px;
         }
 
-        .app-list-item {
-            display: flex;
-            align-items: center; /* Vertically centers the icon, text, and button */
-            gap: 16px; /* Space between icon and text */
-            text-decoration: none;
-            width: 100%;
-        }
-
-        .app-list-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 14px; /* Slightly more rounded than the promo cards */
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            background: #ffffff;
-            object-fit: cover;
-            flex-shrink: 0; /* Prevents the icon from squishing on small screens */
-        }
-
-        .app-list-text {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; /* This pushes the button to the far right edge! */
-            gap: 4px;
-        }
-
-        .app-list-title {
-            font-size: 1.1em;
-            font-weight: 500;
-            color: var(--text-main);
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .app-list-desc {
-            font-size: 0.85em;
-            color: #9aa0a6; /* The classic Play Store grey text */
-            margin: 0;
-        }
-
-        /* --- Custom Buttons --- */
-        .btn-install {
-            background-color: #0a56d1; /* Google Material Blue */
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 0.85em;
-            padding: 8px 20px;
-            border-radius: 20px; /* Pill shape */
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.2s ease;
-            border: none;
-            flex-shrink: 0;
-        }
-
-        .btn-install:hover {
-            background-color: #0842a0;
-        }
-
-        .btn-disabled {
-            background-color: transparent;
-            color: #5f6368;
-            border: 1px solid #5f6368;
-            font-weight: 600;
-            font-size: 0.85em;
-            padding: 7px 19px; /* Slightly less padding to account for the 1px border */
-            border-radius: 20px;
-            text-align: center;
-            cursor: not-allowed;
-            flex-shrink: 0;
-        }
-
-        /* --- Google Play Event Cards (Snapping Slider) --- */
-        .event-grid {
-            display: flex;
-            flex-wrap: nowrap; /* Forces them into a single horizontal row */
-            gap: 16px;
-            margin-bottom: 30px;
-            overflow-x: auto; /* Enables horizontal swiping */
-            padding-bottom: 20px; /* Room for the drop shadow */
-            
-            /* The Recoil Spring Magic */
-            scroll-snap-type: x mandatory;
-            
-            /* Hides the ugly browser scrollbar */
-            scrollbar-width: none; 
-        }
-
-        .event-grid::-webkit-scrollbar {
-            display: none;
-        }
-
-        .event-card {
-            display: flex;
-            flex-direction: column;
-            
-            /* The 85% trick lets the edge of the next card peek out on mobile! */
-            width: 85%; 
-            max-width: 400px; /* Keeps it perfectly sized on your wide PC screen */
-            flex-shrink: 0; /* Stops the browser from squishing the cards together */
-            
-            /* Snaps this card perfectly into the view when you stop swiping */
-            scroll-snap-align: center; 
-            
-            border-radius: 12px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            overflow: hidden; 
-            text-decoration: none;
-            background-color: #ffffff; 
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        /* Keep your existing .event-banner and .event-text-container CSS exactly as they are below this! */
-
-        .event-card:hover {
-            transform: translateY(-2px); /* Gives it a slight lift when you hover on PC */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .event-banner {
-            width: 100%;
-            aspect-ratio: 16 / 9; /* Locks in the exact proportions of your CapCut thumbnail */
-            object-fit: cover;
-            border-bottom: 1px solid #e0e0e0; /* Clean line separating image from text */
-        }
-
-        .event-text-container {
-            padding: 16px;
-        }
-
-        .event-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #202124;
-            margin: 0;
-        }
-        
-        /* Developer Bio Section */
-        .dev-bio {
-            background: var(--bio-bg);
-            padding: 24px;
-            border-radius: 16px;
-            margin: 32px 0;
-            border-left: 4px solid var(--accent);
-            box-shadow: var(--card-shadow);
-        }
-        .dev-bio h2 {
-            margin-top: 0;
-            color: var(--accent);
-        }
-        .dev-bio p {
-            line-height: 1.6;
-            color: var(--text-main);
+        .nav-links a {
             font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
         }
 
-        /* Promo Text */
-        .promo-text {
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 500;
-            font-style: italic;
-            color: var(--accent);
-            margin: 24px 0;
+        .nav-links a:hover {
+            color: var(--accent-emerald);
         }
 
-        /* --- Google Play Upcoming Section --- */
-        .upcoming-indicator {
-            display: inline-block;
-            background-color: #d93025; /* The exact Google Play Red */
-            color: #ffffff;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+        .btn-header {
+            background: linear-gradient(135deg, var(--accent-emerald), #059669);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
             font-weight: 700;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 14px var(--accent-glow);
+            transition: var(--transition);
         }
-        
-        .upcoming-icons {
-            display: flex;
-            gap: 16px; /* Brought closer together (was 24px) */
-            overflow-x: auto;
-            padding-bottom: 15px; /* Room for the drop shadow */
-            scrollbar-width: none; /* Hides the scrollbar for a native app feel */
+
+        .btn-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
-        
-        .upcoming-icons::-webkit-scrollbar {
+
+        .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
-        
-        .upcoming-item {
+
+        /* Mobile Nav Drawer */
+        .mobile-nav {
+            position: fixed;
+            top: 76px;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-line);
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers the whole column */
-            text-align: center; /* Centers the text perfectly under the icon */
-            width: 90px; /* Gives the centered text just enough room */
-            flex-shrink: 0; 
-            text-decoration: none; 
-        }
-        
-        .upcoming-item img {
-            width: 84px; /* Much larger, showcase-sized icons */
-            height: 84px;
-            border-radius: 18px; /* Slightly larger curve for bigger icons */
-            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-            background: #ffffff;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-        
-        .upcoming-item span {
-            font-size: 0.85rem;
-            color: var(--text-main);
-            font-weight: 500;
-            line-height: 1.2;
-            word-break: break-word; /* Allows long words to break naturally if absolutely necessary */
-        }
-        
-        .upcoming-text {
-            margin-top: 16px;
-            font-size: 0.95em;
-            font-weight: 500;
-            color: #9aa0a6; /* Standard Play Store secondary text color */
+            gap: 20px;
+            transform: translateY(-150%);
+            transition: var(--transition);
+            z-index: 999;
         }
 
-        /* YouTube Button */
-        .yt-btn-container {
-            text-align: center;
-            margin: 40px 0;
+        .mobile-nav.active {
+            transform: translateY(0);
         }
-        .yt-btn {
-            background-color: #ff0000;
-            color: white;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 24px;
-            font-weight: bold;
-            font-size: 1.1rem;
+
+        /* =========================================
+           3. HERO SECTION
+           ========================================= */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .badge-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-            transition: transform 0.2s;
-        }
-        .yt-btn:hover {
-            transform: scale(1.05);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-emerald);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        /* Outro */
-        .outro {
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtext {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 580px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-emerald), #059669);
+            color: #051a10;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            color: var(--text-main);
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Terminal Graphic */
+        .hero-terminal {
+            background: rgba(11, 16, 28, 0.9);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.1);
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-line);
+            padding-bottom: 12px;
+        }
+
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .terminal-title {
+            margin-left: auto;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .term-line { display: flex; gap: 10px; }
+        .term-prompt { color: var(--accent-emerald); }
+        .term-cmd { color: #f8fafc; }
+        .term-out { color: var(--text-muted); padding-left: 18px; }
+        .term-highlight { color: var(--accent-cyan); }
+
+        /* =========================================
+           4. SERVICES & PRICING TIERS SECTION
+           ========================================= */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-subtitle {
+            color: var(--accent-emerald);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-glow);
+            background: var(--bg-card-hover);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-emerald);
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .price-badge {
+            align-self: flex-start;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--accent-cyan);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* =========================================
+           5. PUBLISHED APPS SHOWCASE
+           ========================================= */
+        .apps-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .app-featured-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 36px;
+            align-items: center;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+        }
+
+        .app-featured-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+        }
+
+        .app-banner-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-line);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .app-info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .app-header-inline {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .app-icon-thumb {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid var(--border-line);
+            background: #fff;
+        }
+
+        .app-header-text h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .app-category-tag {
+            font-size: 0.85rem;
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        .app-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .app-tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tech-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+        }
+
+        .app-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        /* =========================================
+           6. ABOUT THE DEVELOPER & STACK
+           ========================================= */
+        .dev-about-box {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(11, 16, 28, 0.95));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .dev-bio-text h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .dev-bio-text p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-emerald);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Tech Stack Icons */
+        .stack-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stack-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-line);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stack-icon {
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .stack-details h4 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .stack-details p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* =========================================
+           7. CONTACT & CTA FOOTER
+           ========================================= */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .cta-banner h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cta-banner p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px auto;
+            font-size: 1.1rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-line);
+            padding: 40px 0;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.9rem;
-            margin-top: 40px;
-            border-top: 1px solid var(--border-line);
-            padding-top: 24px;
+        }
+
+        /* Floating WhatsApp Quick Action Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1) rotate(8deg);
+        }
+
+        /* =========================================
+           8. RESPONSIVE BREAKPOINTS
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+            .app-featured-card { grid-template-columns: 1fr; }
+            .dev-about-box { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .btn-header { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .stack-list { grid-template-columns: 1fr; }
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0K5Y7KPZWS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0K5Y7KPZWS');
-</script>
 </head>
 <body>
 
-<div class="container">
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/?text=Hello%20SunDownTech,%20I'd%20like%20to%20discuss%20a%20mobile%20app%20project!" class="floating-whatsapp" target="_blank" aria-label="Contact on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <div class="yt-banner-container">
-        <img src="CPU A web ss/1771855980858.png" alt="SunDownDeveloper Banner" class="yt-banner">
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                <span>SunDown<span class="tech-accent">Tech</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#services">Services & Rates</a>
+                <a href="#apps">Published Apps</a>
+                <a href="#about">About</a>
+                <a href="#youtube">YouTube</a>
+                <a href="mailto:contact.sundowntech@gmail.com" class="btn-header">Get In Touch</a>
+            </nav>
+
+            <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#services" onclick="closeMobileNav()">Services & Rates</a>
+        <a href="#apps" onclick="closeMobileNav()">Published Apps</a>
+        <a href="#about" onclick="closeMobileNav()">About Developer</a>
+        <a href="#youtube" onclick="closeMobileNav()">YouTube Channel</a>
+        <a href="mailto:contact.sundowntech@gmail.com" class="btn-primary" style="text-align: center; justify-content: center;">Contact Us</a>
     </div>
 
-    <h2>Recommended for you</h2>
-    
-    <div class="play-card-row">
-        
-        <a href="cpu-a.html" class="play-promo">
-            <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A Promo Banner" class="play-banner">
-            
-            <div class="play-details">
-                <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="play-icon">
-                <div class="play-text">
-                    <h3 class="play-title">CPU A</h3>
-                    <p class="play-category">Tools • Device Info</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text-content">
+                <div class="badge-tag">
+                    <i class="fas fa-shield-halved"></i> Registered CAC Studio
+                </div>
+                <h1>Let's Bring Your <span class="highlight">Android Idea</span> to Life</h1>
+                <p class="hero-subtext">
+                    We craft high-performance native Android applications, deep system diagnostics, and seamless digital solutions. Precision engineering with zero compromises.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#services" class="btn-primary">
+                        Explore Services <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#apps" class="btn-secondary">
+                        <i class="fas fa-mobile-screen-button"></i> View Our Apps
+                    </a>
                 </div>
             </div>
-        </a>
-        <a href="visual-studio.html" class="play-promo">
-            <img src="MLBB VS/feature-graphic.png" alt="MLBB Visual Studio Promo Banner" class="play-banner">
-            
-            <div class="play-details">
-                <img src="CPU A web ss/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon" class="play-icon">
-                <div class="play-text">
-                    <h3 class="play-title">MLBB Visual Studio</h3>
-                    <p class="play-category">Tools • Gaming • Visuals</p>
+
+            <!-- Interactive Terminal Graphic -->
+            <div class="hero-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <div class="terminal-title">sundowntech_runtime.java</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="term-line">
+                        <span class="term-prompt">&gt;</span>
+                        <span class="term-cmd">SunDownTech.init();</span>
+                    </div>
+                    <div class="term-out">[SUCCESS] Environment: Android Studio &amp; Sketchware Pro</div>
+                    <div class="term-line">
+                        <span class="term-prompt">&gt;</span>
+                        <span class="term-cmd">fetchCoreCompetencies();</span>
+                    </div>
+                    <div class="term-out">[INFO] Languages: <span class="term-highlight">Java, Kotlin, JS</span></div>
+                    <div class="term-out">[INFO] Target SDK: <span class="term-highlight">Android 15 / 16 / 17</span></div>
+                    <div class="term-line">
+                        <span class="term-prompt">&gt;</span>
+                        <span class="term-cmd">buildNextApp();</span>
+                    </div>
+                    <div class="term-out">[RUNNING] Deploying robust architecture...</div>
                 </div>
             </div>
-        </a>
-    </div>
-
-    <h2>Recommended apps</h2>
-    
-    <div class="app-list">
-        
-        <div class="app-list-item">
-            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-list-icon">
-            <div class="app-list-text">
-                <h3 class="app-list-title">CPU A</h3>
-                <p class="app-list-desc">Tools • Device Info</p>
-            </div>
-            <a href="https://play.google.com/store/apps/details?id=com.cpu.a" class="btn-install" target="_blank">Install</a>
         </div>
-    </div>
+    </section>
 
-    <h2>Offers you might like</h2>
-    <div class="slider-wrapper" id="ad-slider">
-        <a href="https://play.google.com/store/apps/details?id=com.cpu.a" target="_blank" class="ad-card" style="display: block;">
-            <img src="CPU A web ss/CPU A BANNER 1.png" alt="Advertisement 1">
-        </a>
-        <a href="mailto:sundowndeveloper0@gmail.com" class="ad-card" style="display: block;">
-            <img src="CPU A web ss/file_000000006e64720a98ac1145c1ffa41a.png" alt="Contact to Advertise">
-        </a>
-    </div>
-
-    <h2>Popular apps</h2>
-    
-    <div class="app-list">
-        
-        <div class="app-list-item">
-            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-list-icon">
-            <div class="app-list-text">
-                <h3 class="app-list-title">CPU A</h3>
-                <p class="app-list-desc">Tools • Device Info</p>
+    <!-- Services & Pricing Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">What We Offer</div>
+                <h2 class="section-title">Premium Development Services</h2>
+                <p style="color: var(--text-muted)">From architectural concept to Play Store publishing, we deliver end-to-end solutions tailored to your project goals.</p>
             </div>
-            <a href="https://play.google.com/store/apps/details?id=com.cpu.a" class="btn-install" target="_blank">Install</a>
-        </div>
 
-        <div class="app-list-item">
-            <img src="CPU A web ss/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon" class="app-list-icon">
-            <div class="app-list-text">
-                <h3 class="app-list-title">MLBB Visual Studio</h3>
-                <p class="app-list-desc">Tools • Gaming • Visuals</p>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-code"></i></div>
+                        <h3>Android App Development</h3>
+                        <p>We design and develop high-performance native Android applications with stunning UI/UX, seamless functionality, and rock-solid reliability.</p>
+                    </div>
+                    <div class="price-badge">$100 – $4,000+</div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                        <h3>UI/UX Design & Prototyping</h3>
+                        <p>Intuitive, clean dark-tech interfaces designed for maximum user engagement. Modern wireframes, prototypes, and polished layouts.</p>
+                    </div>
+                    <div class="price-badge">$75 – $1,500</div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <h3>Backend & API Integration</h3>
+                        <p>Robust Firebase integration, push notifications, REST APIs, custom JSON mapping, and real-time database management.</p>
+                    </div>
+                    <div class="price-badge">$200 – $3,000</div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-vial-circle-check"></i></div>
+                        <h3>Quality Assurance & Testing</h3>
+                        <p>Comprehensive hardware testing across device brands and Android SDK versions to ensure flawless performance before launch.</p>
+                    </div>
+                    <div class="price-badge">$100 – $800</div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-wrench"></i></div>
+                        <h3>Maintenance & API Updates</h3>
+                        <p>Ongoing bug fixes, Play Store target API level upgrades (Android 15+ compliance), and performance optimization.</p>
+                    </div>
+                    <div class="price-badge">$50 – $300/mo</div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-comments"></i></div>
+                        <h3>IT & Architecture Consulting</h3>
+                        <p>Strategic technical advisory to evaluate app monetization, security architecture, and system hardware analytics.</p>
+                    </div>
+                    <div class="price-badge">$50 – $200/hr</div>
+                </div>
             </div>
-            <div class="btn-disabled">Coming Soon</div>
         </div>
+    </section>
 
-    </div>
-
-    <h2>Events happening now</h2>
-    
-    <div class="event-grid">
-        
-        <a href="cpu-a.html" class="event-card">
-            <img src="CPU A web ss/CPU A BANNER 6.png" alt="CPU A Launch Event" class="event-banner">
-            <div class="event-text-container">
-                <h3 class="event-title">CPU A Launch!</h3>
+    <!-- Published Applications Section -->
+    <section class="section" id="apps">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Our Work</div>
+                <h2 class="section-title">Published Applications</h2>
+                <p style="color: var(--text-muted)">A showcase of Android mobile solutions engineered, published, and maintained by SunDownTech.</p>
             </div>
-        </a>
-        <a href="https://youtu.be/fEWg1WtHyeQ?si=4a92NXzlz1h8TJUW" target="_blank" class="event-card">
-            <img src="CPU A web ss/CPU A BANNER 4.png" alt="CPU A Official Promo Video" class="event-banner">
-            <div class="event-text-container">
-                <h3 class="event-title">Watch The Official Promo</h3>
+
+            <div class="apps-showcase">
+                <!-- App 1: CPU A -->
+                <div class="app-featured-card">
+                    <img src="CPU A web ss/20251118_010415.jpg" alt="CPU A App Showcase Banner" class="app-banner-img">
+                    <div class="app-info-content">
+                        <div class="app-header-inline">
+                            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-icon-thumb">
+                            <div class="app-header-text">
+                                <h3>CPU A</h3>
+                                <div class="app-category-tag">Tools • Hardware &amp; System Monitor</div>
+                            </div>
+                        </div>
+                        <p class="app-description">
+                            Deep live insights into your Android device. Real-time CPU core frequencies, SoC architecture identification via custom JSON database mapping, thermal readings, and diagnostic battery telemetry.
+                        </p>
+                        <div class="app-tech-tags">
+                            <span class="tech-pill">Java</span>
+                            <span class="tech-pill">Native Hardware APIs</span>
+                            <span class="tech-pill">JSON Mapping</span>
+                            <span class="tech-pill">Firebase</span>
+                        </div>
+                        <div class="app-actions">
+                            <a href="https://play.google.com/store/apps/details?id=com.cpu.a" target="_blank" class="btn-primary">
+                                <i class="fab fa-google-play"></i> Get on Google Play
+                            </a>
+                            <a href="cpu-a.html" class="btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App 2: MLBB Visual Studio -->
+                <div class="app-featured-card">
+                    <img src="MLBB VS/feature-graphic.png" alt="MLBB Visual Studio Banner" class="app-banner-img">
+                    <div class="app-info-content">
+                        <div class="app-header-inline">
+                            <img src="CPU A web ss/Picsart_26-02-visual-studio.png" alt="MLBB VS Icon" class="app-icon-thumb">
+                            <div class="app-header-text">
+                                <h3>MLBB Visual Studio</h3>
+                                <div class="app-category-tag">Tools • Gaming • Visual Engine</div>
+                            </div>
+                        </div>
+                        <p class="app-description">
+                            Specialized mobile utility tailored for Mobile Legends skin rendering and visual customization with ad placement mechanics and optimized user experience.
+                        </p>
+                        <div class="app-tech-tags">
+                            <span class="tech-pill">Java</span>
+                            <span class="tech-pill">Android NDK</span>
+                            <span class="tech-pill">AdMob / Mediation</span>
+                        </div>
+                        <div class="app-actions">
+                            <a href="visual-studio.html" class="btn-secondary">
+                                <i class="fas fa-clock"></i> View App Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App 3: Upcoming Builds -->
+                <div class="app-featured-card" style="grid-template-columns: 1fr;">
+                    <div>
+                        <div class="section-subtitle"><i class="fas fa-rocket"></i> In Development</div>
+                        <h3 style="font-size: 1.5rem; margin: 8px 0 16px 0;">Upcoming Additions: FundsUp &amp; SodApp</h3>
+                        <p style="color: var(--text-muted); max-width: 800px;">
+                            We are continuously building. Next-gen utility applications like <strong>FundsUp</strong> and enterprise platforms like <strong>SodApp</strong> are currently undergoing architecture and UI integration.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </a>
-
-    </div>
-    
-    <div class="dev-bio">
-        <h2>About SunDownDeveloper</h2>
-        <p>Creating advanced, high-performance mobile experiences for Android users worldwide. I specialize in turning complex logic into seamless, intuitive applications. </p>
-        <p>Fluent in <strong>Java, Kotlin, and JavaScript</strong>, my development environments of choice are <strong>Android Studio</strong> and <strong>Sketchware Pro</strong>. Whether it's deep system analytics or rich visual studios, my passion is building modern apps that solve real problems and push the boundaries of mobile tech.</p>
-    </div>
-
-    <div class="promo-text">
-        "Designing the future of Android, one line of code at a time."
-    </div>
-
-    <h2>Coming soon to Play</h2>
-    <div class="upcoming-indicator">Upcoming</div>
-    
-    <div class="upcoming-icons">
-        <div class="upcoming-item">
-            <img src="CPU A web ss/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon">
-            <span>MLBB Visual Studio</span>
         </div>
-        <div class="upcoming-item">
-            <img src="CPU A web ss/Picsart_25-05-fundsup.png" alt="FundsUp Icon">
-            <span>FundsUp</span>
+    </section>
+
+    <!-- About Developer & Tech Stack Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="dev-about-box">
+                <div class="dev-bio-text">
+                    <div class="section-subtitle">The Mind Behind SunDownTech</div>
+                    <h2>SunDownDeveloper</h2>
+                    <p>
+                        I specialize in building production-grade Android apps from scratch. Fluent in <strong>Java, Kotlin, and JavaScript</strong>, my core development environments are strictly <strong>Android Studio</strong> and <strong>Sketchware Pro</strong>.
+                    </p>
+                    <p>
+                        Whether engineering raw kernel-level diagnostic utilities like CPU A or designing high-conversion mobile interfaces, my commitment is simple: build software that is fast, resilient, and visually captivating.
+                    </p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Native Code</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">SDK 35+</div>
+                            <div class="stat-label">Play Compliant</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Precision</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stack Cards -->
+                <div class="stack-list">
+                    <div class="stack-item">
+                        <i class="fab fa-java stack-icon"></i>
+                        <div class="stack-details">
+                            <h4>Java &amp; Kotlin</h4>
+                            <p>Core Android logic &amp; API handling</p>
+                        </div>
+                    </div>
+
+                    <div class="stack-item">
+                        <i class="fab fa-android stack-icon"></i>
+                        <div class="stack-details">
+                            <h4>Android Studio</h4>
+                            <p>Official IDE build environment</p>
+                        </div>
+                    </div>
+
+                    <div class="stack-item">
+                        <i class="fas fa-cubes stack-icon"></i>
+                        <div class="stack-details">
+                            <h4>Sketchware Pro</h4>
+                            <p>Rapid native mobile development</p>
+                        </div>
+                    </div>
+
+                    <div class="stack-item">
+                        <i class="fas fa-fire stack-icon"></i>
+                        <div class="stack-details">
+                            <h4>Firebase &amp; Cloud</h4>
+                            <p>Auth, Firestore, Messaging &amp; DB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="upcoming-text">The fun's on its way...</div>
+    </section>
 
-    <div class="yt-btn-container">
-        <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" class="yt-btn">
-            ▶ Subscribe on YouTube
-        </a>
-    </div>
+    <!-- YouTube Banner CTA -->
+    <section class="section" id="youtube">
+        <div class="container">
+            <div class="cta-banner" style="background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(15, 23, 42, 0.9)); border-color: rgba(255, 0, 0, 0.2);">
+                <i class="fab fa-youtube" style="font-size: 3.5rem; color: #ff0000; margin-bottom: 20px;"></i>
+                <h2>SunDownDeveloper YouTube Channel</h2>
+                <p>Watch official app promos, developer updates, and mobile tech insights directly from our channel.</p>
+                <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" class="btn-primary" style="background: #ff0000; color: #fff; box-shadow: 0 4px 20px rgba(255,0,0,0.4);">
+                    <i class="fab fa-youtube"></i> Subscribe on YouTube
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <div class="outro">
-        <h2>SunDownDeveloper</h2>
-        <p>Innovating Mobile. Built with precision.</p>
-        <p>&copy; 2026 SunDownDeveloper. All rights reserved.</p>
-    </div>
+    <!-- Contact & Final Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="cta-banner">
+                <h2>Let's Build Something Great Together</h2>
+                <p>Have an Android app project in mind or need expert consultancy? Get in touch today.</p>
+                <div class="contact-methods">
+                    <a href="mailto:contact.sundowntech@gmail.com" class="btn-primary">
+                        <i class="fas fa-envelope"></i> contact.sundowntech@gmail.com
+                    </a>
+                    <a href="https://wa.me/?text=Hello%20SunDownTech!" target="_blank" class="btn-secondary">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
 
-</div>
+            <div style="margin-top: 40px; border-top: 1px solid var(--border-line); padding-top: 24px;">
+                <p><strong>SunDownTech</strong> — Innovating Mobile. Built with precision.</p>
+                <p style="font-size: 0.8rem; margin-top: 8px;">&copy; 2026 SunDownTech / SunDownDeveloper. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-<script>
-    const adSlider = document.getElementById('ad-slider');
+    <!-- Interactive JS Scripts -->
+    <script>
+        // Mobile Navigation Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
 
-    setInterval(() => {
-        const firstCard = adSlider.querySelector('.ad-card');
-        if (!firstCard) return; 
-        const cardWidth = firstCard.offsetWidth + 16; 
-        
-        if (adSlider.scrollLeft + adSlider.clientWidth >= adSlider.scrollWidth - 10) {
-            adSlider.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            adSlider.scrollTo({ left: adSlider.scrollLeft + cardWidth, behavior: 'smooth' });
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.className = 'fas fa-xmark';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        function closeMobileNav() {
+            mobileNav.classList.remove('active');
+            menuToggle.querySelector('i').className = 'fas fa-bars';
         }
-    }, 4000); 
-</script>
 
+        // Smooth reveal on scroll using IntersectionObserver
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .app-featured-card, .dev-about-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
