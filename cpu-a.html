@@ -3,671 +3,756 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPU A - Device Info App</title>
+    <title>CPU A — Ultimate Hardware & System Monitor | SunDownTech</title>
+    
+    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
+    <meta name="description" content="CPU A provides deep, real-time insights into your Android device hardware. Check CPU cores, GPU specs, RAM usage, thermals, and battery diagnostics. Built by SunDownTech.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* --- AUTO DARK/LIGHT MODE VARIABLES --- */
+        /* =========================================
+           1. CORE SYSTEM & NEON TECH VARIABLES
+           ========================================= */
         :root {
-            --bg-color: #f4f7f6;
-            --surface-color: #ffffff;
-            --text-main: #222222;
-            --text-muted: #555555;
-            --accent: #007bff;
-            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            --border-line: #eeeeee;
+            --bg-dark: #070a12;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(23, 33, 58, 0.9);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-emerald: #10b981;
+            --accent-cyan: #06b6d4;
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --border-line: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(16, 185, 129, 0.3);
+            --glass-blur: blur(16px);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --surface-color: #1e1e1e;
-                --text-main: #ffffff;
-                --text-muted: #a0a0a0;
-                --accent: #00a8ff;
-                --card-shadow: 0 4px 12px rgba(0,0,0,0.5);
-                --border-line: #333333;
-            }
-        }
-
-        /* --- MAIN STYLES --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .container {
-            max-width: 1200px; 
-            width: 100%; 
-            margin: 0 auto;
-            padding: 0 08px; /* 0 space on top/bottom, 20px of space on left/right */
-            box-sizing: border-box; /* This ensures the padding doesn't accidentally widen the screen */
-        }
-        
-        /* --- App Store Header Banner --- */
-        .app-store-banner {
-            width: 100%;
-            height: 180px; /* Adjust if you want the banner taller/shorter */
-            background-image: url('CPU A web ss/20251118_010415.jpg'); /* Use your dark CapCut banner here! */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            margin-bottom: 20px;
+            scroll-behavior: smooth;
         }
 
-        .app-store-back {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding-bottom: 60px;
+        }
+
+        /* Ambient Noise Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================
+           2. HEADER & NAVIGATION
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(7, 10, 18, 0.85);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-back-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--border-glow);
+            color: var(--accent-emerald);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .logo-icon {
             width: 32px;
             height: 32px;
-            background: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 0.95rem;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .tech-accent { color: var(--accent-emerald); }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 58px;
+            height: 58px;
+            background: #25d366;
+            color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            color: #000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 1.7rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: var(--transition);
         }
 
-        /* --- App Store Main Info --- */
-        .app-store-info {
-            display: flex;
-            gap: 16px;
+        .floating-whatsapp:hover {
+            transform: scale(1.1) rotate(8deg);
+        }
+
+        /* =========================================
+           3. APP HERO BANNER & MAIN HEADLINE
+           ========================================= */
+        .app-hero-wrapper {
+            padding-top: 100px;
             margin-bottom: 24px;
         }
 
-        .app-store-icon {
-            width: 118px;
-            height: 118px;
-            border-radius: 22px; /* iOS App Store squircle curve */
-            box-shadow: 0 1px 6px rgba(0,0,0,0.15);
-            border: 1px solid rgba(0,0,0,0.05);
-            background: #fff;
-            object-fit: cover;
+        .app-store-banner {
+            width: 100%;
+            height: 240px;
+            border-radius: var(--radius-lg);
+            background-image: url('CPU A web ss/20251118_010415.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
         }
 
-        .app-store-details {
+        .app-store-banner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(7, 10, 18, 0.95), transparent 60%);
+        }
+
+        /* Main Info Card Overlay/Container */
+        .app-header-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 4px 0;
-            flex-grow: 1;
+            gap: 24px;
         }
 
-        .app-store-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin: 0 0 2px 0;
-            line-height: 1.1;
-        }
-
-        .app-store-subtitle {
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: #8e8e93; /* Apple standard grey */
-            margin: 0;
-        }
-
-        .app-store-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 12px;
-        }
-
-        .app-btn-install {
-            background-color: #007aff; /* Apple standard blue */
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 8px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .app-btn-share {
-            background: none;
-            border: none;
-            color: #007aff;
-            cursor: pointer;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* --- App Store Stats Scroll Row --- */
-        .app-stats-row {
+        .app-main-info {
             display: flex;
             gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #e5e5ea;
-            scrollbar-width: none;
-        }
-        .app-stats-row::-webkit-scrollbar { display: none; }
-
-        .app-stat-item {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
-            min-width: 80px;
-            border-right: 1px solid #e5e5ea;
-            padding-right: 20px;
         }
-        
-        /* Removes the line from the very last item */
-        .app-stat-item:last-child {
-            border-right: none;
-            padding-right: 0;
+
+        .app-store-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            border: 1px solid var(--border-line);
+            background: #ffffff;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+        }
+
+        .app-title-group h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .app-title-group .subtitle {
+            font-size: 1.05rem;
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        .app-cta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-line);
+            padding-top: 20px;
+        }
+
+        .btn-install-main {
+            background: linear-gradient(135deg, var(--accent-emerald), #059669);
+            color: #051a10;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 12px 32px;
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .btn-install-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+        }
+
+        .btn-share {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            color: var(--text-main);
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .btn-share:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-cyan);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        /* =========================================
+           4. STATS GRID & SPECS ROW
+           ========================================= */
+        .app-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+        }
+
+        .stat-box:hover {
+            border-color: var(--border-glow);
+            background: var(--bg-card-hover);
         }
 
         .stat-label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: #8e8e93;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             margin-bottom: 4px;
         }
 
         .stat-value {
             font-size: 1.3rem;
-            font-weight: 700;
-            color: #8e8e93; /* Set to grey like the reference image */
-            margin-bottom: 2px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-weight: 800;
+            color: var(--accent-emerald);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .stat-sub {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #8e8e93;
+            font-size: 0.78rem;
+            color: var(--text-muted);
         }
 
-        .star-rating {
-            color: #8e8e93;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
+        /* =========================================
+           5. UPDATE LOG (TERMINAL STYLE)
+           ========================================= */
+        .card-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 28px;
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
         }
 
-        /* --- App Store Update Log --- */
-        .app-update-log {
-            margin-bottom: 30px;
+        .card-box:hover {
+            border-color: var(--border-glow);
         }
 
-        .update-header {
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
 
-        .update-header h3 {
-            font-size: 1.3rem;
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--accent-cyan);
+        }
+
+        .update-version {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
             font-weight: 700;
-            color: var(--text-main);
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .update-arrow {
-            color: #c7c7cc;
-            font-weight: bold;
-        }
-
-        .update-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #8e8e93;
-            margin-bottom: 12px;
-        }
-
-        .update-text {
+        .update-list {
+            color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.4;
-            color: var(--text-main);
-            margin: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 3; /* Truncates text after 3 lines like the app store */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            position: relative;
+            line-height: 1.7;
+            padding-left: 20px;
         }
 
-        .update-more {
-            color: #007aff;
-            background: var(--bg-color); /* Blends with your background */
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            padding-left: 10px;
-            cursor: pointer;
-        }
-
-        /* --- App Store Screenshot Gallery --- */
-        .screenshot-gallery {
+        /* =========================================
+           6. SCREENSHOT GALLERY
+           ========================================= */
+        .screenshot-slider {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             overflow-x: auto;
-            
-            /* The Magic Trick: This pulls the slider OUT of the container's padding to touch the phone edges */
-            margin-left: -10px; 
-            margin-right: -10px;
-            
-            /* This pushes the first image back into perfect alignment with your text! */
-            padding: 10px 10px 24px 10px; 
-            
+            padding-bottom: 16px;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
         }
-        
-        .screenshot-gallery::-webkit-scrollbar { 
-            display: none; 
-        }
+
+        .screenshot-slider::-webkit-scrollbar { display: none; }
 
         .screenshot-item {
-            width: auto;
-            max-width: 220px; /* The Fix: Locks the width so they don't explode! */
-            height: auto; /* Keeps your screenshot proportions absolutely perfect */
-            max-height: 450px; /* Failsafe limit */
-            border-radius: 12px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            border: 1px solid rgba(0,0,0,0.05); 
+            max-width: 220px;
+            height: auto;
+            max-height: 440px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-line);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             flex-shrink: 0;
             scroll-snap-align: start;
-            object-fit: cover; /* contain Ensures the whole screenshot is always visible */
+            object-fit: cover;
+            transition: var(--transition);
         }
 
-        /* Horizontal Screenshot Slider */
-        .screenshot-slider {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding: 20px 0;
-            scrollbar-width: thin;
-        }
-        .screenshot-slider img {
-            height: 400px;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
+        .screenshot-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
         }
 
-        /* --- Expandable About Card --- */
+        /* =========================================
+           7. EXPANDABLE ABOUT APP CARD
+           ========================================= */
         .about-card {
-            background: var(--surface-color);
-            padding: 24px;
-            border-radius: 16px;
-            margin: 15px 0 25px 0;
-            box-shadow: var(--card-shadow);
-            border-left: 4px solid var(--accent);
             cursor: pointer;
             position: relative;
-            transition: box-shadow 0.3s ease, transform 0.2s ease;
         }
-        .about-card:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-        }
-        
+
         .about-content {
-            font-size: 0.89em; /* Your requested text size */
-            line-height: 1.6;
-            color: var(--text-main);
-            max-height: 120px; /* How much text shows initially */
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-height: 140px;
             overflow: hidden;
             position: relative;
-            transition: max-height 0.4s ease-in-out;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .about-content.expanded {
-            max-height: 2500px; /* Expands to fit all text */
+            max-height: 3000px;
         }
-        
-        /* Cleans up the paragraph spacing inside the card */
+
         .about-content p {
-            margin-top: 0;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
-        
-        /* The fade effect at the bottom when collapsed */
-        .fade-out {
+
+        .about-content strong {
+            color: var(--text-main);
+        }
+
+        .fade-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            height: 50px;
-            background: linear-gradient(transparent, var(--surface-color));
-            transition: opacity 0.3s;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.95));
             pointer-events: none;
-        }
-        .about-content.expanded .fade-out {
-            opacity: 0; /* Hides the fade when opened */
-        }
-        
-        /* The Show More / Show Less text */
-        .expand-label {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 0.9em;
-            text-align: center;
-            margin-top: 15px;
-            display: block;
-            transition: color 0.2s;
+            transition: opacity 0.3s;
         }
 
-        /* --- App Store Ratings & Reviews --- */
-        .app-reviews-section {
-            margin-top: 32px;
-            margin-bottom: 24px;
+        .about-content.expanded .fade-overlay {
+            opacity: 0;
         }
 
-        .reviews-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .reviews-header h2 {
-            font-size: 1.4rem;
+        .expand-btn-text {
+            color: var(--accent-emerald);
             font-weight: 700;
-            color: var(--text-main);
-            margin: 0;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-top: 16px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
 
-        .reviews-arrow {
-            color: #c7c7cc;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .reviews-summary {
+        /* =========================================
+           8. REVIEWS & RATINGS SECTION
+           ========================================= */
+        .reviews-summary-card {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-md);
+            padding: 20px 28px;
             margin-bottom: 24px;
         }
 
-        .reviews-score {
-            font-size: 4.5rem; /* Massive, Apple-style font size */
-            font-weight: 800; /* Extra bold */
-            color: var(--text-main);
+        .score-big {
+            font-size: 4rem;
+            font-weight: 800;
             line-height: 1;
-            letter-spacing: -2px; /* Pulls the numbers tighter together */
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, #ffffff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .reviews-stars-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end; /* Pushes the stars perfectly to the right edge */
+        .stars-container {
+            text-align: right;
         }
 
-        .reviews-stars-overall {
+        .stars-gold {
+            color: #f59e0b;
             font-size: 1.2rem;
-            color: var(--text-main);
             letter-spacing: 2px;
             margin-bottom: 4px;
         }
 
-        .reviews-count {
-            font-size: 0.85rem;
-            color: #8e8e93; /* iOS standard grey */
-            font-weight: 500;
-        }
-
-        .reviews-subtitle {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 16px;
-        }
-
-        /* Review Cards Slider */
         .reviews-slider {
             display: flex;
             gap: 16px;
             overflow-x: auto;
-            
-            /* The Fix: Breaks the slider out to the edge of the phone screen */
-            margin-left: -10px;
-            margin-right: -10px;
-            
-            /* The Fix: Pushes the first card back into perfect alignment with the title */
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 20px; 
-            
+            padding-bottom: 12px;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
         }
 
-        .reviews-slider::-webkit-scrollbar {
-            display: none;
-        }
+        .reviews-slider::-webkit-scrollbar { display: none; }
 
         .review-card {
-            background-color: rgba(142, 142, 147, 0.12); 
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-md);
             padding: 20px;
-            
-            /* The Sizing Fix */
-            width: 85%; 
-            max-width: 350px; 
-            box-sizing: border-box; /* Forces the padding to stay INSIDE the 85% width! */
-            
+            width: 85%;
+            max-width: 360px;
             flex-shrink: 0;
-            
-            /* The Alignment Fix */
-            scroll-snap-align: start; /* Snaps perfectly to the left edge instead of the center */
-            
+            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .review-card-meta {
+        .review-meta {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .review-card-stars {
-            font-size: 0.9rem;
-            color: var(--text-main);
-            letter-spacing: 1px;
-        }
-
-        .review-card-author {
             font-size: 0.85rem;
-            color: #8e8e93;
-            font-weight: 400;
+            color: var(--text-muted);
         }
 
-        .review-card-text {
-            font-size: 0.95rem;
+        .review-text {
+            font-size: 0.92rem;
             color: var(--text-main);
-            line-height: 1.4;
-            margin: 0;
+            line-height: 1.5;
         }
 
-        /* Google Play Badge */
-        .download-btn-container {
-            margin-top: 25px;
-            text-align: left;
+        /* =========================================
+           9. DEVELOPER FOOTER & OFFICIAL BADGE
+           ========================================= */
+        .download-cta-banner {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
         }
-        .play-badge {
-            height: 60px; /* Standard official height */
-            transition: transform 0.2s ease;
+
+        .download-cta-banner h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
         }
-        .play-badge:hover {
+
+        .play-badge-img {
+            height: 60px;
+            transition: var(--transition);
+        }
+
+        .play-badge-img:hover {
             transform: scale(1.05);
         }
 
-        /* Description Section */
-        .description {
-            line-height: 1.6;
-            font-size: 0.89em;
-            padding: 20px 0;
-            border-bottom: 2px solid var(--border-line);
-        }
-        
-        /* Developer Footer */
-        .developer-footer {
+        .dev-footer-card {
             display: flex;
             align-items: center;
             gap: 20px;
-            padding: 30px 0;
-            margin-top: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 24px;
         }
-        .dev-photo {
-            width: 80px;
-            height: 80px;
+
+        .dev-avatar {
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent);
+            border: 2px solid var(--accent-emerald);
+            box-shadow: 0 0 16px var(--accent-glow);
         }
-        .dev-info h3 {
-            margin: 0 0 5px 0;
-            color: var(--accent);
+
+        .dev-details h3 {
+            font-size: 1.2rem;
+            color: var(--accent-emerald);
+            margin-bottom: 4px;
         }
-        .dev-info p {
-            margin: 0;
-            font-size: 0.95em;
+
+        .dev-details p {
             color: var(--text-muted);
+            font-size: 0.9rem;
         }
-        .dev-info a {
-            color: #ff0000;
-            text-decoration: none;
-            font-weight: bold;
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-line);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .app-title-group h1 { font-size: 1.8rem; }
+            .score-big { font-size: 3rem; }
+            .dev-footer-card { flex-direction: column; text-align: center; }
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0K5Y7KPZWS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-0K5Y7KPZWS');
-</script>
+    <!-- Google Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0K5Y7KPZWS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0K5Y7KPZWS');
+    </script>
 </head>
 <body>
 
-<div class="container">
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/2347015327995?text=Hello%20SunDownTech,%20I'm%20interested%20in%20CPU%20A!" class="floating-whatsapp" target="_blank" aria-label="Contact on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <div class="app-store-banner">
-        <a href="javascript:history.back()" class="app-store-back">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </a>
-    </div>
+    <!-- Top Navigation Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="nav-back-btn">
+                <i class="fas fa-arrow-left"></i> Home
+            </a>
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                <span>SunDown<span class="tech-accent">Tech</span></span>
+            </a>
+        </div>
+    </header>
 
-    <div class="container">
-        <div class="app-store-info">
-            <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-store-icon">
-            <div class="app-store-details">
-                <div>
-                    <h1 class="app-store-title">CPU A</h1>
-                    <h2 class="app-store-subtitle">Ultimate Device Info.</h2>
+    <div class="container app-hero-wrapper">
+        <!-- Banner Image -->
+        <div class="app-store-banner"></div>
+
+        <!-- Main App Header Card -->
+        <div class="app-header-card">
+            <div class="app-main-info">
+                <img src="CPU A web ss/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-store-icon">
+                <div class="app-title-group">
+                    <h1>CPU A</h1>
+                    <div class="subtitle">Ultimate Device &amp; Hardware Info Monitor</div>
                 </div>
-                <div class="app-store-actions">
-                    <a href="https://play.google.com/store/apps/details?id=com.cpu.a" class="app-btn-install" target="_blank">Install</a>
-                    <button class="app-btn-share">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-                    </button>
-                </div>
+            </div>
+
+            <div class="app-cta-row">
+                <a href="https://play.google.com/store/apps/details?id=com.cpu.a" class="btn-install-main" target="_blank">
+                    <i class="fab fa-google-play"></i> Get on Google Play
+                </a>
+                <button class="btn-share" id="shareBtn" title="Share CPU A">
+                    <i class="fas fa-share-nodes"></i>
+                </button>
             </div>
         </div>
 
-        <div class="app-stats-row">
-            <div class="app-stat-item">
-                <span class="stat-label">9 RATINGS</span>
-                <span class="stat-value">4.9</span>
-                <span class="star-rating">★★★★★</span>
+        <!-- Specs & Quick Stats Grid -->
+        <div class="app-stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">RATING</div>
+                <div class="stat-value">4.9 ★</div>
+                <div class="stat-sub">13 Reviews</div>
             </div>
-            <div class="app-stat-item">
-                <span class="stat-label">AGE</span>
-                <span class="stat-value">3+</span>
-                <span class="stat-sub">Years Old</span>
+            <div class="stat-box">
+                <div class="stat-label">AGE</div>
+                <div class="stat-value">3+</div>
+                <div class="stat-sub">Years Old</div>
             </div>
-            <div class="app-stat-item">
-                <span class="stat-label">CHART</span>
-                <span class="stat-value">No. -</span>
-                <span class="stat-sub">Device Tools</span>
+            <div class="stat-box">
+                <div class="stat-label">CATEGORY</div>
+                <div class="stat-value">Tools</div>
+                <div class="stat-sub">Device Info</div>
             </div>
-            <div class="app-stat-item">
-                <span class="stat-label">DEVELOPER</span>
-                <span class="stat-value">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                </span>
-                <span class="stat-sub">SunDownDeveloper</span>
+            <div class="stat-box">
+                <div class="stat-label">DEVELOPER</div>
+                <div class="stat-value"><i class="fas fa-code"></i></div>
+                <div class="stat-sub">SunDownTech</div>
             </div>
-            <div class="app-stat-item">
-                <span class="stat-label">LANGUAGE</span>
-                <span class="stat-value">EN</span>
-                <span class="stat-sub">+ More</span>
-            </div>
-            <div class="app-stat-item">
-                <span class="stat-label">SIZE</span>
-                <span class="stat-value">20.0</span>
-                <span class="stat-sub">MB</span>
+            <div class="stat-box">
+                <div class="stat-label">SIZE</div>
+                <div class="stat-value">20 MB</div>
+                <div class="stat-sub">Lightweight</div>
             </div>
         </div>
 
-        <div class="app-update-log">
-            <div class="update-header">
-                <h3>Update Log <span class="update-arrow">&gt;</span></h3>
+        <!-- Update Log -->
+        <div class="card-box">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-terminal"></i> What's New</div>
+                <span class="update-version">v1.0.1 • 3d ago</span>
             </div>
-            <div class="update-meta">
-                <span class="update-version">Version 1.0.1</span>
-                <span class="update-time">3d ago</span>
-            </div>
-            <p class="update-text"> 
-                • <br>
-                - Implemented Device Diagnostics test
-                - Improved Mobile Network State Detection 
-                - Implemented High level Precision Tracking
-                - Improved CPU/GPU Detection Accuracy
-                - Fixed Older Device Support Issue
-                - UI Polish/Improved stability across all devices
-                - Fixed major bugs <span class="update-more">more</span>
-            </p>
+            <ul class="update-list">
+                <li>Implemented Device Diagnostics test suite</li>
+                <li>Improved Mobile Network State Detection</li>
+                <li>Implemented High-level Precision Tracking</li>
+                <li>Improved CPU/GPU Detection Accuracy (Custom JSON engine)</li>
+                <li>Fixed Legacy Device Compatibility</li>
+                <li>UI Polish &amp; System Stability Optimizations</li>
+            </ul>
         </div>
 
-    <div class="screenshot-gallery">
-        <img src="CPU A web ss/Screenshot_20260208-012607.jpg" alt="Screenshot 1" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260208-012609.jpg" alt="Screenshot 2" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260208-012612.jpg" alt="Screenshot 3" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260208-012615.jpg" alt="Screenshot 4" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260208-012625.jpg" alt="Screenshot 5" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260208-012633.jpg" alt="Screenshot 6" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260208-012636.jpg" alt="Screenshot 7" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260221-120152.jpg" alt="Screenshot 8" class="screenshot-item">
-        <img src="CPU A web ss/Screenshot_20260221-120156.jpg" alt="Screenshot 9" class="screenshot-item">
-    </div>
+        <!-- Screenshot Gallery -->
+        <div class="card-box">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-mobile-screen"></i> App Screenshots</div>
+            </div>
+            <div class="screenshot-slider">
+                <img src="CPU A web ss/Screenshot_20260208-012607.jpg" alt="CPU A Screenshot 1" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260208-012609.jpg" alt="CPU A Screenshot 2" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260208-012612.jpg" alt="CPU A Screenshot 3" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260208-012615.jpg" alt="CPU A Screenshot 4" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260208-012625.jpg" alt="CPU A Screenshot 5" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260208-012633.jpg" alt="CPU A Screenshot 6" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260208-012636.jpg" alt="CPU A Screenshot 7" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260221-120152.jpg" alt="CPU A Screenshot 8" class="screenshot-item">
+                <img src="CPU A web ss/Screenshot_20260221-120156.jpg" alt="CPU A Screenshot 9" class="screenshot-item">
+            </div>
+        </div>
 
-    <div class="description" style="border-bottom: none;">
-        <h2>About the App</h2>
-        
-        <div class="about-card" onclick="toggleCard()">
+        <!-- Expandable About Card -->
+        <div class="card-box about-card" onclick="toggleCard()">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-circle-info"></i> About CPU A</div>
+            </div>
             <div class="about-content" id="aboutContent">
                 <p>CPU A provides deep, real-time insights into your Android device. Check your hardware version, RAM usage, model numbers, and internal storage at a glance. Built with performance in mind, it's the perfect tool for monitoring your system's health and specifications.</p>
                 
                 <p><strong>🔍 Core Features</strong></p>
-                
-                <p><strong>🧠 CPU & GPU Information</strong><br>
+                <p><strong>🧠 CPU &amp; GPU Information</strong><br>
                 Access in-depth processor and graphics details, including:<br>
                 - CPU architecture and core layout<br>
                 - Supported clock frequencies<br>
@@ -680,7 +765,7 @@
                 - Display resolution and screen density<br>
                 - Supported hardware features</p>
                 
-                <p><strong>⚙️ System & Build Information</strong><br>
+                <p><strong>⚙️ System &amp; Build Information</strong><br>
                 Get a complete view of your system configuration:<br>
                 - Android version and SDK level<br>
                 - Security patch status<br>
@@ -689,7 +774,7 @@
                 <p><strong>♻️ Optimized Performance</strong><br>
                 CPU A is designed to be lightweight, responsive, and efficient—delivering accurate information without unnecessary overhead.</p>
                 
-                <p><strong>🚀 Continuous Improvements & Enhancements</strong><br>
+                <p><strong>🚀 Continuous Improvements &amp; Enhancements</strong><br>
                 CPU A is actively evolving, with ongoing updates focused on performance optimization, expanded hardware analysis, and improved usability.</p>
                 
                 <p>Planned enhancements include:<br>
@@ -700,88 +785,115 @@
                 - UI refinements and performance optimizations<br>
                 Our goal is to deliver one of the most dependable and feature-rich device information tools available on Android.</p>
                 
-                <p><strong>🙌 Feedback & Support</strong><br>
+                <p><strong>🙌 Feedback &amp; Support</strong><br>
                 Your feedback plays an important role in shaping CPU A’s future. If you encounter any issues, have suggestions, or would like to request features, please leave a review or contact us directly.</p>
                 
                 <p><strong>⭐ Thank You for Using CPU A</strong><br>
                 We appreciate your trust in CPU A. Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
-                
-                <div class="fade-out"></div>
+
+                <div class="fade-overlay"></div>
             </div>
-            
-            <span class="expand-label" id="expandLabel">Show More ▼</span>
+            <div class="expand-btn-text" id="expandLabel">
+                Show More <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
 
-        <div class="app-reviews-section">
-            <div class="reviews-header">
-                <h2>Ratings & Reviews <span class="reviews-arrow">&gt;</span></h2>
-            </div>
-            
-            <div class="reviews-summary">
-                <div class="reviews-score">4.9</div>
-                <div class="reviews-stars-container">
-                    <div class="reviews-stars-overall">★★★★★</div>
-                    <div class="reviews-count">13 Ratings</div>
-                </div>
+        <!-- Ratings & Reviews -->
+        <div class="card-box">
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-star"></i> Ratings &amp; Reviews</div>
             </div>
 
-            <h3 class="reviews-subtitle">Most Helpful Reviews</h3>
+            <div class="reviews-summary-card">
+                <div class="score-big">4.9</div>
+                <div class="stars-container">
+                    <div class="stars-gold">★★★★★</div>
+                    <div style="color: var(--text-muted); font-size: 0.85rem;">13 Ratings</div>
+                </div>
+            </div>
 
             <div class="reviews-slider">
                 <div class="review-card">
-                    <div class="review-card-meta">
-                        <span class="review-card-stars">★★★★★</span>
-                        <span class="review-card-author">2/23/26 • Samuelson OC</span>
+                    <div class="review-meta">
+                        <span style="color: #f59e0b;">★★★★★</span>
+                        <span>Samuelson OC • Feb 2026</span>
                     </div>
-                    <p class="review-card-text">
-                        Honestly, I like the aesthetics of the app, it feels premium and easy to navigate through smooth transitioning between activities within the app. Kudos for that, overall 5 stars from me! This is hands-down the most accurate hardware monitor I've found. Finally, a tool that lets me check my live core frequencies and RAM usage without a cluttered UI. An absolute must-have for Android power users!
-                    </p>
+                    <div class="review-text">
+                        "Honestly, I like the aesthetics of the app, it feels premium and easy to navigate through smooth transitioning between activities within the app. Kudos for that, overall 5 stars from me! This is hands-down the most accurate hardware monitor I've found."
+                    </div>
                 </div>
+
                 <div class="review-card">
-                    <div class="review-card-meta">
-                        <span class="review-card-stars">★★★★☆</span>
-                        <span class="review-card-author">3/03/26 • Obinna Ifeayin</span>
+                    <div class="review-meta">
+                        <span style="color: #f59e0b;">★★★★☆</span>
+                        <span>Obinna Ifeanyi • Mar 2026</span>
                     </div>
-                    <p class="review-card-text">
-                        I strongly recommend this app. It is very smooth and detailed, with a beautiful interface that makes complex hardware data very understandable for the common man. I used to be overwhelmed by system specs, but this breaks down my phone's performance perfectly. Nice work to the developer, looking forward to future updates!
-                    </p>
+                    <div class="review-text">
+                        "I strongly recommend this app. It is very smooth and detailed, with a beautiful interface that makes complex hardware data very understandable for the common man."
+                    </div>
                 </div>
-                
-                </div>
+            </div>
         </div>
 
-        <div class="download-btn-container">
+        <!-- Download Banner CTA -->
+        <div class="download-cta-banner">
+            <h2>Experience CPU A Today</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Download directly from the Google Play Store and unlock your device secrets.</p>
             <a href="https://play.google.com/store/apps/details?id=com.cpu.a" target="_blank">
-                <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" class="play-badge">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="play-badge-img">
             </a>
         </div>
+
+        <!-- Developer Profile Footer -->
+        <div class="dev-footer-card">
+            <img src="CPU A web ss/javascript-jpg.webp" alt="SunDownDeveloper Profile" class="dev-avatar">
+            <div class="dev-details">
+                <h3>SunDownDeveloper</h3>
+                <p>Lead Engineer at <strong>SunDownTech</strong>. Building advanced Android tools, custom resource engines, and high-performance apps.</p>
+                <p style="margin-top: 6px;">
+                    <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" style="color: #ff0000; font-weight: 700;">
+                        <i class="fab fa-youtube"></i> Subscribe on YouTube
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 SunDownTech / SunDownDeveloper. All rights reserved.</p>
+        </footer>
     </div>
 
-    <div class="developer-footer">
-        <img src="CPU A web ss/javascript-jpg.webp" alt="SunDownDeveloper" class="dev-photo">
-        <div class="dev-info">
-            <h3>SunDownDeveloper</h3>
-            <p>Passionate Android programmer building tools that matter.</p>
-            <p>Check out my tutorials and projects on <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank">YouTube</a>.</p>
-        </div>
-    </div>
-</div>
-<script>
-    function toggleCard() {
-        const content = document.getElementById('aboutContent');
-        const label = document.getElementById('expandLabel');
-        
-        // Toggles the 'expanded' class on and off
-        content.classList.toggle('expanded');
-        
-        // Changes the text of the button depending on the state
-        if (content.classList.contains('expanded')) {
-            label.innerHTML = 'Show Less ▲';
-        } else {
-            label.innerHTML = 'Show More ▼';
+    <!-- Interactivity Scripts -->
+    <script>
+        // Expand/Collapse Card Logic
+        function toggleCard() {
+            const content = document.getElementById('aboutContent');
+            const label = document.getElementById('expandLabel');
+            
+            content.classList.toggle('expanded');
+            
+            if (content.classList.contains('expanded')) {
+                label.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
+            } else {
+                label.innerHTML = 'Show More <i class="fas fa-chevron-down"></i>';
+            }
         }
-    }
-</script>
-    
+
+        // Web Share API Button
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'CPU A - Ultimate Device Info',
+                        text: 'Check out CPU A, a deep hardware & system diagnostics tool for Android by SunDownTech!',
+                        url: window.location.href,
+                    });
+                } catch (err) {}
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        });
+    </script>
 </body>
 </html>
