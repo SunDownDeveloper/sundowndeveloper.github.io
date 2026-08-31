@@ -702,6 +702,42 @@
             .stats-grid { grid-template-columns: 1fr; }
             .stack-list { grid-template-columns: 1fr; }
         }
+        /* --- SCOPED SOCIAL MEDIA ICONS --- */
+        .nav-social-icon {
+            color: var(--text-muted, #94a3b8);
+            font-size: 1.2rem;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .nav-social-icon:hover {
+            color: #10b981; /* Matches your neon emerald accent */
+            transform: translateY(-2px);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-muted, #94a3b8);
+            font-size: 1.35rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            color: #10b981;
+            transform: scale(1.15);
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0K5Y7KPZWS"></script>
@@ -736,6 +772,12 @@
                 <a href="#apps">Published Apps</a>
                 <a href="#about">About</a>
                 <a href="#youtube">YouTube</a>
+                <a href="https://github.com/SunDownDeveloper" target="_blank" class="nav-social-icon" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" class="nav-social-icon" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
                 <a href="mailto:contact.sundowntech@gmail.com" class="btn-header">Get In Touch</a>
             </nav>
 
@@ -1054,6 +1096,17 @@
                         <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                     </a>
                 </div>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/SunDownDeveloper" target="_blank" title="GitHub Profile" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+            </a>
+                <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" title="LinkedIn Profile" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+            </a>
+                <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" title="YouTube Channel" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
             </div>
 
             <div style="margin-top: 40px; border-top: 1px solid var(--border-line); padding-top: 24px;">
