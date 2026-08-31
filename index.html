@@ -621,6 +621,13 @@
             margin: 0;
         }
 
+        /* Centering odd 5th card in stack grid */
+        @media (min-width: 769px) {
+            .stack-list .stack-item:last-child:nth-child(odd) {
+                grid-column: span 2;
+            }
+        }
+
         /* =========================================
            7. CONTACT & CTA FOOTER
            ========================================= */
@@ -1075,6 +1082,14 @@
                         <div class="stack-details">
                             <h4>Firebase &amp; Cloud</h4>
                             <p>Auth, Firestore, Messaging &amp; DB</p>
+                        </div>
+                    </div>
+
+                    <div class="stack-item">
+                        <i class="fas fa-code stack-icon"></i>
+                        <div class="stack-details">
+                            <h4>Visual Studio Code</h4>
+                            <p>Backend logic, JS &amp; script architecture</p>
                         </div>
                     </div>
                 </div>
