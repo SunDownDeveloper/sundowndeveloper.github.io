@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SunDownTech | Next-Gen Android Engineering & Development</title>
+    <title>SunDownTech | Next-Gen Android Engineering & Digital Studio</title>
     
-    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
-    <meta name="description" content="SunDownTech — Premium native Android application development, system diagnostics tools, and custom digital solutions. Built by SunDownDeveloper.">
+    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMHPrgqHgc7XA" />
+    <meta name="description" content="SunDownTech — CAC-registered native Android application engineering studio, system diagnostics tools, and enterprise mobile solutions. Founded by Christian Samuel (SunDownDeveloper).">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/SDD.png">
+    <link rel="apple-touch-icon" href="assets/SDD.png">
 
     <style>
         /* =========================================
@@ -22,8 +26,8 @@
            ========================================= */
         :root {
             --bg-dark: #070a12;
-            --bg-card: rgba(15, 23, 42, 0.75);
-            --bg-card-hover: rgba(23, 33, 58, 0.9);
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-card-hover: rgba(23, 33, 58, 0.95);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent-emerald: #10b981;
@@ -35,7 +39,7 @@
             --radius-lg: 20px;
             --radius-md: 14px;
             --radius-sm: 8px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -85,7 +89,7 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(7, 10, 18, 0.8);
+            background: rgba(7, 10, 18, 0.85);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--border-line);
@@ -106,6 +110,7 @@
             font-size: 1.35rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+            white-space: nowrap;
         }
 
         .logo-icon {
@@ -135,13 +140,14 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 18px;
         }
 
         .nav-links a {
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             font-weight: 600;
             color: var(--text-muted);
+            white-space: nowrap;
             transition: var(--transition);
         }
 
@@ -152,10 +158,11 @@
         .btn-header {
             background: linear-gradient(135deg, var(--accent-emerald), #059669);
             color: #000;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: var(--radius-sm);
             font-weight: 700;
             font-size: 0.9rem;
+            white-space: nowrap;
             box-shadow: 0 4px 14px var(--accent-glow);
             transition: var(--transition);
         }
@@ -174,7 +181,6 @@
             cursor: pointer;
         }
 
-        /* Mobile Nav Drawer */
         .mobile-nav {
             position: fixed;
             top: 76px;
@@ -196,12 +202,17 @@
             transform: translateY(0);
         }
 
+        @media (max-width: 1024px) {
+            .nav-links, .btn-header { display: none !important; }
+            .mobile-menu-btn { display: block !important; }
+        }
+
         /* =========================================
-           3. HERO SECTION
+           3. HERO SECTION WITH ANIMATED TEXT
            ========================================= */
         .hero {
             padding-top: 160px;
-            padding-bottom: 100px;
+            padding-bottom: 90px;
             position: relative;
         }
 
@@ -210,6 +221,14 @@
             grid-template-columns: 1.2fr 0.8fr;
             gap: 48px;
             align-items: center;
+        }
+
+        .badge-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
         .badge-tag {
@@ -223,9 +242,22 @@
             border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 24px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-emerald);
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
         }
 
         .hero h1 {
@@ -233,7 +265,7 @@
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -1.5px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .hero h1 .highlight {
@@ -242,8 +274,35 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .animated-slogan-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .slogan-prefix {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .slogan-dynamic {
+            color: var(--accent-emerald);
+            border-right: 2px solid var(--accent-emerald);
+            padding-right: 4px;
+            animation: blinkCursor 0.8s infinite;
+        }
+
+        @keyframes blinkCursor {
+            50% { border-color: transparent; }
+        }
+
         .hero-subtext {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 36px;
             max-width: 580px;
@@ -267,6 +326,8 @@
             gap: 10px;
             box-shadow: 0 4px 20px var(--accent-glow);
             transition: var(--transition);
+            cursor: pointer;
+            border: none;
         }
 
         .btn-primary:hover {
@@ -287,6 +348,7 @@
             gap: 10px;
             backdrop-filter: var(--glass-blur);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .btn-secondary:hover {
@@ -342,16 +404,16 @@
         .term-highlight { color: var(--accent-cyan); }
 
         /* =========================================
-           4. SERVICES & PRICING TIERS SECTION
+           4. ABOUT SUNDOWNTECH & CAC CERTIFICATE
            ========================================= */
         .section {
-            padding: 100px 0;
+            padding: 90px 0;
             position: relative;
         }
 
         .section-header {
             text-align: center;
-            max-width: 680px;
+            max-width: 720px;
             margin: 0 auto 60px auto;
         }
 
@@ -371,6 +433,226 @@
             margin-bottom: 16px;
         }
 
+        .about-studio-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .about-studio-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .about-studio-content p {
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            margin-bottom: 20px;
+        }
+
+        .studio-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.98rem;
+        }
+
+        .highlight-item i {
+            color: var(--accent-emerald);
+            font-size: 1.1rem;
+            margin-top: 4px;
+        }
+
+        .cac-showcase-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.08));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: var(--transition);
+        }
+
+        .cac-showcase-card:hover {
+            border-color: var(--accent-emerald);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px var(--accent-glow);
+        }
+
+        .cac-cert-preview-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--border-line);
+            margin: 16px 0;
+            cursor: pointer;
+        }
+
+        .cac-cert-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7) contrast(1.1);
+            transition: var(--transition);
+        }
+
+        .cac-cert-preview-wrapper:hover .cac-cert-preview-img {
+            filter: brightness(0.9);
+            transform: scale(1.03);
+        }
+
+        .cac-overlay-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(7, 10, 18, 0.85);
+            border: 1px solid var(--accent-emerald);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(8px);
+        }
+
+        .cac-verify-info-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+            text-align: left;
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--accent-emerald);
+        }
+
+        /* =========================================
+           5. 3D STACKED CARD DECK (HURDLED CARDS)
+           ========================================= */
+        .process-tab-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .process-tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-line);
+            color: var(--text-muted);
+            padding: 12px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .process-tab-btn.active, .process-tab-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--accent-emerald);
+            color: var(--accent-emerald);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* 3D Stack Viewport */
+        .process-stack-viewport {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 320px;
+            margin: 0 auto;
+            perspective: 1200px;
+        }
+
+        .process-stacked-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 240px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-line);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transition: all 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .process-stacked-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        /* Top Active Card Styling */
+        .process-stacked-card.active-top {
+            border-color: var(--accent-emerald) !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
+        }
+
+        .process-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .process-step-num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-emerald);
+        }
+
+        .process-card-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .process-card-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Mobile adjustment for stacked card height */
+        @media (max-width: 768px) {
+            .process-stack-viewport { height: 380px; }
+            .process-stacked-card { padding: 28px; }
+        }
+
+        /* =========================================
+           6. SERVICES & PRICING
+           ========================================= */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -387,8 +669,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            overflow: hidden;
         }
 
         .service-card:hover {
@@ -437,7 +717,7 @@
         }
 
         /* =========================================
-           5. PUBLISHED APPS SHOWCASE
+           7. PUBLISHED & UPCOMING APPS SHOWCASE
            ========================================= */
         .apps-showcase {
             display: flex;
@@ -532,24 +812,59 @@
         }
 
         /* =========================================
-           6. ABOUT THE DEVELOPER & STACK
+           8. FOUNDER & LEADERSHIP CARD
            ========================================= */
         .dev-about-box {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(11, 16, 28, 0.95));
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(11, 16, 28, 0.98));
             border: 1px solid var(--border-glow);
             border-radius: var(--radius-lg);
             padding: 48px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 0.8fr 1.2fr;
             gap: 48px;
             align-items: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
+        .founder-img-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .founder-img {
+            width: 100%;
+            max-width: 280px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 24px;
+            border: 2px solid var(--accent-emerald);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        .founder-badge-location {
+            margin-top: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-line);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
         .dev-bio-text h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+        }
+
+        .dev-alias {
+            color: var(--accent-emerald);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
         }
 
         .dev-bio-text p {
@@ -588,11 +903,11 @@
             margin-top: 4px;
         }
 
-        /* Tech Stack Icons */
         .stack-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
+            margin-top: 24px;
         }
 
         .stack-item {
@@ -621,15 +936,70 @@
             margin: 0;
         }
 
-        /* Centering odd 5th card in stack grid */
-        @media (min-width: 769px) {
-            .stack-list .stack-item:last-child:nth-child(odd) {
-                grid-column: span 2;
-            }
+        /* =========================================
+           9. CAC CERTIFICATE MODAL
+           ========================================= */
+        .cac-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .cac-modal-content {
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            max-width: 700px;
+            width: 100%;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .cac-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cac-modal-close:hover {
+            color: var(--accent-emerald);
+        }
+
+        .cac-cert-img {
+            width: 100%;
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-line);
+            margin: 16px 0;
+        }
+
+        .cac-note-box {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            text-align: left;
         }
 
         /* =========================================
-           7. CONTACT & CTA FOOTER
+           10. CONTACT & FOOTER
            ========================================= */
         .cta-banner {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
@@ -668,7 +1038,39 @@
             font-size: 0.9rem;
         }
 
-        /* Floating WhatsApp Quick Action Button */
+        .nav-social-icon {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-right: 12px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-social-icon:hover {
+            color: var(--accent-emerald);
+            transform: translateY(-2px);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.35rem;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-emerald);
+            transform: scale(1.15);
+        }
+
         .floating-whatsapp {
             position: fixed;
             bottom: 28px;
@@ -691,80 +1093,31 @@
             transform: scale(1.1) rotate(8deg);
         }
 
-        /* =========================================
-           8. RESPONSIVE BREAKPOINTS
-           ========================================= */
+        /* Mobile Breakpoints */
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.8rem; }
+            .about-studio-grid { grid-template-columns: 1fr; }
             .app-featured-card { grid-template-columns: 1fr; }
             .dev-about-box { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            .nav-links, .btn-header { display: none; }
-            .mobile-menu-btn { display: block; }
             .hero h1 { font-size: 2.2rem; }
             .section-title { font-size: 2rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .stack-list { grid-template-columns: 1fr; }
         }
-        /* --- SCOPED SOCIAL MEDIA ICONS --- */
-        .nav-social-icon {
-            color: var(--text-muted, #94a3b8);
-            font-size: 1.2rem;
-            margin-right: 12px;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .nav-social-icon:hover {
-            color: #10b981; /* Matches your neon emerald accent */
-            transform: translateY(-2px);
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 18px;
-            justify-content: center;
-            align-items: center;
-            margin-top: 16px;
-        }
-
-        .footer-socials a {
-            color: var(--text-muted, #94a3b8);
-            font-size: 1.35rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .footer-socials a:hover {
-            color: #10b981;
-            transform: scale(1.15);
-        }
-
-        @media (max-width: 480px) {
-            .cta-banner h2 {
-                font-size: 1.75rem;
-                word-wrap: break-word;
-            }
-        }
     </style>
-    <!-- Google tag (gtag.js) -->
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0K5Y7KPZWS"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-0K5Y7KPZWS');
     </script>
-    <!-- Website Favicon / Browser Tab Logo -->
-<link rel="icon" type="image/png" href="assets/SDD.png">
-<link rel="apple-touch-icon" href="assets/SDD.png">
 </head>
 <body>
 
@@ -782,16 +1135,14 @@
             </a>
 
             <nav class="nav-links">
-                <a href="#services">Services & Rates</a>
+                <a href="#about-studio">About Studio</a>
+                <a href="#process">Why Choose Us</a>
+                <a href="#services">Services &amp; Rates</a>
                 <a href="#apps">Published Apps</a>
-                <a href="#about">About</a>
+                <a href="#leadership">Leadership</a>
                 <a href="#youtube">YouTube</a>
-                <a href="https://github.com/SunDownDeveloper" target="_blank" class="nav-social-icon" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" class="nav-social-icon" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
+                <a href="https://github.com/SunDownDeveloper" target="_blank" class="nav-social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" class="nav-social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:contact@sundowntech.io" class="btn-header">Get In Touch</a>
             </nav>
 
@@ -801,15 +1152,16 @@
         </div>
     </header>
 
-    <!-- Mobile Drawer -->
+    <!-- Mobile Navigation Drawer -->
     <div class="mobile-nav" id="mobileNav">
-        <a href="#services" onclick="closeMobileNav()">Services & Rates</a>
+        <a href="#about-studio" onclick="closeMobileNav()">About Studio</a>
+        <a href="#process" onclick="closeMobileNav()">Why Choose Us</a>
+        <a href="#services" onclick="closeMobileNav()">Services &amp; Rates</a>
         <a href="#apps" onclick="closeMobileNav()">Published Apps</a>
-        <a href="#about" onclick="closeMobileNav()">About Developer</a>
+        <a href="#leadership" onclick="closeMobileNav()">Leadership</a>
         <a href="#youtube" onclick="closeMobileNav()">YouTube Channel</a>
         <a href="mailto:contact@sundowntech.io" class="btn-primary" style="text-align: center; justify-content: center;">Contact Us</a>
 
-        <!-- Subtle Social Row -->
         <div style="display: flex; gap: 20px; justify-content: center; padding-top: 10px; border-top: 1px solid var(--border-line);">
             <a href="https://github.com/SunDownDeveloper" target="_blank" aria-label="GitHub" style="font-size: 1.3rem; color: var(--text-muted);"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" aria-label="LinkedIn" style="font-size: 1.3rem; color: var(--text-muted);"><i class="fab fa-linkedin"></i></a>
@@ -821,13 +1173,24 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text-content">
-                <div class="badge-tag">
-                    <i class="fas fa-shield-halved"></i> CAC Registered Studio • BN 9818273
+                <div class="badge-group">
+                    <div class="badge-tag">
+                        <div class="pulse-dot"></div> CAC Registered Studio • BN 9818273
+                    </div>
                 </div>
+
                 <h1>Let's Bring Your <span class="highlight">Android Idea</span> to Life</h1>
+
+                <!-- Dynamic Animated Slogan Engine -->
+                <div class="animated-slogan-box">
+                    <span class="slogan-prefix">&gt;</span>
+                    <span class="slogan-dynamic" id="sloganText"></span>
+                </div>
+
                 <p class="hero-subtext">
-                    We craft high-performance native Android applications, deep system diagnostics, and seamless digital solutions. Precision engineering with zero compromises.
+                    We engineer high-performance native Android applications, system diagnostics tools, and enterprise mobile solutions. Precision engineering with zero compromises.
                 </p>
+
                 <div class="hero-cta-group">
                     <a href="#services" class="btn-primary">
                         Explore Services <i class="fas fa-arrow-right"></i>
@@ -838,7 +1201,7 @@
                 </div>
             </div>
 
-            <!-- Interactive Terminal Graphic -->
+            <!-- Hero Terminal Graphic -->
             <div class="hero-terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -868,6 +1231,168 @@
         </div>
     </section>
 
+    <!-- About SunDownTech & CAC Verification -->
+    <section class="section" id="about-studio">
+        <div class="container">
+            <div class="about-studio-grid">
+                <div class="about-studio-content">
+                    <div class="section-subtitle">About The Studio</div>
+                    <h2>Engineered for Precision &amp; Built for Scale</h2>
+                    <p>
+                        <strong>SunDownTech</strong> is an officially registered software engineering studio dedicated to crafting high-performance Android applications, low-level system diagnostic tools, and custom digital software solutions.
+                    </p>
+                    
+                    <div class="studio-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-circle-check"></i>
+                            <div><strong>100% Native Focus:</strong> Pure Java and Kotlin architecture designed for speed and reliability.</div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-circle-check"></i>
+                            <div><strong>Legal Enterprise Entity:</strong> Registered with the Corporate Affairs Commission (BN 9818273).</div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-circle-check"></i>
+                            <div><strong>Full Delivery Cycle:</strong> From initial system blueprint to Google Play Console publishing.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAC Certificate Showcase Card -->
+                <div class="cac-showcase-card">
+                    <div class="badge-tag" style="background: rgba(16, 185, 129, 0.15);">
+                        <i class="fas fa-shield-halved"></i> Corporate Verification
+                    </div>
+                    <h3 style="font-size: 1.35rem; font-weight: 800; margin-top: 12px; color: #fff;">
+                        CAC Business Registration
+                    </h3>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+                        SunDownTech • BN 9818273
+                    </p>
+
+                    <!-- Clickable Certificate Preview -->
+                    <div class="cac-cert-preview-wrapper" onclick="openCacModal()">
+                        <img src="assets/CAC.jpg" alt="CAC Certificate Preview" class="cac-cert-preview-img" onerror="this.src='assets/20251118_010415.jpg'">
+                        <div class="cac-overlay-badge">
+                            <i class="fas fa-expand"></i> Click to View Certificate
+                        </div>
+                    </div>
+
+                    <button onclick="openCacModal()" class="btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-certificate"></i> View CAC Certificate
+                    </button>
+
+                    <div class="cac-verify-info-note">
+                        <i class="fas fa-info-circle" style="color: var(--accent-cyan); margin-right: 6px;"></i>
+                        Clients can independently verify Business Name Number <strong>BN 9818273</strong> directly on the official CAC portal.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D HURDLED / STACKED CARD DECK PROCESS WORKFLOW -->
+    <section class="section" id="process">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Why Choose Us</div>
+                <h2 class="section-title">How We Take You From Idea to Impact</h2>
+                <p style="color: var(--text-muted)">Hover or click any step below to watch the physical card deck animate the phase to the front.</p>
+            </div>
+
+            <!-- Step Navigation Tabs -->
+            <div class="process-tab-navigation">
+                <button class="process-tab-btn active" onclick="bringCardToTop(0)" onmouseenter="bringCardToTop(0)">
+                    <span>01</span> Discover
+                </button>
+                <button class="process-tab-btn" onclick="bringCardToTop(1)" onmouseenter="bringCardToTop(1)">
+                    <span>02</span> UI/UX Design
+                </button>
+                <button class="process-tab-btn" onclick="bringCardToTop(2)" onmouseenter="bringCardToTop(2)">
+                    <span>03</span> Native Build
+                </button>
+                <button class="process-tab-btn" onclick="bringCardToTop(3)" onmouseenter="bringCardToTop(3)">
+                    <span>04</span> QA Testing
+                </button>
+                <button class="process-tab-btn" onclick="bringCardToTop(4)" onmouseenter="bringCardToTop(4)">
+                    <span>05</span> Play Store
+                </button>
+                <button class="process-tab-btn" onclick="bringCardToTop(5)" onmouseenter="bringCardToTop(5)">
+                    <span>06</span> Post-Launch
+                </button>
+            </div>
+
+            <!-- 3D Stack Viewport -->
+            <div class="process-stack-viewport" id="cardStackViewport">
+                <!-- Card 01 -->
+                <div class="process-stacked-card active-top" onclick="bringCardToTop(0)">
+                    <div class="process-card-header">
+                        <div class="process-step-num">01</div>
+                        <div class="process-card-title">Discovery &amp; System Architecture</div>
+                    </div>
+                    <p class="process-card-desc">
+                        We analyze your product vision, define functional specifications, evaluate REST API requirements, and structure a clean native Android architecture targeted for SDK 35+ compliance.
+                    </p>
+                </div>
+
+                <!-- Card 02 -->
+                <div class="process-stacked-card" onclick="bringCardToTop(1)">
+                    <div class="process-card-header">
+                        <div class="process-step-num">02</div>
+                        <div class="process-card-title">Dark-Tech UI/UX Prototyping</div>
+                    </div>
+                    <p class="process-card-desc">
+                        Intuitive, clean dark interfaces designed for visual impact and smooth interaction. We create high-converting wireframes and layouts tailored specifically for Android screen sizes.
+                    </p>
+                </div>
+
+                <!-- Card 03 -->
+                <div class="process-stacked-card" onclick="bringCardToTop(2)">
+                    <div class="process-card-header">
+                        <div class="process-step-num">03</div>
+                        <div class="process-card-title">Native Java &amp; Kotlin Engineering</div>
+                    </div>
+                    <p class="process-card-desc">
+                        Core Android development written cleanly in pure native code for ultra-fast execution speeds, minimal memory footprint, zero framework overhead, and long-term stability.
+                    </p>
+                </div>
+
+                <!-- Card 04 -->
+                <div class="process-stacked-card" onclick="bringCardToTop(3)">
+                    <div class="process-card-header">
+                        <div class="process-step-num">04</div>
+                        <div class="process-card-title">Hardware Diagnostics &amp; Testing</div>
+                    </div>
+                    <p class="process-card-desc">
+                        Rigorous testing across physical hardware brands covering CPU core telemetry, thermal performance under heavy load, battery drain optimization, and memory leak checks.
+                    </p>
+                </div>
+
+                <!-- Card 05 -->
+                <div class="process-stacked-card" onclick="bringCardToTop(4)">
+                    <div class="process-card-header">
+                        <div class="process-step-num">05</div>
+                        <div class="process-card-title">Google Play Console Deployment</div>
+                    </div>
+                    <p class="process-card-desc">
+                        Complete end-to-end management through Google Play Console policies, app signing credentials, store listing graphic assets, privacy policies, and public release.
+                    </p>
+                </div>
+
+                <!-- Card 06 -->
+                <div class="process-stacked-card" onclick="bringCardToTop(5)">
+                    <div class="process-card-header">
+                        <div class="process-step-num">06</div>
+                        <div class="process-card-title">Post-Launch Maintenance &amp; Scaling</div>
+                    </div>
+                    <p class="process-card-desc">
+                        Continuous health monitoring, OS target API upgrades for future Android versions, analytics integration, and scaling new feature sets as your active userbase grows.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Services & Pricing Section -->
     <section class="section" id="services">
         <div class="container">
@@ -878,7 +1403,6 @@
             </div>
 
             <div class="services-grid">
-                <!-- Service 1 -->
                 <div class="service-card">
                     <div>
                         <div class="service-icon"><i class="fas fa-code"></i></div>
@@ -888,51 +1412,46 @@
                     <div class="price-badge">$100 – $4,000+</div>
                 </div>
 
-                <!-- Service 2 -->
                 <div class="service-card">
                     <div>
                         <div class="service-icon"><i class="fas fa-palette"></i></div>
-                        <h3>UI/UX Design & Prototyping</h3>
+                        <h3>UI/UX Design &amp; Prototyping</h3>
                         <p>Intuitive, clean dark-tech interfaces designed for maximum user engagement. Modern wireframes, prototypes, and polished layouts.</p>
                     </div>
                     <div class="price-badge">$75 – $1,500</div>
                 </div>
 
-                <!-- Service 3 -->
                 <div class="service-card">
                     <div>
                         <div class="service-icon"><i class="fas fa-server"></i></div>
-                        <h3>Backend & API Integration</h3>
+                        <h3>Backend &amp; API Integration</h3>
                         <p>Robust Firebase integration, push notifications, REST APIs, custom JSON mapping, and real-time database management.</p>
                     </div>
                     <div class="price-badge">$200 – $3,000</div>
                 </div>
 
-                <!-- Service 4 -->
                 <div class="service-card">
                     <div>
                         <div class="service-icon"><i class="fas fa-vial-circle-check"></i></div>
-                        <h3>Quality Assurance & Testing</h3>
+                        <h3>Quality Assurance &amp; Testing</h3>
                         <p>Comprehensive hardware testing across device brands and Android SDK versions to ensure flawless performance before launch.</p>
                     </div>
                     <div class="price-badge">$100 – $800</div>
                 </div>
 
-                <!-- Service 5 -->
                 <div class="service-card">
                     <div>
                         <div class="service-icon"><i class="fas fa-wrench"></i></div>
-                        <h3>Maintenance & API Updates</h3>
+                        <h3>Maintenance &amp; API Updates</h3>
                         <p>Ongoing bug fixes, Play Store target API level upgrades (Android 15+ compliance), and performance optimization.</p>
                     </div>
                     <div class="price-badge">$50 – $300/mo</div>
                 </div>
 
-                <!-- Service 6 -->
                 <div class="service-card">
                     <div>
                         <div class="service-icon"><i class="fas fa-comments"></i></div>
-                        <h3>IT & Architecture Consulting</h3>
+                        <h3>IT &amp; Architecture Consulting</h3>
                         <p>Strategic technical advisory to evaluate app monetization, security architecture, and system hardware analytics.</p>
                     </div>
                     <div class="price-badge">$50 – $200/hr</div>
@@ -941,13 +1460,13 @@
         </div>
     </section>
 
-    <!-- Published Applications Section -->
+    <!-- Published & Upcoming Applications Section -->
     <section class="section" id="apps">
         <div class="container">
             <div class="section-header">
-                <div class="section-subtitle">Our Work</div>
-                <h2 class="section-title">Published Applications</h2>
-                <p style="color: var(--text-muted)">A showcase of Android mobile solutions engineered, published, and maintained by SunDownTech.</p>
+                <div class="section-subtitle">Our Work &amp; Pipeline</div>
+                <h2 class="section-title">Published Applications &amp; Next-Gen Platforms</h2>
+                <p style="color: var(--text-muted)">A showcase of mobile solutions engineered, published, and actively developed by SunDownTech.</p>
             </div>
 
             <div class="apps-showcase">
@@ -1007,89 +1526,114 @@
                     </div>
                 </div>
 
-                <!-- App 3: Upcoming Builds -->
-                <div class="app-featured-card" style="grid-template-columns: 1fr;">
-                    <div>
-                        <div class="section-subtitle"><i class="fas fa-rocket"></i> In Development</div>
-                        <h3 style="font-size: 1.5rem; margin: 8px 0 16px 0;">Upcoming Additions: SunDown Hub &amp; more</h3>
-                        <p style="color: var(--text-muted); max-width: 800px;">
-                            We are continuously building. Next-gen utility/enterprise application platforms like <strong>SunDown Hub</strong> and others are currently undergoing architecture and UI integration.
+                <!-- Featured Upcoming Platform: SunDown Hub -->
+                <div class="app-featured-card" style="border-color: rgba(6, 182, 212, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(6, 182, 212, 0.08));">
+                    <div class="app-info-content" style="grid-column: span 2;">
+                        <div class="badge-tag" style="background: rgba(6, 182, 212, 0.12); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">
+                            <i class="fas fa-microchip"></i> Flagship Platform In Development
+                        </div>
+                        <div class="app-header-inline">
+                            <div class="app-header-text">
+                                <h3 style="font-size: 2rem;">SunDown Hub</h3>
+                                <div class="app-category-tag" style="color: var(--accent-cyan);">AI Developer Companion &amp; Code Ecosystem</div>
+                            </div>
+                        </div>
+                        <p class="app-description" style="font-size: 1.05rem; max-width: 900px;">
+                            <strong>SunDown Hub</strong> is our ambitious AI-powered mobile application engineered to serve as an everyday project companion and intelligent code assistant for mobile developers.
                         </p>
+                        <p class="app-description" style="font-size: 0.98rem; max-width: 900px;">
+                            Beyond real-time debugging and XML/Kotlin assistance, SunDown Hub offers an open creator portal where developers can showcase their custom scripts, tools, and libraries—giving creators direct revenue paths to monetize their work.
+                        </p>
+                        <div class="app-tech-tags">
+                            <span class="tech-pill">AI Code Assistants</span>
+                            <span class="tech-pill">Kotlin Native</span>
+                            <span class="tech-pill">Developer Ecosystem</span>
+                            <span class="tech-pill">Monetization Engine</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Developer & Tech Stack Section -->
-    <section class="section" id="about">
+    <!-- Leadership & Founder Section -->
+    <section class="section" id="leadership">
         <div class="container">
             <div class="dev-about-box">
-                <div class="dev-bio-text">
-                    <div class="section-subtitle">The Mind Behind SunDownTech</div>
-                    <h2>SunDownDeveloper</h2>
-                    <p>
-                        I specialize in building production-grade Android apps from scratch. Fluent in <strong>Java</strong> and <strong>Kotlin</strong>, my core development environments are strictly <strong>Android Studio</strong> and <strong>Visual Studio Code</strong>.
-                    </p>
-                    <p>
-                        Whether engineering raw kernel-level diagnostic utilities like CPU A or designing high-conversion mobile interfaces, my commitment is simple: build software that is fast, resilient, and visually captivating.
-                    </p>
-
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Native Code</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">SDK 35+</div>
-                            <div class="stat-label">Play Compliant</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Precision</div>
-                        </div>
+                <div class="founder-img-wrapper">
+                    <img src="assets/Founder.jpg" alt="Christian Samuel - Founder of SunDownTech" class="founder-img" onerror="this.src='assets/SDD.png'">
+                    <div class="founder-badge-location">
+                        <i class="fas fa-location-dot" style="color: var(--accent-emerald);"></i> Lagos, Nigeria
                     </div>
                 </div>
 
-                <!-- Stack Cards -->
-                <div class="stack-list">
-                    <div class="stack-item">
-                        <i class="fab fa-java stack-icon"></i>
-                        <div class="stack-details">
-                            <h4>Java &amp; Kotlin</h4>
-                            <p>Core Android logic &amp; API handling</p>
+                <div class="dev-bio-text">
+                    <div class="section-subtitle">Leadership &amp; Vision</div>
+                    <h2>Christian Samuel</h2>
+                    <div class="dev-alias">Founder &amp; Lead Systems Architect • "SunDownDeveloper"</div>
+                    <p>
+                        Originating from Lagos, Nigeria, I lead <strong>SunDownTech</strong> with a bold vision: transforming this registered Android studio into a massive global technology conglomerate.
+                    </p>
+                    <p>
+                        Fluent in <strong>Java</strong> and <strong>Kotlin</strong>, my core development workflow operates seamlessly between <strong>Android Studio</strong> and <strong>Visual Studio Code</strong>. My commitment is simple: build software that is fast, resilient, and visually captivating.
+                    </p>
+
+                    <!-- Animated Stats Grid -->
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-card">
+                            <div class="stat-number">0%</div>
+                            <div class="stat-label">Native Code</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">SDK 0+</div>
+                            <div class="stat-label">Play Compliant</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">0/7</div>
+                            <div class="stat-label">Precision</div>
                         </div>
                     </div>
 
-                    <div class="stack-item">
-                        <i class="fab fa-android stack-icon"></i>
-                        <div class="stack-details">
-                            <h4>Android Studio</h4>
-                            <p>Official IDE build environment</p>
+                    <!-- Tech Stack Grid -->
+                    <div class="stack-list">
+                        <div class="stack-item">
+                            <i class="fab fa-java stack-icon"></i>
+                            <div class="stack-details">
+                                <h4>Java &amp; Kotlin</h4>
+                                <p>Core Android logic &amp; APIs</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="stack-item">
-                        <i class="fas fa-cubes stack-icon"></i>
-                        <div class="stack-details">
-                            <h4>Sketchware Pro</h4>
-                            <p>Quick UI Prototyping</p>
+                        <div class="stack-item">
+                            <i class="fab fa-android stack-icon"></i>
+                            <div class="stack-details">
+                                <h4>Android Studio</h4>
+                                <p>Official IDE environment</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="stack-item">
-                        <i class="fas fa-fire stack-icon"></i>
-                        <div class="stack-details">
-                            <h4>Firebase &amp; Cloud</h4>
-                            <p>Auth, Firestore, Messaging &amp; DB</p>
+                        <div class="stack-item">
+                            <i class="fas fa-code stack-icon"></i>
+                            <div class="stack-details">
+                                <h4>Visual Studio Code</h4>
+                                <p>JS, Web &amp; REST Json architecture</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="stack-item">
-                        <i class="fas fa-code stack-icon"></i>
-                        <div class="stack-details">
-                            <h4>Visual Studio Code</h4>
-                            <p>Backend logic, JS &amp; Json architecture</p>
+                        <div class="stack-item">
+                            <i class="fas fa-cubes stack-icon"></i>
+                            <div class="stack-details">
+                                <h4>Sketchware Pro</h4>
+                                <p>Rapid UI prototyping</p>
+                            </div>
+                        </div>
+
+                        <div class="stack-item" style="grid-column: span 2;">
+                            <i class="fas fa-fire stack-icon"></i>
+                            <div class="stack-details">
+                                <h4>Firebase &amp; Cloud Infrastructure</h4>
+                                <p>Authentication, Firestore, Push Notifications &amp; Realtime Databases</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1116,7 +1660,7 @@
         <div class="container">
             <div class="cta-banner">
                 <h2>Let's Build Something Great Together</h2>
-                <p>Have an Android app project in mind or need expert consultancy? Get in touch today.</p>
+                <p>Have an Android app project in mind or need expert studio consultancy? Get in touch today.</p>
                 <div class="contact-methods">
                     <a href="mailto:contact@sundowntech.io" class="btn-primary">
                         <i class="fas fa-envelope"></i> contact@sundowntech.io
@@ -1126,39 +1670,152 @@
                     </a>
                 </div>
             </div>
+
             <div class="footer-socials">
-                <a href="https://github.com/SunDownDeveloper" target="_blank" title="GitHub Profile" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-            </a>
-                <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" title="LinkedIn Profile" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-            </a>
-                <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" title="YouTube Channel" aria-label="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
+                <a href="https://github.com/SunDownDeveloper" target="_blank" title="GitHub Profile" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/sundowndeveloper" target="_blank" title="LinkedIn Profile" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://youtube.com/@sundowndeveloper?si=2cvvXsheStbJXweS" target="_blank" title="YouTube Channel" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
 
             <div style="margin-top: 40px; border-top: 1px solid var(--border-line); padding-top: 24px;">
-                <p><strong>SunDownTech</strong> — Innovating Mobile. Built with precision.</p>
+                <p><strong>SunDownTech</strong> — Innovating Mobile Engineering. Built with precision.</p>
                 <p style="font-size: 0.8rem; margin-top: 8px;">&copy; 2026 SunDownTech (BN: 9818273). All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive JS Scripts -->
+    <!-- CAC Modal Overlay -->
+    <div class="cac-modal-overlay" id="cacModal">
+        <div class="cac-modal-content">
+            <button class="cac-modal-close" onclick="closeCacModal()">&times;</button>
+            <h3 style="font-size: 1.5rem; color: #fff;">CAC Business Registration</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">SunDownTech Enterprise Verification • BN 9818273</p>
+            
+            <img src="assets/CAC.jpg" alt="SunDownTech CAC Registration Certificate" class="cac-cert-img" onerror="this.src='assets/20251118_010415.jpg'">
+            
+            <div class="cac-note-box">
+                <i class="fas fa-circle-check" style="color: var(--accent-emerald);"></i>
+                <strong>Official Registration Notice:</strong> SunDownTech is legally registered under the Corporate Affairs Commission (CAC) of Nigeria. You can independently verify Business Name Number <strong>9818273</strong> on the official CAC public search portal.
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Scripts Engine -->
     <script>
-        // Mobile Navigation Toggle
+        // 1. Dynamic Typing Slogan Engine
+        const slogans = [
+            "You pitch it, we build it.",
+            "Native Java & Kotlin performance.",
+            "From concept to Play Store standard.",
+            "Precision mobile engineering with zero compromises."
+        ];
+        
+        let sloganIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const sloganElement = document.getElementById("sloganText");
+
+        function typeSlogan() {
+            const currentSlogan = slogans[sloganIndex];
+            
+            if (isDeleting) {
+                sloganElement.textContent = currentSlogan.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                sloganElement.textContent = currentSlogan.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 35 : 75;
+
+            if (!isDeleting && charIndex === currentSlogan.length) {
+                typeSpeed = 2200;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                sloganIndex = (sloganIndex + 1) % slogans.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeSlogan, typeSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", typeSlogan);
+
+        // 2. 3D HURDLED CARD DECK CONTROLLER ENGINE
+        // Stagger positions & subtle rotations for physical stack realism
+        const cardTransforms = [
+            { top: 16, scale: 0.97, rotate: 1.8, opacity: 0.9, zIndex: 5 },
+            { top: 32, scale: 0.94, rotate: -2.0, opacity: 0.75, zIndex: 4 },
+            { top: 48, scale: 0.91, rotate: 1.2, opacity: 0.6, zIndex: 3 },
+            { top: 64, scale: 0.88, rotate: -1.5, opacity: 0.45, zIndex: 2 },
+            { top: 80, scale: 0.85, rotate: 0.8, opacity: 0.3, zIndex: 1 }
+        ];
+
+        let activeCardIndex = 0;
+
+        function bringCardToTop(targetIndex) {
+            activeCardIndex = targetIndex;
+
+            // Update Tab Button styles
+            const tabs = document.querySelectorAll('.process-tab-btn');
+            tabs.forEach((tab, idx) => {
+                tab.classList.toggle('active', idx === targetIndex);
+            });
+
+            // Update Stacked Cards positions
+            const cards = document.querySelectorAll('.process-stacked-card');
+            cards.forEach((card, idx) => {
+                card.classList.remove('active-top');
+
+                if (idx === targetIndex) {
+                    // Active Top Card position
+                    card.style.zIndex = 10;
+                    card.style.opacity = 1;
+                    card.style.transform = `translateY(0px) scale(1) rotate(0deg)`;
+                    card.classList.add('active-top');
+                } else {
+                    // Calculate relative offset depth behind active card
+                    let depth = idx > targetIndex ? idx - targetIndex - 1 : (cards.length - targetIndex + idx) - 1;
+                    if (depth >= cardTransforms.length) depth = cardTransforms.length - 1;
+
+                    const cfg = cardTransforms[depth];
+                    card.style.zIndex = cfg.zIndex;
+                    card.style.opacity = cfg.opacity;
+                    card.style.transform = `translateY(${cfg.top}px) scale(${cfg.scale}) rotate(${cfg.rotate}deg)`;
+                }
+            });
+        }
+
+        // Initialize stack positions on load
+        document.addEventListener("DOMContentLoaded", () => {
+            bringCardToTop(0);
+        });
+
+        // 3. CAC Modal Controls
+        function openCacModal() {
+            document.getElementById('cacModal').style.display = 'flex';
+        }
+
+        function closeCacModal() {
+            document.getElementById('cacModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('cacModal');
+            if (event.target === modal) {
+                closeCacModal();
+            }
+        }
+
+        // 4. Mobile Navigation Toggle
         const menuToggle = document.getElementById('menuToggle');
         const mobileNav = document.getElementById('mobileNav');
 
         menuToggle.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
             const icon = menuToggle.querySelector('i');
-            if (mobileNav.classList.contains('active')) {
-                icon.className = 'fas fa-xmark';
-            } else {
-                icon.className = 'fas fa-bars';
-            }
+            icon.className = mobileNav.classList.contains('active') ? 'fas fa-xmark' : 'fas fa-bars';
         });
 
         function closeMobileNav() {
@@ -1166,11 +1823,8 @@
             menuToggle.querySelector('i').className = 'fas fa-bars';
         }
 
-        // Smooth reveal on scroll using IntersectionObserver
-        const observerOptions = {
-            threshold: 0.1
-        };
-
+        // 5. Scroll Reveal Observer & Animated Stat Counter Engine
+        const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1180,12 +1834,49 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .app-featured-card, .dev-about-box').forEach(el => {
+        document.querySelectorAll('.service-card, .app-featured-card, .dev-about-box, .about-studio-grid').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
             observer.observe(el);
         });
+
+        // Smooth Stat Counter Trigger
+        let animatedStats = false;
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animatedStats) {
+                    animatedStats = true;
+                    runStatCounters();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const statsGrid = document.getElementById('statsGrid');
+        if (statsGrid) statsObserver.observe(statsGrid);
+
+        function runStatCounters() {
+            const stats = document.querySelectorAll('.stat-number');
+            if (stats.length >= 3) {
+                animateNumber(stats[0], 0, 100, 1600, "", "%");
+                animateNumber(stats[1], 0, 35, 1600, "SDK ", "+");
+                stats[2].textContent = "24/7";
+            }
+        }
+
+        function animateNumber(element, start, end, duration, prefix = "", suffix = "") {
+            let startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const currentVal = Math.floor(progress * (end - start) + start);
+                element.textContent = `${prefix}${currentVal}${suffix}`;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
     </script>
 </body>
 </html>
