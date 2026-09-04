@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>CPU A — Ultimate Hardware & System Monitor | SunDownTech</title>
+    <title>MLBB Visual Studio — Closed Beta | SunDownTech</title>
     
-    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMH9PrgqHgc7XA" />
-    <meta name="description" content="CPU A provides deep, real-time insights into your Android device hardware. Check CPU cores, GPU specs, RAM usage, thermals, and battery diagnostics. Built by SunDownTech.">
+    <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMHPrgqHgc7XA" />
+    <meta name="description" content="MLBB Visual Studio — Ultimate Premium Customization Engine. Local dual-injection visual engine for Mobile Legends. Join the Closed Beta via SunDownTech.">
+    <link rel="canonical" href="https://sundowntech.io/visual-studio" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,9 +33,9 @@
             --text-muted: #94a3b8;
             --accent-emerald: #10b981;
             --accent-cyan: #06b6d4;
-            --accent-glow: rgba(16, 185, 129, 0.25);
+            --accent-glow: rgba(6, 182, 212, 0.25);
             --border-line: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(16, 185, 129, 0.3);
+            --border-glow: rgba(6, 182, 212, 0.3);
             --glass-blur: blur(16px);
             --radius-lg: 20px;
             --radius-md: 14px;
@@ -56,8 +57,8 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
             background-attachment: fixed;
             padding-bottom: 60px;
         }
@@ -117,9 +118,9 @@
         }
 
         .nav-back-btn:hover {
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(6, 182, 212, 0.15);
             border-color: var(--border-glow);
-            color: var(--accent-emerald);
+            color: var(--accent-cyan);
             transform: translateX(-3px);
         }
 
@@ -134,7 +135,7 @@
         .logo-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -144,7 +145,7 @@
             box-shadow: 0 0 12px var(--accent-glow);
         }
 
-        .tech-accent { color: var(--accent-emerald); }
+        .tech-accent { color: var(--accent-cyan); }
 
         /* Floating WhatsApp Button */
         .floating-whatsapp {
@@ -183,7 +184,7 @@
             aspect-ratio: 16 / 9;
             max-height: 280px;
             border-radius: var(--radius-lg);
-            background-image: url('assets/20251118_010415.jpg');
+            background-image: url('MLBB%20VS/feature-graphic.png');
             background-size: cover;
             background-position: center;
             border: 1px solid var(--border-glow);
@@ -242,7 +243,7 @@
 
         .app-title-group .subtitle {
             font-size: 1.05rem;
-            color: var(--accent-emerald);
+            color: var(--accent-cyan);
             font-weight: 600;
             line-height: 1.3;
         }
@@ -257,9 +258,9 @@
             padding-top: 20px;
         }
 
-        .btn-install-main {
-            background: linear-gradient(135deg, var(--accent-emerald), #059669);
-            color: #051a10;
+        .btn-beta-main {
+            background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+            color: #031826;
             font-weight: 800;
             font-size: 1rem;
             padding: 12px 32px;
@@ -272,9 +273,9 @@
             transition: var(--transition);
         }
 
-        .btn-install-main:hover {
+        .btn-beta-main:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.45);
         }
 
         .btn-share {
@@ -295,8 +296,8 @@
 
         .btn-share:hover {
             background: rgba(255, 255, 255, 0.1);
-            color: var(--accent-cyan);
-            border-color: rgba(6, 182, 212, 0.3);
+            color: var(--accent-emerald);
+            border-color: rgba(16, 185, 129, 0.3);
         }
 
         /* =========================================
@@ -336,7 +337,7 @@
         .stat-value {
             font-size: 1.3rem;
             font-weight: 800;
-            color: var(--accent-emerald);
+            color: var(--accent-cyan);
             font-family: 'JetBrains Mono', monospace;
         }
 
@@ -346,7 +347,7 @@
         }
 
         /* =========================================
-           5. UPDATE LOG (TERMINAL STYLE)
+           5. BETA TUTORIAL & INSTRUCTIONS BOX
            ========================================= */
         .card-box {
             background: var(--bg-card);
@@ -378,33 +379,36 @@
         }
 
         .card-title i {
-            color: var(--accent-cyan);
+            color: var(--accent-emerald);
         }
 
-        .update-version {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            background: rgba(6, 182, 212, 0.12);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            color: var(--accent-cyan);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 700;
-        }
-
-        .update-list {
-            color: var(--text-muted);
+        .tutorial-box {
+            background: rgba(6, 182, 212, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .tutorial-box strong {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-box ol {
             padding-left: 20px;
         }
 
-        .update-list li {
-            margin-bottom: 8px;
+        .tutorial-box li {
+            margin-bottom: 12px;
             word-wrap: break-word;
         }
 
-        .update-list li:last-child {
+        .tutorial-box li:last-child {
             margin-bottom: 0;
         }
 
@@ -438,7 +442,7 @@
         .screenshot-item:hover {
             transform: translateY(-4px);
             border-color: var(--border-glow);
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.25);
         }
 
         /* =========================================
@@ -460,11 +464,18 @@
         }
 
         .about-content.expanded {
-            max-height: 3000px;
+            max-height: 3500px;
         }
 
         .about-content p {
             margin-bottom: 16px;
+        }
+
+        .about-content h3 {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-top: 24px;
+            margin-bottom: 12px;
         }
 
         .about-content strong {
@@ -487,7 +498,7 @@
         }
 
         .expand-btn-text {
-            color: var(--accent-emerald);
+            color: var(--accent-cyan);
             font-weight: 700;
             font-size: 0.95rem;
             text-align: center;
@@ -499,78 +510,16 @@
         }
 
         /* =========================================
-           8. REVIEWS & RATINGS SECTION
+           8. REVIEWS & RATINGS SECTION (BETA STATE)
            ========================================= */
-        .reviews-summary-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .empty-reviews-box {
+            text-align: center;
+            padding: 36px 20px;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-line);
+            border: 1px dashed var(--border-line);
             border-radius: var(--radius-md);
-            padding: 20px 28px;
-            margin-bottom: 24px;
-        }
-
-        .score-big {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1;
-            font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(135deg, #ffffff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stars-container {
-            text-align: right;
-        }
-
-        .stars-gold {
-            color: #f59e0b;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-        }
-
-        .reviews-slider {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            padding-bottom: 12px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .reviews-slider::-webkit-scrollbar { display: none; }
-
-        .review-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-line);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            width: 85%;
-            max-width: 360px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .review-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
             color: var(--text-muted);
-            gap: 8px;
-        }
-
-        .review-text {
-            font-size: 0.92rem;
-            color: var(--text-main);
-            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         /* =========================================
@@ -579,7 +528,7 @@
         .download-cta-banner {
             text-align: center;
             padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
             border: 1px solid var(--border-glow);
             border-radius: var(--radius-lg);
             margin-bottom: 40px;
@@ -589,15 +538,6 @@
             font-size: 1.8rem;
             font-weight: 800;
             margin-bottom: 12px;
-        }
-
-        .play-badge-img {
-            height: 60px;
-            transition: var(--transition);
-        }
-
-        .play-badge-img:hover {
-            transform: scale(1.05);
         }
 
         footer {
@@ -620,15 +560,12 @@
             .app-store-icon { width: 80px; height: 80px; border-radius: 18px; }
             .app-title-group h1 { font-size: 1.6rem; }
             .app-title-group .subtitle { font-size: 0.92rem; }
-            .btn-install-main { padding: 12px 20px; font-size: 0.95rem; width: 100%; }
+            .btn-beta-main { padding: 12px 20px; font-size: 0.95rem; width: 100%; }
             .btn-share { width: 48px; height: 48px; }
             .app-cta-row { gap: 12px; }
             .card-box { padding: 20px; margin-bottom: 20px; }
-            .reviews-summary-card { padding: 16px 20px; }
-            .score-big { font-size: 3.2rem; }
             .download-cta-banner { padding: 28px 16px; }
             .download-cta-banner h2 { font-size: 1.4rem; }
-            .play-badge-img { height: 50px; }
         }
 
         @media (max-width: 480px) {
@@ -646,7 +583,7 @@
             .app-title-group .subtitle { font-size: 0.82rem; }
             
             .app-cta-row { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 14px; }
-            .btn-install-main { width: 100%; text-align: center; }
+            .btn-beta-main { width: 100%; text-align: center; }
             .btn-share { width: 100%; height: 42px; border-radius: var(--radius-sm); }
             
             .app-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 16px 0; }
@@ -657,10 +594,8 @@
 
             .card-box { padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px; }
             .card-title { font-size: 1.15rem; }
-            .update-list { padding-left: 16px; font-size: 0.88rem; }
-
-            .review-card { width: 90%; padding: 14px; }
-            .review-meta { flex-direction: column; gap: 4px; }
+            .tutorial-box { padding: 14px 16px; font-size: 0.88rem; line-height: 1.6; }
+            .tutorial-box ol { padding-left: 16px; }
 
             .screenshot-item { width: 140px; }
             .floating-whatsapp { bottom: 18px; right: 18px; width: 48px; height: 48px; font-size: 1.4rem; }
@@ -679,18 +614,18 @@
 <body>
 
     <!-- Floating WhatsApp CTA -->
-    <a href="https://wa.me/2347015327995?text=Hello%20SunDownTech,%20I'm%20interested%20in%20CPU%20A!" class="floating-whatsapp" target="_blank" aria-label="Contact on WhatsApp">
+    <a href="https://wa.me/2347015327995?text=Hello%20SunDownTech,%20I'm%20interested%20in%20MLBB%20Visual%20Studio!" class="floating-whatsapp" target="_blank" aria-label="Contact on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Top Navigation Header -->
     <header>
         <div class="container nav-container">
-            <a href="index.html" class="nav-back-btn">
+            <a href="../" class="nav-back-btn">
                 <i class="fas fa-arrow-left"></i> Home
             </a>
-            <a href="index.html" class="logo">
-                <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+            <a href="./" class="logo">
+                <div class="logo-icon"><i class="fas fa-paintbrush"></i></div>
                 <span>SunDown<span class="tech-accent">Tech</span></span>
             </a>
         </div>
@@ -703,18 +638,18 @@
         <!-- Main App Header Card -->
         <div class="app-header-card">
             <div class="app-main-info">
-                <img src="assets/—Pngtree—computer chip icon vector_13662865.png" alt="CPU A Icon" class="app-store-icon">
+                <img src="MLBB%20VS/Picsart_26-02-visual-studio.png" alt="MLBB Visual Studio Icon" class="app-store-icon">
                 <div class="app-title-group">
-                    <h1>CPU A</h1>
-                    <div class="subtitle">Ultimate Device &amp; Hardware Info Monitor</div>
+                    <h1>MLBB Visual Studio</h1>
+                    <div class="subtitle">Ultimate Premium Customization Engine</div>
                 </div>
             </div>
 
             <div class="app-cta-row">
-                <a href="https://play.google.com/store/apps/details?id=com.cpu.a" class="btn-install-main" target="_blank">
-                    <i class="fab fa-google-play"></i> Get on Google Play
+                <a href="https://chat.whatsapp.com/LI7dESj6BQf1v4u617iYAV?mode=hqctcla" class="btn-beta-main" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Join Closed Testing Beta
                 </a>
-                <button class="btn-share" id="shareBtn" title="Share CPU A">
+                <button class="btn-share" id="shareBtn" title="Share MLBB Visual Studio">
                     <i class="fas fa-share-nodes"></i>
                 </button>
             </div>
@@ -723,9 +658,9 @@
         <!-- Specs & Quick Stats Grid -->
         <div class="app-stats-grid">
             <div class="stat-box">
-                <div class="stat-label">RATING</div>
-                <div class="stat-value">5 ★</div>
-                <div class="stat-sub">32 Reviews</div>
+                <div class="stat-label">STATUS</div>
+                <div class="stat-value">BETA</div>
+                <div class="stat-sub">Closed Testing</div>
             </div>
             <div class="stat-box">
                 <div class="stat-label">AGE</div>
@@ -735,7 +670,7 @@
             <div class="stat-box">
                 <div class="stat-label">CATEGORY</div>
                 <div class="stat-value">Tools</div>
-                <div class="stat-sub">Device Info</div>
+                <div class="stat-sub">Visual Engine</div>
             </div>
             <div class="stat-box">
                 <div class="stat-label">DEVELOPER</div>
@@ -744,26 +679,25 @@
             </div>
             <div class="stat-box">
                 <div class="stat-label">SIZE</div>
-                <div class="stat-value">20 MB</div>
+                <div class="stat-value">16.2 MB</div>
                 <div class="stat-sub">Lightweight</div>
             </div>
         </div>
 
-        <!-- Update Log -->
+        <!-- Beta Participation Box -->
         <div class="card-box">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-terminal"></i> What's New</div>
-                <span class="update-version">v1.0.5 • 3d ago</span>
+                <div class="card-title"><i class="fas fa-flask"></i> Beta Instructions</div>
             </div>
-            <ul class="update-list">
-                <li>Improved Performance on Device Diagnostics test</li>
-                <li>Improved High level Precision Tracking</li>
-                <li>Improved Fixed Major Issues on fallout of CPU/GPU Detection Accuracy and false readings(CPU detection should work flawlessly in mapped devices)</li>
-                <li>Improved Support on Older Devices</li>
-                <li>Settings and references are automatically backed up and restored upon download on an existing or new device</li>
-                <li>UI Polish &amp; System Stability Optimizations</li>
-                <li>Fixed Major Bugs</li>
-            </ul>
+            <div class="tutorial-box">
+                <strong>How to participate in the Closed Beta:</strong>
+                <ol>
+                    <li>Tap the <strong>Join Closed Testing Beta</strong> button above to join our official WhatsApp Beta group.</li>
+                    <li>Drop your Google account email in the group chat.</li>
+                    <li>Within 5 minutes, you will be added to the official testing list.</li>
+                    <li><strong>Important:</strong> Ensure the email you provide is signed into your browser (to accept the invite) AND signed into your Google Play Store app to successfully download the beta build!</li>
+                </ol>
+            </div>
         </div>
 
         <!-- Screenshot Gallery -->
@@ -772,65 +706,52 @@
                 <div class="card-title"><i class="fas fa-mobile-screen"></i> App Screenshots</div>
             </div>
             <div class="screenshot-slider">
-                <img src="assets/Screenshot_20260208-012607.jpg" alt="CPU A Screenshot 1" class="screenshot-item">
-                <img src="assets/Screenshot_20260208-012609.jpg" alt="CPU A Screenshot 2" class="screenshot-item">
-                <img src="assets/Screenshot_20260208-012612.jpg" alt="CPU A Screenshot 3" class="screenshot-item">
-                <img src="assets/Screenshot_20260208-012615.jpg" alt="CPU A Screenshot 4" class="screenshot-item">
-                <img src="assets/Screenshot_20260208-012625.jpg" alt="CPU A Screenshot 5" class="screenshot-item">
-                <img src="assets/Screenshot_20260208-012633.jpg" alt="CPU A Screenshot 6" class="screenshot-item">
-                <img src="assets/Screenshot_20260208-012636.jpg" alt="CPU A Screenshot 7" class="screenshot-item">
-                <img src="assets/Screenshot_20260221-120152.jpg" alt="CPU A Screenshot 8" class="screenshot-item">
-                <img src="assets/Screenshot_20260221-120156.jpg" alt="CPU A Screenshot 9" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_1.jpg" alt="MLBB Visual Studio Screenshot 1" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_2.jpg" alt="MLBB Visual Studio Screenshot 2" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_3.jpg" alt="MLBB Visual Studio Screenshot 3" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_4.jpg" alt="MLBB Visual Studio Screenshot 4" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_5.jpg" alt="MLBB Visual Studio Screenshot 5" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_6.jpg" alt="MLBB Visual Studio Screenshot 6" class="screenshot-item">
+                <img src="MLBB%20VS/Screenshot_7.jpg" alt="MLBB Visual Studio Screenshot 7" class="screenshot-item">
             </div>
         </div>
 
         <!-- Expandable About Card -->
         <div class="card-box about-card" onclick="toggleCard()">
             <div class="card-header">
-                <div class="card-title"><i class="fas fa-circle-info"></i> About CPU A</div>
+                <div class="card-title"><i class="fas fa-circle-info"></i> About the App</div>
             </div>
             <div class="about-content" id="aboutContent">
-                <p>CPU A provides deep, real-time insights into your Android device. Check your hardware version, RAM usage, model numbers, and internal storage at a glance. Built with performance in mind, it's the perfect tool for monitoring your system's health and specifications.</p>
+                <p>🎨 <strong>Enter the Studio. Remaster Your Experience.</strong></p>
+                <p>Welcome to MLBB Visual Studio, the ultimate premium customization engine built specifically for players who want to elevate their in-game aesthetics. Unlock breathtaking visual effects, custom hero skins, and epic recall animations—all rendered 100% locally on your device with zero risk to your account.</p>
+                <p>Engineered with the same precision and AAA-polish as CPU A, this tool is built for speed, safety, and a flawless user experience.</p>
                 
-                <p><strong>🔍 Core Features</strong></p>
-                <p><strong>🧠 CPU &amp; GPU Information</strong><br>
-                Access in-depth processor and graphics details, including:<br>
-                - CPU architecture and core layout<br>
-                - Supported clock frequencies<br>
-                - GPU model and rendering information</p>
+                <h3>🔥 KEY FEATURES</h3>
+                <p><strong>🚀 Advanced Dual-Injection Engine</strong><br>
+                Whether you are on an older device or running the latest Android OS, our app adapts. Featuring a revolutionary dual-engine architecture, MLBB Visual Studio utilizes both SAF (Storage Access Framework) and Shizuku (Wireless Debugging) for lightning-fast, flawless visual deployment. No PC and no traditional root required!</p>
+
+                <p><strong>✨ High-Fidelity Customization</strong><br>
+                Completely transform your gameplay. Inject highly detailed hero skins, vibrant custom maps, flashy recall animations, emotes, and elimination effects directly into your local game directory.</p>
+
+                <p><strong>🛡️ 100% Safe &amp; Local (Zero Ban Risk)</strong><br>
+                Play with absolute peace of mind. MLBB Visual Studio modifies only the visual assets displayed on your personal screen. It does not alter core gameplay mechanics, inject cheats, or modify server data. You get to enjoy the premium visuals, but the competitive balance remains completely untouched.</p>
+
+                <p><strong>🛠️ The Ultimate Control Center</strong><br>
+                Manage your mods like a pro developer. Our deeply integrated, cyberpunk-themed Control Center features a highly intelligent "Remove Injected Skin" utility to safely wipe mods, built-in video tutorials, and dedicated tools to fix stuck loading screens or full storage issues with a single tap.</p>
+
+                <p><strong>📱 Tablet-Proof Dynamic UI</strong><br>
+                Experience a breathtaking, dark-neon aesthetic that dynamically scales to look absolutely gorgeous on any screen size, from compact phones to massive gaming tablets.</p>
+
+                <h3>⚠️ IMPORTANT DISCLAIMER:</h3>
+                <p>MLBB Visual Studio is a third-party local visual modification tool. It is not affiliated with, endorsed by, or officially connected to Moonton or Mobile Legends: Bang Bang. All injected files are local aesthetic modifications only, visible strictly to the user, and provide absolutely no in-game competitive advantage (no damage hacks, no map hacks).</p>
                 
-                <p><strong>📱 Device Overview</strong><br>
-                View essential hardware and system data at a glance:<br>
-                - Device model and manufacturer<br>
-                - RAM and internal storage details<br>
-                - Display resolution and screen density<br>
-                - Supported hardware features</p>
-                
-                <p><strong>⚙️ System &amp; Build Information</strong><br>
-                Get a complete view of your system configuration:<br>
-                - Android version and SDK level<br>
-                - Security patch status<br>
-                - Build number and device fingerprint</p>
-                
-                <p><strong>♻️ Optimized Performance</strong><br>
-                CPU A is designed to be lightweight, responsive, and efficient—delivering accurate information without unnecessary overhead.</p>
-                
-                <p><strong>🚀 Continuous Improvements &amp; Enhancements</strong><br>
-                CPU A is actively evolving, with ongoing updates focused on performance optimization, expanded hardware analysis, and improved usability.</p>
-                
-                <p>Planned enhancements include:<br>
-                - Real-time CPU frequency monitoring<br>
-                - Advanced battery health and charging insights<br>
-                - Temperature and sensor data tracking<br>
-                - Deeper hardware diagnostics and system details<br>
-                - UI refinements and performance optimizations<br>
-                Our goal is to deliver one of the most dependable and feature-rich device information tools available on Android.</p>
-                
-                <p><strong>🙌 Feedback &amp; Support</strong><br>
-                Your feedback plays an important role in shaping CPU A’s future. If you encounter any issues, have suggestions, or would like to request features, please leave a review or contact us directly.</p>
-                
-                <p><strong>⭐ Thank You for Using CPU A</strong><br>
-                We appreciate your trust in CPU A. Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
+                <p>Ready to upgrade your visuals? Join our closed beta today and redefine your game!</p>
+
+                <h3>🙌 Feedback &amp; Support</h3>
+                <p>Your feedback plays an important role in shaping MLBB Visual Studio’s future. If you encounter any issues, have suggestions, or would like to request features, please leave feedback in our beta group or contact us directly.</p>
+
+                <h3>⭐ Thank You for Using MLBB Visual Studio</h3>
+                <p>We appreciate your trust in MLBB Visual Studio. Expect consistent updates, enhanced performance, and powerful new features in upcoming releases.</p>
 
                 <div class="fade-overlay"></div>
             </div>
@@ -839,49 +760,23 @@
             </div>
         </div>
 
-        <!-- Ratings & Reviews -->
+        <!-- Ratings & Reviews (Beta State) -->
         <div class="card-box">
             <div class="card-header">
                 <div class="card-title"><i class="fas fa-star"></i> Ratings &amp; Reviews</div>
             </div>
-
-            <div class="reviews-summary-card">
-                <div class="score-big">5</div>
-                <div class="stars-container">
-                    <div class="stars-gold">★★★★★</div>
-                    <div style="color: var(--text-muted); font-size: 0.85rem;">32 Ratings</div>
-                </div>
-            </div>
-
-            <div class="reviews-slider">
-                <div class="review-card">
-                    <div class="review-meta">
-                        <span style="color: #f59e0b;">★★★★★</span>
-                        <span>Samuelson OC • Feb 2026</span>
-                    </div>
-                    <div class="review-text">
-                        "Honestly, I like the aesthetics of the app, it feels premium and easy to navigate through smooth transitioning between activities within the app. Kudos for that, overall 5 stars from me! This is hands-down the most accurate hardware monitor I've found."
-                    </div>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-meta">
-                        <span style="color: #f59e0b;">★★★★★</span>
-                        <span>Obinna Ifeanyi • Mar 2026</span>
-                    </div>
-                    <div class="review-text">
-                        "I strongly recommend this app. It is very smooth and detailed, with a beautiful interface that makes complex hardware data very understandable for the common man."
-                    </div>
-                </div>
+            <div class="empty-reviews-box">
+                <i class="fas fa-comments" style="font-size: 1.8rem; margin-bottom: 12px; color: var(--accent-cyan); display: block;"></i>
+                No public reviews yet. Join the closed beta group to test builds and leave feedback directly to the development team!
             </div>
         </div>
 
         <!-- Download Banner CTA -->
         <div class="download-cta-banner">
-            <h2>Experience CPU A Today</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Download directly from the Google Play Store and unlock your device secrets.</p>
-            <a href="https://play.google.com/store/apps/details?id=com.cpu.a" target="_blank">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" class="play-badge-img">
+            <h2>Get Early Access to MLBB Visual Studio</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Join the testing program and start customizing your game environment today.</p>
+            <a href="https://chat.whatsapp.com/LI7dESj6BQf1v4u617iYAV?mode=hqctcla" target="_blank" class="btn-beta-main">
+                <i class="fab fa-whatsapp"></i> Join WhatsApp Beta Group
             </a>
         </div>
 
@@ -911,8 +806,8 @@
             if (navigator.share) {
                 try {
                     await navigator.share({
-                        title: 'CPU A - Ultimate Device Info',
-                        text: 'Check out CPU A, a deep hardware & system diagnostics tool for Android by SunDownTech!',
+                        title: 'MLBB Visual Studio - Beta',
+                        text: 'Check out MLBB Visual Studio, a premium custom visual engine for Mobile Legends by SunDownTech!',
                         url: window.location.href,
                     });
                 } catch (err) {}
