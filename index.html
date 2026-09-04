@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>SunDownTech | Next-Gen Android Engineering & Digital Studio</title>
     
     <meta name="google-site-verification" content="jKRaAj2T4Q9AD71nFV0V9i1OLWVRHfMHPrgqHgc7XA" />
@@ -332,6 +332,7 @@
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             box-shadow: 0 4px 20px var(--accent-glow);
             transition: var(--transition);
@@ -354,6 +355,7 @@
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             backdrop-filter: var(--glass-blur);
             transition: var(--transition);
@@ -404,12 +406,13 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            word-break: break-word;
         }
 
         .term-line { display: flex; gap: 10px; }
         .term-prompt { color: var(--accent-emerald); }
         .term-cmd { color: #f8fafc; }
-        .term-out { color: var(--text-muted); padding-left: 18px; }
+        .term-out { color: var(--text-muted); padding-left: 18px; word-break: break-word; }
         .term-highlight { color: var(--accent-cyan); }
 
         /* =========================================
@@ -565,19 +568,19 @@
         .process-tab-navigation {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 48px;
+            margin-bottom: 36px;
         }
 
         .process-tab-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-line);
             color: var(--text-muted);
-            padding: 12px 22px;
+            padding: 10px 18px;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
@@ -607,11 +610,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            min-height: 240px;
+            min-height: 220px;
             background: var(--bg-card);
             border: 1px solid var(--border-line);
             border-radius: var(--radius-lg);
-            padding: 40px;
+            padding: 36px;
             backdrop-filter: var(--glass-blur);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             transition: all 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -633,25 +636,25 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .process-step-num {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
             color: var(--accent-emerald);
         }
 
         .process-card-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
         }
 
         .process-card-desc {
             color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         /* =========================================
@@ -659,7 +662,7 @@
            ========================================= */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
 
@@ -742,6 +745,10 @@
             transition: var(--transition);
         }
 
+        .app-featured-card.full-width-card {
+            grid-template-columns: 1fr;
+        }
+
         .app-featured-card:hover {
             border-color: var(--border-glow);
             box-shadow: 0 16px 40px rgba(0,0,0,0.5);
@@ -775,6 +782,7 @@
             object-fit: cover;
             border: 1px solid var(--border-line);
             background: #fff;
+            flex-shrink: 0;
         }
 
         .app-header-text h3 {
@@ -925,6 +933,10 @@
             gap: 16px;
         }
 
+        .stack-item.full-width-item {
+            grid-column: span 2;
+        }
+
         .stack-icon {
             font-size: 1.8rem;
             color: var(--accent-cyan);
@@ -954,25 +966,27 @@
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
         }
 
         .cac-modal-content {
             background: rgba(15, 23, 42, 0.98);
             border: 1px solid var(--border-glow);
             border-radius: var(--radius-lg);
-            max-width: 700px;
+            max-width: 650px;
             width: 100%;
-            padding: 32px;
+            padding: 28px;
             position: relative;
             box-shadow: 0 25px 50px rgba(0,0,0,0.8);
             text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .cac-modal-close {
             position: absolute;
-            top: 16px;
-            right: 20px;
+            top: 14px;
+            right: 18px;
             background: none;
             border: none;
             color: var(--text-muted);
@@ -987,7 +1001,7 @@
 
         .cac-cert-img {
             width: 100%;
-            max-height: 480px;
+            max-height: 420px;
             object-fit: contain;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-line);
@@ -1032,7 +1046,7 @@
         .contact-methods {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
@@ -1081,15 +1095,15 @@
             position: fixed;
             bottom: 28px;
             right: 28px;
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             background: #25d366;
             color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
             z-index: 999;
             transition: var(--transition);
@@ -1100,67 +1114,76 @@
         }
 
         /* =========================================
-           11. ENHANCED MOBILE RESPONSIVE FIXES
+           11. ENHANCED MOBILE RESPONSIVE BREAKPOINTS
            ========================================= */
         @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; }
+            .hero-grid { grid-template-columns: 1fr; gap: 32px; }
             .hero h1 { font-size: 2.8rem; }
             .about-studio-grid { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
-            .app-featured-card { grid-template-columns: 1fr; }
+            .app-featured-card { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
             .dev-about-box { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
         }
 
         @media (max-width: 768px) {
             .container { padding: 0 16px; }
-            .hero { padding-top: 120px; padding-bottom: 60px; }
+            .hero { padding-top: 110px; padding-bottom: 50px; }
             .hero h1 { font-size: 2.1rem; letter-spacing: -0.5px; }
             .section { padding: 60px 0; }
             .section-title { font-size: 1.85rem; }
             .cta-banner h2 { font-size: 1.75rem; }
-            .cta-banner { padding: 36px 18px; margin-bottom: 40px; }
+            .cta-banner { padding: 32px 16px; margin-bottom: 40px; }
 
             .about-studio-grid, .dev-about-box {
-                padding: 22px 16px !important;
+                padding: 20px 16px !important;
                 border-radius: 16px;
             }
 
             .cac-showcase-card {
-                padding: 18px 12px !important;
+                padding: 16px 12px !important;
             }
 
-            .stats-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .stat-card { padding: 10px 6px; }
+            .stat-number { font-size: 1.35rem; }
+            .stat-label { font-size: 0.68rem; }
 
-            /* Fix Tech Stack Overflow on Mobile */
             .stack-list { 
                 grid-template-columns: 1fr !important; 
+                gap: 10px;
             }
-            .stack-item { 
-                grid-column: span 1 !important; /* Forces 2-column span to reset on mobile */
+            .stack-item.full-width-item { 
+                grid-column: span 1 !important;
             }
 
-            .process-stack-viewport { height: 380px; }
-            .process-stacked-card { padding: 24px 18px; }
-            .process-card-title { font-size: 1.3rem; }
+            .process-stack-viewport { height: 420px; }
+            .process-stacked-card { padding: 20px 16px; min-height: 200px; }
+            .process-card-title { font-size: 1.25rem; }
+            .process-card-desc { font-size: 0.9rem; }
+            .process-tab-btn { padding: 8px 14px; font-size: 0.8rem; }
 
             .services-grid {
                 grid-template-columns: 1fr;
             }
 
             .floating-whatsapp {
-                bottom: 20px;
-                right: 20px;
-                width: 52px;
-                height: 52px;
-                font-size: 1.5rem;
+                bottom: 18px;
+                right: 18px;
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
             }
         }
 
         @media (max-width: 480px) {
             .hero h1 { font-size: 1.85rem; }
-            .animated-slogan-box { font-size: 1.05rem; min-height: 48px; }
-            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .animated-slogan-box { font-size: 1.05rem; min-height: 44px; }
+            .btn-primary, .btn-secondary { width: 100%; text-align: center; }
             .dev-bio-text h2 { font-size: 1.65rem; }
             .cac-cert-preview-wrapper { height: 160px; }
+            .terminal-body { font-size: 0.78rem; }
+            .cac-modal-content { padding: 20px 14px; }
+            .cac-cert-img { max-height: 260px; }
+            .app-actions .btn-primary, .app-actions .btn-secondary { width: 100%; }
         }
     </style>
 
@@ -1268,7 +1291,7 @@
                         <span class="term-prompt">&gt;</span>
                         <span class="term-cmd">SunDownTech.init();</span>
                     </div>
-                    <div class="term-out">[SUCCESS] Environment: Android Studio &amp; Visual Studio Code</div>
+                    <div class="term-out">[SUCCESS] Environment: Android Studio &amp; VS Code</div>
                     <div class="term-line">
                         <span class="term-prompt">&gt;</span>
                         <span class="term-cmd">fetchCoreCompetencies();</span>
@@ -1581,8 +1604,8 @@
                 </div>
 
                 <!-- Featured Upcoming Platform: SunDown Hub -->
-                <div class="app-featured-card" style="border-color: rgba(6, 182, 212, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(6, 182, 212, 0.08));">
-                    <div class="app-info-content" style="grid-column: span 2;">
+                <div class="app-featured-card full-width-card" style="border-color: rgba(6, 182, 212, 0.4); background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(6, 182, 212, 0.08));">
+                    <div class="app-info-content">
                         <div class="badge-tag" style="background: rgba(6, 182, 212, 0.12); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">
                             <i class="fas fa-microchip"></i> Flagship Platform In Development
                         </div>
@@ -1592,10 +1615,10 @@
                                 <div class="app-category-tag" style="color: var(--accent-cyan);">AI Developer Companion &amp; Code Ecosystem</div>
                             </div>
                         </div>
-                        <p class="app-description" style="font-size: 1.05rem; max-width: 900px;">
+                        <p class="app-description" style="font-size: 1.05rem;">
                             <strong>SunDown Hub</strong> is our ambitious AI-powered mobile application engineered to serve as an everyday project companion and intelligent code assistant for mobile developers.
                         </p>
-                        <p class="app-description" style="font-size: 0.98rem; max-width: 900px;">
+                        <p class="app-description" style="font-size: 0.98rem;">
                             Beyond real-time debugging and XML/Kotlin assistance, SunDown Hub offers an open creator portal where developers can showcase their custom scripts, tools, and libraries—giving creators direct revenue paths to monetize their work.
                         </p>
                         <div class="app-tech-tags">
@@ -1635,15 +1658,15 @@
                     <!-- Animated Stats Grid -->
                     <div class="stats-grid" id="statsGrid">
                         <div class="stat-card">
-                            <div class="stat-number">0%</div>
+                            <div class="stat-number">100%</div>
                             <div class="stat-label">Native Code</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">SDK 0+</div>
+                            <div class="stat-number">SDK 35+</div>
                             <div class="stat-label">Play Compliant</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">0/7</div>
+                            <div class="stat-number">24/7</div>
                             <div class="stat-label">Precision</div>
                         </div>
                     </div>
@@ -1682,7 +1705,7 @@
                             </div>
                         </div>
 
-                        <div class="stack-item" style="grid-column: span 2;">
+                        <div class="stack-item full-width-item">
                             <i class="fas fa-fire stack-icon"></i>
                             <div class="stack-details">
                                 <h4>Firebase &amp; Cloud Infrastructure</h4>
@@ -1797,7 +1820,6 @@
         document.addEventListener("DOMContentLoaded", typeSlogan);
 
         // 2. 3D HURDLED CARD DECK CONTROLLER ENGINE
-        // Stagger positions & subtle rotations for physical stack realism
         const cardTransforms = [
             { top: 16, scale: 0.97, rotate: 1.8, opacity: 0.9, zIndex: 5 },
             { top: 32, scale: 0.94, rotate: -2.0, opacity: 0.75, zIndex: 4 },
@@ -1877,7 +1899,7 @@
             menuToggle.querySelector('i').className = 'fas fa-bars';
         }
 
-        // 5. Scroll Reveal Observer & Animated Stat Counter Engine
+        // 5. Scroll Reveal Observer Engine
         const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
